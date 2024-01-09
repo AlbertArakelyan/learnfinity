@@ -10,8 +10,12 @@ const transporter = require('../../utils/transporter');
 const { userControllerMessages } = require('../../constants/controllerMessages');
 const { bcryptComplexity } = require('../../constants/global');
 
-async function findExistingUser(email) {
-  return await User.findOne({email});
+async function findUserById(userId) {
+  return await User.findById(userId);
+}
+
+async function findExistingUserByEmail(email) {
+  return await User.findOne({ email });
 }
 
 function validateUser(user) {
@@ -72,8 +76,38 @@ async function signUp(userData) {
   return email;
 }
 
+async function isEmailAlreadyVerified(token) {
+  const { userId } = jwt.verify(token, process.env.JWT_SECRET);
+
+  const user = await findUserById(userId);
+
+  return user.isEmailVerified;
+}
+
+async function verifyEmail(token) {
+  const { userId } = jwt.verify(token, process.env.JWT_SECRET);
+
+  const user = await findUserById(userId);
+
+  if (!user) {
+    return;
+  }
+
+  user.isEmailVerified = true;
+
+  await user.save();
+
+  return {
+    token,
+    isEmailVerified: true,
+  };
+}
+
 module.exports = {
-  findExistingUser,
+  findUserById,
+  findExistingUserByEmail,
   validateUser,
   signUp,
+  isEmailAlreadyVerified,
+  verifyEmail,
 };

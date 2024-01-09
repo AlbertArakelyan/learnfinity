@@ -10,20 +10,47 @@ const transporter = require('../../utils/transporter');
 const { userControllerMessages } = require('../../constants/controllerMessages');
 const { bcryptComplexity } = require('../../constants/global');
 
+/**
+ * Finds a user by their ID.
+ *
+ * @param {string} userId - The ID of the user.
+ * @return {Promise<object>} A promise that resolves to the user object.
+ */
 async function findUserById(userId) {
   return await User.findById(userId);
 }
 
+/**
+ * Finds an existing user in the database using their email.
+ *
+ * @param {string} email - The email of the user to search for.
+ * @return {Promise<User>} A promise that resolves to the user object if found, or null if not found.
+ */
 async function findExistingUserByEmail(email) {
   return await User.findOne({ email });
 }
 
+/**
+ * Validates a user object against the usersSchema.
+ *
+ * @param {Object} user - The user object to be validated.
+ * @return {Object} The validation error object, if any.
+ */
 function validateUser(user) {
   const { error } = usersSchema.validate(user);
   
   return error;
 }
 
+/**
+ * Creates a new user account and sends a verification email.
+ *
+ * @param {Object} userData - The user data.
+ * @param {string} userData.fullName - The full name of the user.
+ * @param {string} userData.email - The email of the user.
+ * @param {string} userData.password - The password of the user.
+ * @return {Promise<string>} The email address of the user.
+ */
 async function signUp(userData) {
   const {
     fullName,
@@ -76,6 +103,12 @@ async function signUp(userData) {
   return email;
 }
 
+/**
+ * Checks if the email associated with the given token has already been verified.
+ *
+ * @param {string} token - The verification token.
+ * @return {boolean} - True if the email is verified, false otherwise.
+ */
 async function isEmailAlreadyVerified(token) {
   const { userId } = jwt.verify(token, process.env.JWT_SECRET);
 
@@ -84,6 +117,12 @@ async function isEmailAlreadyVerified(token) {
   return user.isEmailVerified;
 }
 
+/**
+ * Verify an email using the provided token.
+ *
+ * @param {string} token - The token to verify the email.
+ * @return {Object|boolean} - An object containing the token and the email verification status, or false if the user is not found.
+ */
 async function verifyEmail(token) {
   const { userId } = jwt.verify(token, process.env.JWT_SECRET);
 

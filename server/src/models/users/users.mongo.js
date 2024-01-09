@@ -24,6 +24,7 @@ const usersSchema = new mongoose.Schema({
   },
   photoUrl: {
     type: String,
+    default: null,
   }
 }, {
   timestamps: {

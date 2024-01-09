@@ -4,7 +4,7 @@ const {
   minValidationLength,
 } = require('../../constants/validation');
 
-const usersSchema = Joi.object({
+const signUpSchema = Joi.object({
   fullName: Joi.string().required(),
   email: Joi.string().email().required(),
   password: Joi.string().required().min(minValidationLength.base),
@@ -15,4 +15,12 @@ const usersSchema = Joi.object({
   photoUrl: Joi.string(),
 });
 
-module.exports = usersSchema;
+const signInSchema = Joi.object({
+  email: Joi.string().email().required(),
+  password: Joi.string().required().min(minValidationLength.base),
+});
+
+module.exports = {
+  signUpSchema,
+  signInSchema,
+};

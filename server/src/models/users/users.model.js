@@ -3,12 +3,13 @@ const jwt = require('jsonwebtoken');
 
 require('dotenv').config();
 
-const usersSchema = require('../../utils/schemas/users.schema');
+const { signUpSchema, signInSchema } = require('../../utils/schemas/users.schema');
 
 const User = require('./users.mongo');
 const transporter = require('../../utils/transporter');
 const { userControllerMessages } = require('../../constants/controllerMessages');
 const { bcryptComplexity } = require('../../constants/global');
+const {func} = require("joi");
 
 /**
  * Finds a user by their ID.
@@ -31,14 +32,26 @@ async function findExistingUserByEmail(email) {
 }
 
 /**
- * Validates a user object against the usersSchema.
+ * Validates a user object against the signUpSchema.
  *
  * @param {Object} user - The user object to be validated.
  * @return {Object} The validation error object, if any.
  */
 function validateUser(user) {
-  const { error } = usersSchema.validate(user);
+  const { error } = signUpSchema.validate(user);
   
+  return error;
+}
+
+/**
+ * Validates the sign-in process for a user.
+ *
+ * @param {Object} user - The user object to be validated.
+ * @return {Object} The validation error, if any.
+ */
+function validateSignIn(user) {
+  const { error } = signInSchema.validate(user);
+
   return error;
 }
 
@@ -114,7 +127,8 @@ async function isEmailAlreadyVerified(token) {
 
   const user = await findUserById(userId);
 
-  return user.isEmailVerified;
+  // TODO even though a token is invalid it still sends "Email is already verified"
+  return user && user.isEmailVerified;
 }
 
 /**
@@ -142,11 +156,79 @@ async function verifyEmail(token) {
   };
 }
 
+/**
+ * Determines whether sign-in is allowed for a given email and password.
+ *
+ * @param {string} email - The email address of the user.
+ * @param {string} password - The password of the user.
+ * @return {Object} An object indicating whether sign-in is allowed and the reason if not allowed.
+ *
+ *                  - isAllowed: A boolean value indicating whether sign-in is allowed.
+ *                  - reason: A string providing the reason if sign-in is not allowed.
+ */
+async function isSignInAllowed(email, password) {
+  const user = await findExistingUserByEmail(email);
+
+  if (!user) {
+    return {
+      isAllowed: false,
+      reason: userControllerMessages.invalidEmailOrPassword,
+    };
+  }
+
+  const isPasswordCorrect = await bcrypt.compare(password, user.password);
+
+  if (!isPasswordCorrect) {
+    return {
+      isAllowed: false,
+      reason: userControllerMessages.invalidEmailOrPassword,
+    };
+  }
+
+  if (!user.isEmailVerified) {
+    return {
+      isAllowed: false,
+      reason: userControllerMessages.emailNotVerified,
+    };
+  }
+
+  return {
+    isAllowed: true,
+  };
+}
+
+/**
+ * Retrieves user data and generates an access token for sign in.
+ *
+ * @param {string} email - The email of the user signing in.
+ * @return {Object} An object containing the user data and the generated access token.
+ */
+async function signIn(email) {
+  const user = await findExistingUserByEmail(email);
+
+  const userData = {
+    id: user._id,
+    email: user.email,
+    fullName: user.fullName,
+    photoUrl: user.photoUrl,
+  };
+
+  const accessToken = jwt.sign(userData, process.env.JWT_SECRET);
+
+  return {
+    userData,
+    accessToken,
+  };
+}
+
 module.exports = {
   findUserById,
   findExistingUserByEmail,
   validateUser,
+  validateSignIn,
   signUp,
   isEmailAlreadyVerified,
   verifyEmail,
+  isSignInAllowed,
+  signIn,
 };

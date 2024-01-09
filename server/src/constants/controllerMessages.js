@@ -5,6 +5,8 @@ const userControllerMessages = {
   emailVerified: 'Email has successfully been verified.',
   emailAlreadyVerified: 'Email has already been verified',
   userNotFound: 'User not found', // TODO make more meneangful
+  invalidEmailOrPassword: 'Invalid email or password',
+  emailNotVerified: 'Email not verified',
 };
 
 const smthWentWrong = 'Something went wrong';

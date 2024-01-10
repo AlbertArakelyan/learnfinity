@@ -7,6 +7,8 @@ const userControllerMessages = {
   userNotFound: 'User not found', // TODO make more meneangful
   invalidEmailOrPassword: 'Invalid email or password',
   emailNotVerified: 'Email not verified',
+  forgotPasswordMailSent: 'Password reset email has been sent',
+  resetPassword: 'Reset password',
 };
 
 const smthWentWrong = 'Something went wrong';

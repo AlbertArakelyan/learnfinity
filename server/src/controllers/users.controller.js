@@ -7,6 +7,7 @@ const {
   verifyEmail,
   isSignInAllowed,
   signIn,
+  forgotPassword,
 } = require('../models/users/users.model');
 
 const httpStatuses = require('../constants/httpStatuses');
@@ -140,8 +141,43 @@ async function httpSignIn(req, res) {
   }
 }
 
+async function httpForgotPassword(req, res) {
+  try {
+    const { email } = req.body;
+
+    const user = await findExistingUserByEmail(email);
+
+    if (!user) {
+      return res.status(httpStatuses.notFound).json({
+        success: false,
+        message: userControllerMessages.userNotFound,
+        statusCode: httpStatuses.notFound,
+      });
+    }
+
+    const responseEmail = await forgotPassword(email);
+
+    return res.status(httpStatuses.ok).json({
+      success: true,
+      data: {
+        email: responseEmail,
+      },
+      message: userControllerMessages.forgotPasswordMailSent,
+      statusCode: httpStatuses.ok,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(httpStatuses.serverError).json({
+      success: false,
+      message: error.message || smthWentWrong,
+      statusCode: httpStatuses.serverError,
+    });
+  }
+}
+
 module.exports = {
   httpSignUp,
   httpVerifyEmail,
   httpSignIn,
+  httpForgotPassword,
 };

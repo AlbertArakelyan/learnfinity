@@ -221,6 +221,64 @@ async function signIn(email) {
   };
 }
 
+/**
+ * Creates a reset password URL for the given email.
+ *
+ * @param {string} email - The email of the user.
+ * @return {string} The reset password URL.
+ */
+async function createResetPasswordUrl(email) {
+  const user = await findExistingUserByEmail(email);
+
+  const resetToken = crypto.randomUUID().toString('hex');
+
+  user.resetPasswordToken = resetToken;
+  user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+
+  await user.save();
+
+  const resetUrl = `${process.env.NODEMAILER_WEBSITE_URL}reset-password/${resetToken}`;
+
+  return resetUrl;
+}
+
+/**
+ * Sends a password reset email to the specified email address.
+ *
+ * @param {string} email - The email address of the user.
+ * @return {string} The email address that was sent the reset password link.
+ */
+async function forgotPassword(email) {
+  const resetUrl = await createResetPasswordUrl(email);
+
+  const mailOptions = {
+    from: process.env.NODEMAILER_EMAIL,
+    to: email,
+    subject: userControllerMessages.resetPassword,
+    html: `Please click this link to reset your password: <a href="${resetUrl}">${resetUrl}</a>`,
+  };
+
+  let sendEmailError;
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    // TODO improve error catching as it remains inside of this block
+    if (error) {
+      sendEmailError = error;
+      return;
+    }
+
+    console.log(`Email sent: ${info.response}`);
+  });
+
+  // TODO improve error catching as here sendEmailError still is not defined
+  if (sendEmailError) {
+    console.log('if/sendEmailError', sendEmailError);
+    throw new Error(sendEmailError);
+  }
+
+  return email;
+}
+
 module.exports = {
   findUserById,
   findExistingUserByEmail,
@@ -231,4 +289,5 @@ module.exports = {
   verifyEmail,
   isSignInAllowed,
   signIn,
+  forgotPassword,
 };

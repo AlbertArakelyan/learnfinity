@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 
 require('dotenv').config();
 
-const { signUpSchema, signInSchema } = require('../../utils/schemas/users.schema');
+const { signUpSchema, signInSchema, resetPasswordSchema } = require('../../utils/schemas/users.schema');
 
 const User = require('./users.mongo');
 const transporter = require('../../utils/transporter');
@@ -279,6 +279,51 @@ async function forgotPassword(email) {
   return email;
 }
 
+/**
+ * Validates the provided password data for resetting the password.
+ *
+ * @param {object} passwordData - The password data to be validated.
+ * @property {string} password - The new password.
+ * @property {string} confirmPassword - The confirmation of the new password.
+ * @return {object} The validation error, if any.
+ */
+function validateResetPassword(passwordData) {
+  const { error } = resetPasswordSchema.validate(passwordData);
+
+  return error;
+}
+
+/**
+ * Resets the user's password.
+ *
+ * @param {string} token - The reset password token.
+ * @param {string} password - The new password.
+ * @param {string} confirmPassword - The confirmation of the new password.
+ * @return {Object} - An object indicating whether the password was reset successfully.
+ */
+async function resetPassword(token, password) {
+  const user = await User.findOne({
+    resetPasswordToken: token,
+    resetPasswordExpires: { $gt: Date.now() },
+  });
+
+  if (!user) {
+    return;
+  }
+
+  const hashedPassword = await bcrypt.hash(password, bcryptComplexity);
+
+  user.password = hashedPassword;
+  user.resetPasswordToken = undefined;
+  user.resetPasswordExpires = undefined;
+
+  await user.save();
+
+  return {
+    isPasswordReset: true,
+  };
+}
+
 module.exports = {
   findUserById,
   findExistingUserByEmail,
@@ -290,4 +335,6 @@ module.exports = {
   isSignInAllowed,
   signIn,
   forgotPassword,
+  validateResetPassword,
+  resetPassword,
 };

@@ -8,6 +8,8 @@ const {
   isSignInAllowed,
   signIn,
   forgotPassword,
+  validateResetPassword,
+  resetPassword,
 } = require('../models/users/users.model');
 
 const httpStatuses = require('../constants/httpStatuses');
@@ -175,9 +177,58 @@ async function httpForgotPassword(req, res) {
   }
 }
 
+async function httpResetPassword(req, res) {
+  try {
+    const { resetToken, password, confirmPassword } = req.body;
+
+    if (password !== confirmPassword) {
+      return res.status(httpStatuses.badRequest).json({
+        success: false,
+        message: userControllerMessages.passwordsDontMatch,
+        statusCode: httpStatuses.badRequest,
+      });
+    }
+
+    const error = validateResetPassword({ password, confirmPassword });
+
+    if (error) {
+      return res.status(httpStatuses.badRequest).json({
+        success: false,
+        message: error.details[0].message,
+        statusCode: httpStatuses.badRequest,
+      });
+    }
+
+    const resetPasswordData = await resetPassword(resetToken, password);
+
+    if (!resetPasswordData) {
+      return res.status(httpStatuses.notFound).json({
+        success: false,
+        message: userControllerMessages.userNotFound,
+        statusCode: httpStatuses.notFound,
+      });
+    }
+
+    return res.status(httpStatuses.ok).json({
+      success: true,
+      data: resetPasswordData,
+      message: userControllerMessages.passwordReset,
+      statusCode: httpStatuses.ok,
+    })
+  } catch (error) {
+    console.log(error);
+    return res.status(httpStatuses.serverError).json({
+      success: false,
+      message: error.message || smthWentWrong,
+      statusCode: httpStatuses.serverError,
+    });
+  }
+}
+
 module.exports = {
   httpSignUp,
   httpVerifyEmail,
   httpSignIn,
   httpForgotPassword,
+  httpResetPassword,
 };

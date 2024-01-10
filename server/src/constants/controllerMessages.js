@@ -9,6 +9,9 @@ const userControllerMessages = {
   emailNotVerified: 'Email not verified',
   forgotPasswordMailSent: 'Password reset email has been sent',
   resetPassword: 'Reset password',
+  passwordsDontMatch: 'Passwords do not match',
+  invalidToken: 'Invalid token',
+  passwordReset: 'Password has been reset',
 };
 
 const smthWentWrong = 'Something went wrong';

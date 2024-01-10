@@ -20,7 +20,13 @@ const signInSchema = Joi.object({
   password: Joi.string().required().min(minValidationLength.base),
 });
 
+const resetPasswordSchema = Joi.object({
+  password: Joi.string().required().min(minValidationLength.base),
+  confirmPassword: Joi.ref('password'),
+});
+
 module.exports = {
   signUpSchema,
   signInSchema,
+  resetPasswordSchema,
 };

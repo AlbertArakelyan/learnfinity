@@ -9,7 +9,6 @@ const User = require('./users.mongo');
 const transporter = require('../../utils/transporter');
 const { userControllerMessages } = require('../../constants/controllerMessages');
 const { bcryptComplexity } = require('../../constants/global');
-const {func} = require("joi");
 
 /**
  * Finds a user by their ID.

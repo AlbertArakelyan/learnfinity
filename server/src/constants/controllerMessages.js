@@ -14,9 +14,14 @@ const userControllerMessages = {
   passwordReset: 'Password has been reset',
 };
 
+const groupControllerMessages = {
+  groupCreated: 'Group has been created',
+};
+
 const smthWentWrong = 'Something went wrong';
 
 module.exports = {
   userControllerMessages,
+  groupControllerMessages,
   smthWentWrong,
 };

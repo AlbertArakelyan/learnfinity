@@ -16,6 +16,7 @@ const userControllerMessages = {
 
 const groupControllerMessages = {
   groupCreated: 'Group has been created',
+  groupsReceived: 'Groups received',
 };
 
 const smthWentWrong = 'Something went wrong';

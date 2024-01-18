@@ -24,6 +24,25 @@ async function setCreatorAdmin(userId, groupId) {
   await userGroupRoleRelationship.save();
 }
 
+/**
+ * Retrieves groups associated with a user, filtered by role, with pagination.
+ *
+ * @param {string} userId - The ID of the user.
+ * @param {number} skip - The number of records to skip.
+ * @param {number} limit - The maximum number of records to return.
+ * @return {Promise<Array>} An array of groups associated with the user.
+ */
+async function getGroupsByUserIdWithRole(userId, skip, limit) {
+  const groups = await UserGroupRoleRelationship.find({ userId })
+    .populate('groupId')
+    .populate('roleId')
+    .skip(skip)
+    .limit(limit);
+
+  return groups;
+}
+
 module.exports = {
   setCreatorAdmin,
+  getGroupsByUserIdWithRole,
 };

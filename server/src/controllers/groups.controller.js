@@ -4,10 +4,13 @@ const {
 } = require('../models/groups/groups.model');
 const {
   setCreatorAdmin,
+  getGroupsByUserIdWithRole,
 } = require('../models/relationships/userGroupRoleRelationships/userGroupRoleRelationships.model');
 
+const { getPagination, getPaginatedDate } = require('../helpers/pagination');
+
 const httpStatuses = require('../constants/httpStatuses');
-const { groupControllerMessages, smthWentWrong } = require('../constants/controllerMessages');
+const { groupControllerMessages, smthWentWrong, userControllerMessages, } = require('../constants/controllerMessages');
 
 async function httpCreateGroup(req, res) {
   try {
@@ -49,6 +52,41 @@ async function httpCreateGroup(req, res) {
   }
 }
 
+async function httpGetGroups(req, res) {
+  try {
+    const userId = req.user.id;
+    const { page, limit: perPage } = req.query;
+    const { skip, limit } = getPagination(req.query);
+
+    if (!userId) {
+      return res.status(httpStatuses.badRequest).json({
+        success: false,
+        message: userControllerMessages.userNotFound,
+        statusCode: httpStatuses.badRequest,
+      });
+    }
+
+    const groups = await getGroupsByUserIdWithRole(userId, skip, limit);
+
+    const paginatedGroups = getPaginatedDate(groups, page, perPage);
+
+    return res.status(httpStatuses.ok).json({
+      success: true,
+      data: paginatedGroups,
+      message: groupControllerMessages.groupsReceived,
+      statusCode: httpStatuses.ok,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(httpStatuses.serverError).json({
+      success: false,
+      message: error.message || smthWentWrong,
+      statusCode: httpStatuses.serverError,
+    });
+  }
+}
+
 module.exports = {
   httpCreateGroup,
+  httpGetGroups,
 };

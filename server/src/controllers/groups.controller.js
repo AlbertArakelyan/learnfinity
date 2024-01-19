@@ -2,6 +2,7 @@ const {
   validateGroup,
   createGroup,
   deleteGroup,
+  updateGroup,
 } = require('../models/groups/groups.model');
 const {
   setCreatorAdmin,
@@ -121,8 +122,40 @@ async function httpDeleteGroup(req, res) {
   }
 }
 
+async function httpUpdateGroup(req, res) {
+  try {
+    const groupData = req.body;
+    const { groupId } = req.params;
+
+    if (!groupId) {
+      return res.status(httpStatuses.badRequest).json({
+        success: false,
+        message: groupControllerMessages.groupNotFound,
+        statusCode: httpStatuses.badRequest,
+      });
+    }
+
+    const updatedGroup = await updateGroup(groupId, groupData);
+
+    return res.status(httpStatuses.ok).json({
+      success: true,
+      data: updatedGroup,
+      message: groupControllerMessages.groupUpdated,
+      statusCode: httpStatuses.ok,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(httpStatuses.serverError).json({
+      success: false,
+      message: error.message || smthWentWrong,
+      statusCode: httpStatuses.serverError,
+    });
+  }
+}
+
 module.exports = {
   httpCreateGroup,
   httpGetGroups,
   httpDeleteGroup,
+  httpUpdateGroup,
 };

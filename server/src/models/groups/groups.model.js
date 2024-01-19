@@ -2,6 +2,10 @@ const Group = require('./groups.mongo');
 
 const { groupSchema } = require('../../utils/schemas/groups.schema');
 
+async function getGroupById(groupId) {
+  return await Group.findById(groupId);
+}
+
 /**
  * Validates a group object.
  *
@@ -46,8 +50,15 @@ async function deleteGroup(groupId) {
   return groupId;
 }
 
+async function updateGroup(groupId, group) {
+  await Group.findByIdAndUpdate(groupId, group);
+
+  return await getGroupById(groupId);
+}
+
 module.exports = {
   validateGroup,
   createGroup,
   deleteGroup,
+  updateGroup,
 };

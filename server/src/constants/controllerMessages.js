@@ -18,6 +18,7 @@ const groupControllerMessages = {
   groupCreated: 'Group has been created',
   groupsReceived: 'Groups received',
   groupNotFound: 'Group not found',
+  groupUpdated: 'Group has been updated',
 };
 
 const smthWentWrong = 'Something went wrong';

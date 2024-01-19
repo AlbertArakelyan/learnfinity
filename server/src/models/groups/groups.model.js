@@ -34,7 +34,20 @@ async function createGroup(group) {
   return createdGroup;
 }
 
+/**
+ * Deletes a group by its ID.
+ *
+ * @param {string} groupId - The ID of the group to be deleted.
+ * @return {Promise<string>} The ID of the deleted group.
+ */
+async function deleteGroup(groupId) {
+  await Group.findByIdAndDelete(groupId);
+
+  return groupId;
+}
+
 module.exports = {
   validateGroup,
   createGroup,
+  deleteGroup,
 };

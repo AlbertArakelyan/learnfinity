@@ -42,7 +42,14 @@ async function getGroupsByUserIdWithRole(userId, skip, limit) {
   return groups;
 }
 
+async function deleteGroupsById(groupId) {
+  await UserGroupRoleRelationship.deleteMany({ groupId });
+
+  return groupId;
+}
+
 module.exports = {
   setCreatorAdmin,
   getGroupsByUserIdWithRole,
+  deleteGroupsById,
 };

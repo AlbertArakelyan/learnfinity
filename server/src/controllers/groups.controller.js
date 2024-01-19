@@ -1,10 +1,12 @@
 const {
   validateGroup,
   createGroup,
+  deleteGroup,
 } = require('../models/groups/groups.model');
 const {
   setCreatorAdmin,
   getGroupsByUserIdWithRole,
+  deleteGroupsById,
 } = require('../models/relationships/userGroupRoleRelationships/userGroupRoleRelationships.model');
 
 const { getPagination, getPaginatedDate } = require('../helpers/pagination');
@@ -86,7 +88,41 @@ async function httpGetGroups(req, res) {
   }
 }
 
+async function httpDeleteGroup(req, res) {
+  try {
+    const { groupId } = req.params;
+
+    if (!groupId) {
+      return res.status(httpStatuses.badRequest).json({
+        success: false,
+        message: groupControllerMessages.groupNotFound,
+        statusCode: httpStatuses.badRequest,
+      });
+    }
+
+    const deletedGroupId = await deleteGroup(groupId);
+    await deleteGroupsById(deletedGroupId);
+
+    return res.status(httpStatuses.ok).json({
+      success: true,
+      data: {
+        deletedGroupId
+      },
+      message: groupControllerMessages.groupDeleted,
+      statusCode: httpStatuses.ok,
+    })
+  } catch (error) {
+    console.log(error);
+    return res.status(httpStatuses.serverError).json({
+      success: false,
+      message: error.message || smthWentWrong,
+      statusCode: httpStatuses.serverError,
+    });
+  }
+}
+
 module.exports = {
   httpCreateGroup,
   httpGetGroups,
+  httpDeleteGroup,
 };

@@ -37,7 +37,8 @@ async function getGroupsByUserIdWithRole(userId, skip, limit) {
     .populate('groupId')
     .populate('roleId')
     .skip(skip)
-    .limit(limit);
+    .limit(limit)
+    .sort({ created_at: -1 });
 
   return groups;
 }

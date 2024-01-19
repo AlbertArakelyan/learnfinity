@@ -43,6 +43,12 @@ async function getGroupsByUserIdWithRole(userId, skip, limit) {
   return groups;
 }
 
+/**
+ * Deletes groups by their ID.
+ *
+ * @param {string} groupId - The ID of the group.
+ * @return {string} The ID of the deleted group.
+ */
 async function deleteGroupsById(groupId) {
   await UserGroupRoleRelationship.deleteMany({ groupId });
 

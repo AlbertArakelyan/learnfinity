@@ -2,6 +2,12 @@ const Group = require('./groups.mongo');
 
 const { groupSchema } = require('../../utils/schemas/groups.schema');
 
+/**
+ * Retrieves a group by its ID.
+ *
+ * @param {string} groupId - The ID of the group to retrieve.
+ * @return {Promise<Group>} - A Promise that resolves to the retrieved group.
+ */
 async function getGroupById(groupId) {
   return await Group.findById(groupId);
 }
@@ -50,6 +56,15 @@ async function deleteGroup(groupId) {
   return groupId;
 }
 
+/**
+ * Updates a group with the given ID.
+ *
+ * @param {string} groupId - The ID of the group to update.
+ * @param {object} group - The updated group object.
+ * @param {string} group.name - The name of the group.
+ * @param {string} group.group - The group of the group.
+ * @return {Promise<object>} - The updated group object.
+ */
 async function updateGroup(groupId, group) {
   await Group.findByIdAndUpdate(groupId, group);
 

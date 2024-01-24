@@ -1,4 +1,5 @@
 const {
+  getGroupById,
   validateGroup,
   createGroup,
   deleteGroup,
@@ -89,6 +90,36 @@ async function httpGetGroups(req, res) {
   }
 }
 
+async function httpGetGroup(req, res) {
+  try {
+    const { groupId } = req.params;
+
+    if (!groupId) {
+      return res.status(httpStatuses.badRequest).json({
+        success: false,
+        message: groupControllerMessages.groupNotFound,
+        statusCode: httpStatuses.badRequest,
+      });
+    }
+
+    const group = await getGroupById(groupId);
+
+    return res.status(httpStatuses.ok).json({
+      success: true,
+      data: group,
+      message: groupControllerMessages.groupReceived,
+      statusCode: httpStatuses.ok,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(httpStatuses.serverError).json({
+      success: false,
+      message: error.message || smthWentWrong,
+      statusCode: httpStatuses.serverError,
+    });
+  }
+}
+
 async function httpDeleteGroup(req, res) {
   try {
     const { groupId } = req.params;
@@ -155,6 +186,7 @@ async function httpUpdateGroup(req, res) {
 
 module.exports = {
   httpCreateGroup,
+  httpGetGroup,
   httpGetGroups,
   httpDeleteGroup,
   httpUpdateGroup,

@@ -72,6 +72,7 @@ async function updateGroup(groupId, group) {
 }
 
 module.exports = {
+  getGroupById,
   validateGroup,
   createGroup,
   deleteGroup,

@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 const httpStatuses = require('../constants/httpStatuses');
+const { smthWentWrong } = require('../constants/controllerMessages');
 
 async function authMiddleware(req, res, next) {
   try {
@@ -24,7 +25,7 @@ async function authMiddleware(req, res, next) {
     console.log(error);
     res.status(httpStatuses.serverError).json({
       success: false,
-      message: error.message || somethingWentWrong,
+      message: error.message || smthWentWrong,
       statusCode: httpStatuses.serverError,
     });
   }

@@ -19,6 +19,7 @@ async function setCreatorAdmin(userId, groupId) {
     userId,
     groupId,
     roleId: adminRole._id,
+    isActive: true,
   });
 
   await userGroupRoleRelationship.save();

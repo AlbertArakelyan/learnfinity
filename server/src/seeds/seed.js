@@ -2,6 +2,8 @@ const mongoose = require('mongoose');
 
 const seedRoles = require('./roles.seed');
 
-seedRoles().then(() => {
+Promise.all([
+  seedRoles(),
+]).then(() => {
   mongoose.connection.close();
 });

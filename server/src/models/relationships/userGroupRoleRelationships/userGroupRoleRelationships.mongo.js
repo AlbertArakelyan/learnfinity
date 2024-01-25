@@ -16,6 +16,11 @@ const userGroupRoleRelationshipsSchema = new mongoose.Schema({
     ref: 'Role',
     required: true,
   },
+  isActive: {
+    type: Boolean,
+    default: false,
+    required: true,
+  },
 }, {
   timestamps: {
     createdAt: 'created_at',

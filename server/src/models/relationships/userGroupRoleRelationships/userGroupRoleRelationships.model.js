@@ -1,5 +1,9 @@
+const jwt = require('jsonwebtoken');
+
 const UserGroupRoleRelationship = require('./userGroupRoleRelationships.mongo');
 const Role = require('../../roles/roles.mongo');
+
+const transporter = require('../../../utils/transporter');
 
 const { rolePowers } = require('../../../constants/roles');
 
@@ -60,9 +64,61 @@ async function deleteGroupsById(groupId) {
   return groupId;
 }
 
+/**
+ * Generates an invitation token for a user with the specified user ID and role ID.
+ *
+ * @param {string} userId - The ID of the user.
+ * @param {string} roleId - The ID of the role.
+ * @return {string} The generated invitation token.
+ */
+function createInvitationToken(userId, roleId) {
+  return jwt.sign({ userId, roleId }, process.env.JWT_SECRET);
+}
+
+/**
+ * Sends an invitation email to a given email address with a link to join a group.
+ *
+ * @param {string} email - The email address to send the invitation to.
+ * @param {string} groupId - The ID of the group the user is invited to join.
+ * @param {string} token - The token used to authenticate the invitation.
+ * @return {string} The email address that was sent the invitation.
+ */
+function sendInvitationEmail(email, groupId, token) {
+  const invitationUrl = `${process.env.NODEMAILER_WEBSITE_URL}${groupId}/${token}`;
+
+  const mailOptions = {
+    from: process.env.NODEMAILER_EMAIL,
+    to: email,
+    subject: 'Invitation to join a group',
+    html: `<p>Click this link to join the group: <a style="color: cornflowerblue; text-decoration: underline" href="${invitationUrl}">${invitationUrl}</a></p>`, // TODO add group name
+  };
+
+  let sendEmailError;
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    // TODO improve error catching as it remains inside of this block
+    if (error) {
+      sendEmailError = error;
+      return;
+    }
+
+    console.log(`Email sent: ${info.response}`);
+  });
+
+  // TODO improve error catching as here sendEmailError still is not defined
+  if (sendEmailError) {
+    console.log('if/sendEmailError', sendEmailError);
+    throw new Error(sendEmailError);
+  }
+
+  return email;
+}
+
 module.exports = {
   setCreatorAdmin,
   getGroupsByUserIdWithRole,
   getGroupByUserIdAndGroupId,
   deleteGroupsById,
+  createInvitationToken,
+  sendInvitationEmail,
 };

@@ -9,7 +9,10 @@ const {
   setCreatorAdmin,
   getGroupsByUserIdWithRole,
   deleteGroupsById,
+  createInvitationToken,
+  sendInvitationEmail,
 } = require('../models/relationships/userGroupRoleRelationships/userGroupRoleRelationships.model');
+const { findExistingUserByEmail } = require('../models/users/users.model');
 
 const { getPagination, getPaginatedDate } = require('../helpers/pagination');
 
@@ -184,10 +187,67 @@ async function httpUpdateGroup(req, res) {
   }
 }
 
+async function httpInviteUserToGroup(req, res) {
+  try {
+    const { groupId } = req.params;
+
+    if (!groupId) {
+      return res.status(httpStatuses.badRequest).json({
+        success: false,
+        message: groupControllerMessages.groupNotFound,
+        statusCode: httpStatuses.badRequest,
+      });
+    }
+
+    const group = await getGroupById(groupId);
+
+    if (!group) {
+      return res.status(httpStatuses.badRequest).json({
+        success: false,
+        message: groupControllerMessages.groupNotFound,
+        statusCode: httpStatuses.badRequest,
+      });
+    }
+
+    const { email, roleId } = req.body;
+
+    const user = await findExistingUserByEmail(email);
+    const userId = user._id;
+
+    const invitationToken = createInvitationToken(userId, roleId);
+    const sentEmail = sendInvitationEmail(email, groupId, invitationToken);
+
+    if (!sentEmail) {
+      return res.status(httpStatuses.badRequest).json({
+        success: false,
+        message: userControllerMessages.userNotFound, // TODO change the message
+        statusCode: httpStatuses.badRequest,
+      });
+    }
+
+    return res.status(httpStatuses.ok).json({
+      success: true,
+      data: {
+        email: sentEmail,
+      },
+      message: groupControllerMessages.userInvited(email),
+      statusCode: httpStatuses.ok,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(httpStatuses.serverError).json({
+      success: false,
+      message: error.message || smthWentWrong,
+      statusCode: httpStatuses.serverError,
+    });
+  }
+}
+
 module.exports = {
   httpCreateGroup,
   httpGetGroup,
   httpGetGroups,
   httpDeleteGroup,
   httpUpdateGroup,
+  httpInviteUserToGroup,
 };

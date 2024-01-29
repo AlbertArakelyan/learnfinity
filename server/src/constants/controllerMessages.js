@@ -22,6 +22,8 @@ const groupControllerMessages = {
   groupReceived: 'Group received',
   notFoundOrDontHavePermission: 'Group not found or you do not have permission',
   userInvited: (email) => `User ${email} has been invited to join the group`,
+  userAddedToGroup: (email) => `User ${email} has been added to the group`,
+  userAlreadyInGroup: `User is already in the group`,
 };
 
 const smthWentWrong = 'Something went wrong';

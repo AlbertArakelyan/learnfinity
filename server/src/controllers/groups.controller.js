@@ -11,6 +11,9 @@ const {
   deleteGroupsById,
   createInvitationToken,
   sendInvitationEmail,
+  findExistingUserInGroup,
+  getUserInfoFromToken,
+  addUserToGroup,
 } = require('../models/relationships/userGroupRoleRelationships/userGroupRoleRelationships.model');
 const { findExistingUserByEmail } = require('../models/users/users.model');
 
@@ -243,6 +246,58 @@ async function httpInviteUserToGroup(req, res) {
   }
 }
 
+async function httpAddUserToGroup(req, res) {
+  try {
+    const { groupId, invitationToken } = req.params;
+
+    if (!groupId) {
+      return res.status(httpStatuses.badRequest).json({
+        success: false,
+        message: groupControllerMessages.groupNotFound,
+        statusCode: httpStatuses.badRequest,
+      });
+    }
+
+    const user = await getUserInfoFromToken(invitationToken);
+
+    if (!user) {
+      return res.status(httpStatuses.badRequest).json({
+        success: false,
+        message: groupControllerMessages.groupNotFound, // TODO change the message
+        statusCode: httpStatuses.badRequest,
+      });
+    }
+
+    const { userId, roleId } = user;
+
+    const userInGroup = await findExistingUserInGroup(userId, groupId);
+
+    if (userInGroup) {
+      return res.status(httpStatuses.badRequest).json({
+        success: false,
+        message: groupControllerMessages.userAlreadyInGroup,
+        statusCode: httpStatuses.badRequest,
+      });
+    }
+
+    const userGroupData = await addUserToGroup(groupId, userId, roleId);
+
+    return res.status(httpStatuses.ok).json({
+      success: true,
+      data: userGroupData,
+      message: groupControllerMessages.userAddedToGroup(userGroupData.userId.email), // TODO maybe change by name
+      statusCode: httpStatuses.ok,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(httpStatuses.serverError).json({
+      success: false,
+      message: error.message || smthWentWrong,
+      statusCode: httpStatuses.serverError,
+    });
+  }
+}
+
 module.exports = {
   httpCreateGroup,
   httpGetGroup,
@@ -250,4 +305,5 @@ module.exports = {
   httpDeleteGroup,
   httpUpdateGroup,
   httpInviteUserToGroup,
+  httpAddUserToGroup,
 };

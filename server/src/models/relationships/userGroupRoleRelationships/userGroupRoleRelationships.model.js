@@ -6,6 +6,7 @@ const Role = require('../../roles/roles.mongo');
 const transporter = require('../../../utils/transporter');
 
 const { rolePowers } = require('../../../constants/roles');
+const {func} = require("joi");
 
 /**
  * Sets the user with the given userId as an admin for the group with the given groupId.
@@ -23,7 +24,6 @@ async function setCreatorAdmin(userId, groupId) {
     userId,
     groupId,
     roleId: adminRole._id,
-    isActive: true,
   });
 
   await userGroupRoleRelationship.save();
@@ -114,6 +114,50 @@ function sendInvitationEmail(email, groupId, token) {
   return email;
 }
 
+/**
+ * Finds an existing user in a group.
+ *
+ * @param {string} userId - The ID of the user.
+ * @param {string} groupId - The ID of the group.
+ * @return {UserGroupRoleRelationship} The relationship between the user and the group.
+ */
+function findExistingUserInGroup(userId, groupId) {
+  return UserGroupRoleRelationship.findOne({ userId, groupId });
+}
+
+/**
+ * Retrieves user information from a given JWT token.
+ *
+ * @param {string} token - The JWT token containing user information.
+ * @return {object} An object containing the user information extracted from the token.
+ */
+function getUserInfoFromToken(token) {
+  return jwt.verify(token, process.env.JWT_SECRET);
+}
+
+/**
+ * Adds a user to a group with a specific role.
+ *
+ * @param {string} groupId - The ID of the group.
+ * @param {string} userId - The ID of the user.
+ * @param {string} roleId - The ID of the role.
+ * @return {Promise<UserGroupRoleRelationship>} The created user-group-role relationship.
+ */
+async function addUserToGroup(groupId, userId, roleId) {
+  const userGroupRoleRelationship = new UserGroupRoleRelationship({
+    userId,
+    groupId,
+    roleId,
+  });
+
+  await userGroupRoleRelationship.save();
+
+  // TODO make sure how it is populated
+  await userGroupRoleRelationship.populate('userId');
+
+  return userGroupRoleRelationship;
+}
+
 module.exports = {
   setCreatorAdmin,
   getGroupsByUserIdWithRole,
@@ -121,4 +165,7 @@ module.exports = {
   deleteGroupsById,
   createInvitationToken,
   sendInvitationEmail,
+  findExistingUserInGroup,
+  getUserInfoFromToken,
+  addUserToGroup,
 };

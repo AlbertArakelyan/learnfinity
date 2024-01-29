@@ -7,6 +7,7 @@ const {
   httpDeleteGroup,
   httpUpdateGroup,
   httpInviteUserToGroup,
+  httpAddUserToGroup,
 } = require('../controllers/groups.controller');
 
 const { authMiddleware } = require('../middlewares/users.middleware');
@@ -22,7 +23,8 @@ groupsRouter.patch('/:groupId', authMiddleware, groupAccessMiddleware, httpUpdat
 // create inviteUserToGroup API with /:groupId (role and email with body) create a token with users email and role and groupId
 groupsRouter.post('/:groupId', authMiddleware, groupAccessMiddleware, httpInviteUserToGroup); // TODO add permission middleware
 
-// TODO create addUserToGroup API with /:groupId/:invitationToken (roleId and userId from the token)
+// create addUserToGroup API with /:groupId/:invitationToken (roleId and userId from the token)
+groupsRouter.post('/:groupId/:invitationToken', authMiddleware, groupAccessMiddleware, httpAddUserToGroup); // TODO add permission middleware
 // TODO create removeUserFromGroup API with /:groupId/:userId
 // TODO create editUserGroupRole API with /:groupId/:userId (role with body)
 

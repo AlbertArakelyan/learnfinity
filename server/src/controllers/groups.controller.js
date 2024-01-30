@@ -14,6 +14,7 @@ const {
   findExistingUserInGroup,
   getUserInfoFromToken,
   addUserToGroup,
+  deleteUserFromGroup,
 } = require('../models/relationships/userGroupRoleRelationships/userGroupRoleRelationships.model');
 const { findExistingUserByEmail } = require('../models/users/users.model');
 
@@ -298,6 +299,54 @@ async function httpAddUserToGroup(req, res) {
   }
 }
 
+async function httpDeleteUserFromGroup(req, res) {
+  try {
+    const { groupId, userId } = req.params;
+
+    if (!groupId) {
+      return res.status(httpStatuses.badRequest).json({
+        success: false,
+        message: groupControllerMessages.groupNotFound,
+        statusCode: httpStatuses.badRequest,
+      });
+    }
+
+    if (!userId) {
+      return res.status(httpStatuses.badRequest).json({
+        success: false,
+        message: groupControllerMessages.userNotFound,
+        statusCode: httpStatuses.badRequest,
+      });
+    }
+
+    const existingUserInGroup = await findExistingUserInGroup(userId, groupId);
+
+    if (!existingUserInGroup) {
+      return res.status(httpStatuses.badRequest).json({
+        success: false,
+        message: groupControllerMessages.userNotFound,
+        statusCode: httpStatuses.badRequest,
+      });
+    }
+
+    const deletedUser = await deleteUserFromGroup(groupId, userId);
+
+    return res.status(httpStatuses.ok).json({
+      success: true,
+      data: deletedUser,
+      message: groupControllerMessages.userDeletedFromGroup,
+      statusCode: httpStatuses.ok,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(httpStatuses.serverError).json({
+      success: false,
+      message: error.message || smthWentWrong,
+      statusCode: httpStatuses.serverError,
+    });
+  }
+}
+
 module.exports = {
   httpCreateGroup,
   httpGetGroup,
@@ -306,4 +355,5 @@ module.exports = {
   httpUpdateGroup,
   httpInviteUserToGroup,
   httpAddUserToGroup,
+  httpDeleteUserFromGroup,
 };

@@ -158,6 +158,11 @@ async function addUserToGroup(groupId, userId, roleId) {
   return userGroupRoleRelationship;
 }
 
+async function deleteUserFromGroup(groupId, userId) {
+  // TODO call also when just a user or a group is deleted
+  return await UserGroupRoleRelationship.deleteOne({ userId, groupId });
+}
+
 module.exports = {
   setCreatorAdmin,
   getGroupsByUserIdWithRole,
@@ -168,4 +173,5 @@ module.exports = {
   findExistingUserInGroup,
   getUserInfoFromToken,
   addUserToGroup,
+  deleteUserFromGroup,
 };

@@ -24,6 +24,7 @@ const groupControllerMessages = {
   userInvited: (email) => `User ${email} has been invited to join the group`,
   userAddedToGroup: (email) => `User ${email} has been added to the group`,
   userAlreadyInGroup: `User is already in the group`,
+  userDeletedFromGroup: 'User has been deleted from the group',
 };
 
 const smthWentWrong = 'Something went wrong';

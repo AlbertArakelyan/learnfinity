@@ -14,9 +14,25 @@ const userControllerMessages = {
   passwordReset: 'Password has been reset',
 };
 
+const groupControllerMessages = {
+  groupCreated: 'Group has been created',
+  groupsReceived: 'Groups received',
+  groupNotFound: 'Group not found',
+  groupUpdated: 'Group has been updated',
+  groupReceived: 'Group received',
+  notFoundOrDontHavePermission: 'Group not found or you do not have permission',
+  userInvited: (email) => `User ${email} has been invited to join the group`,
+  userAddedToGroup: (email) => `User ${email} has been added to the group`,
+  userAlreadyInGroup: `User is already in the group`,
+  userDeletedFromGroup: 'User has been deleted from the group',
+  roleNotFound: 'Role not found or invalid',
+  roleEdited: 'Role has been edited',
+};
+
 const smthWentWrong = 'Something went wrong';
 
 module.exports = {
   userControllerMessages,
+  groupControllerMessages,
   smthWentWrong,
 };

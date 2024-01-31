@@ -12,7 +12,7 @@ const rolesSchema = new mongoose.Schema({
   power: {
     type: Number,
     required: true,
-    enum: [1, 7, 9],
+    enum: [1, 77, 999],
   },
 });
 

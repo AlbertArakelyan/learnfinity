@@ -23,7 +23,6 @@ groupsRouter.delete('/:groupId', authMiddleware, groupAccessMiddleware, httpDele
 groupsRouter.patch('/:groupId', authMiddleware, groupAccessMiddleware, httpUpdateGroup); // TODO add permission middleware
 groupsRouter.post('/:groupId', authMiddleware, groupAccessMiddleware, httpInviteUserToGroup); // TODO add permission middleware
 groupsRouter.post('/:groupId/:invitationToken', authMiddleware, groupAccessMiddleware, httpAddUserToGroup); // TODO add permission middleware
-// TODO create removeUserFromGroup API with /:groupId/:userId
 groupsRouter.delete('/:groupId/:userId', authMiddleware, groupAccessMiddleware, httpDeleteUserFromGroup); // TODO add permission middleware
 // TODO create editUserGroupRole API with /:groupId/:userId (role with body)
 

@@ -158,6 +158,13 @@ async function addUserToGroup(groupId, userId, roleId) {
   return userGroupRoleRelationship;
 }
 
+/**
+ * Deletes a user from a group.
+ *
+ * @param {string} groupId - The ID of the group.
+ * @param {string} userId - The ID of the user.
+ * @return {Promise} A promise that resolves when the user is successfully deleted from the group.
+ */
 async function deleteUserFromGroup(groupId, userId) {
   // TODO call also when just a user or a group is deleted
   return await UserGroupRoleRelationship.deleteOne({ userId, groupId });

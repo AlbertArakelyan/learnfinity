@@ -15,9 +15,9 @@ function getPaginatedDate(data, page, limit) {
  const totalItems = data.length;
  const totalPages = Math.ceil(totalItems / limit);
 
- return {
-   data,
-   pageInfo: {
+  return {
+    data,
+    pageInfo: {
      page,
      limit,
      totalItems,
@@ -30,8 +30,8 @@ function getPaginatedDate(data, page, limit) {
      // TODO rework
      nextPageUrl: `/api/groups?page=${page + 1}&limit=${limit}`,
      prevPageUrl: `/api/groups?page=${page - 1}&limit=${limit}`,
-   }
- }
+    },
+  };
 }
 
 module.exports = {

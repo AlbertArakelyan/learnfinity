@@ -6,7 +6,6 @@ const Role = require('../../roles/roles.mongo');
 const transporter = require('../../../utils/transporter');
 
 const { rolePowers } = require('../../../constants/roles');
-const {func} = require("joi");
 
 /**
  * Sets the user with the given userId as an admin for the group with the given groupId.
@@ -49,7 +48,7 @@ async function getGroupsByUserIdWithRole(userId, skip, limit) {
 }
 
 async function getGroupByUserIdAndGroupId(userId, groupId) {
-  return await UserGroupRoleRelationship.findOne({userId, groupId});
+  return await UserGroupRoleRelationship.findOne({ userId, groupId });
 }
 
 /**
@@ -152,7 +151,6 @@ async function addUserToGroup(groupId, userId, roleId) {
 
   await userGroupRoleRelationship.save();
 
-  // TODO make sure how it is populated
   await userGroupRoleRelationship.populate('userId');
 
   return userGroupRoleRelationship;
@@ -170,6 +168,18 @@ async function deleteUserFromGroup(groupId, userId) {
   return await UserGroupRoleRelationship.deleteOne({ userId, groupId });
 }
 
+async function editGroupRole(groupId, userId, roleId) {
+  const userGroupRoleRelationship = await getGroupByUserIdAndGroupId(userId, groupId);
+
+  userGroupRoleRelationship.roleId = roleId;
+
+  await userGroupRoleRelationship.save();
+
+  await userGroupRoleRelationship.populate('roleId');
+
+  return userGroupRoleRelationship;
+}
+
 module.exports = {
   setCreatorAdmin,
   getGroupsByUserIdWithRole,
@@ -181,4 +191,5 @@ module.exports = {
   getUserInfoFromToken,
   addUserToGroup,
   deleteUserFromGroup,
+  editGroupRole,
 };

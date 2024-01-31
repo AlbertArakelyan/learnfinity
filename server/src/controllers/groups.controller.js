@@ -15,6 +15,7 @@ const {
   getUserInfoFromToken,
   addUserToGroup,
   deleteUserFromGroup,
+  editGroupRole,
 } = require('../models/relationships/userGroupRoleRelationships/userGroupRoleRelationships.model');
 const { findExistingUserByEmail } = require('../models/users/users.model');
 
@@ -347,6 +348,54 @@ async function httpDeleteUserFromGroup(req, res) {
   }
 }
 
+async function httpEditUserGroupRole(req, res) {
+  try {
+    const { role: roleId } = req.body;
+
+    if (!roleId) {
+      return res.status(httpStatuses.badRequest).json({
+        success: false,
+        message: groupControllerMessages.roleNotFound,
+        statusCode: httpStatuses.badRequest,
+      });
+    }
+
+    const { groupId, userId } = req.params;
+
+    if (!groupId) {
+      return res.status(httpStatuses.badRequest).json({
+        success: false,
+        message: groupControllerMessages.groupNotFound,
+        statusCode: httpStatuses.badRequest,
+      });
+    }
+
+    if (!userId) {
+      return res.status(httpStatuses.badRequest).json({
+        success: false,
+        message: groupControllerMessages.userNotFound,
+        statusCode: httpStatuses.badRequest,
+      });
+    }
+
+    const editedGroup = await editGroupRole(groupId, userId, roleId);
+
+    return res.status(httpStatuses.ok).json({
+      success: true,
+      data: editedGroup,
+      message: groupControllerMessages.roleEdited,
+      statusCode: httpStatuses.ok,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(httpStatuses.serverError).json({
+      success: false,
+      message: error.message || smthWentWrong,
+      statusCode: httpStatuses.serverError,
+    });
+  }
+}
+
 module.exports = {
   httpCreateGroup,
   httpGetGroup,
@@ -356,4 +405,5 @@ module.exports = {
   httpInviteUserToGroup,
   httpAddUserToGroup,
   httpDeleteUserFromGroup,
+  httpEditUserGroupRole,
 };

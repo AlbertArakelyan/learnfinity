@@ -25,6 +25,8 @@ const groupControllerMessages = {
   userAddedToGroup: (email) => `User ${email} has been added to the group`,
   userAlreadyInGroup: `User is already in the group`,
   userDeletedFromGroup: 'User has been deleted from the group',
+  roleNotFound: 'Role not found or invalid',
+  roleEdited: 'Role has been edited',
 };
 
 const smthWentWrong = 'Something went wrong';

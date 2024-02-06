@@ -14,6 +14,6 @@ learningPathsRouter.post('/', authMiddleware, httpCreateLearningPath);
 learningPathsRouter.get('/', authMiddleware, httpGetUserLearningPaths);
 learningPathsRouter.get('/:learningPathId', authMiddleware, httpGetUserLearningPath);
 // TODO create a separate API for shared ones
-// TODO create a separate API for public ones (getting all and one)
+// TODO create a separate API for public ones (getting all)
 
 module.exports = learningPathsRouter;

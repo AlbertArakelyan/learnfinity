@@ -29,10 +29,25 @@ async function createLearningPath(learningPath) {
   return createdLearningPath;
 }
 
+
+/**
+ * Retrieves the learning paths associated with a specific user.
+ *
+ * @param {string} userId - The ID of the user.
+ * @return {Promise<Array>} An array of learning paths associated with the user.
+ */
 async function getUserLearningPaths(userId) {
   return await LearningPath.find({ userId, isCreatedInGroup: false });
 }
 
+/**
+ * Retrieves the learning path for a specific user.
+ *
+ * @param {string} userId - The ID of the user.
+ * @param {string} learningPathId - The ID of the learning path.
+ * @return {Object|null} The learning path object if it is not private and the user has access,
+ * otherwise null.
+ */
 async function getUserLearningPath(userId, learningPathId) {
   const learningPath = LearningPath.findOne({ _id: learningPathId, isCreatedInGroup: false });
   if (learningPath.isPrivate) {

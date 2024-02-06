@@ -1,6 +1,7 @@
 const {
   validateLearningPath,
   createLearningPath,
+  getUserLearningPaths,
 } = require('../models/learningPaths/learningPaths.model');
 
 const httpStatuses = require('../constants/httpStatuses');
@@ -55,6 +56,37 @@ async function httpCreateLearningPath(req, res) {
   }
 }
 
+async function httpGetUserLearningPaths(req, res) {
+  try {
+    const userId = req.user.id;
+
+    if (!userId) {
+      return res.status(httpStatuses.badRequest).json({
+        success: false,
+        message: learningPathControllerMessages.userNotFound,
+        statusCode: httpStatuses.badRequest,
+      });
+    }
+
+    const learningPaths = await getUserLearningPaths(userId);
+
+    return res.status(httpStatuses.ok).json({
+      success: true,
+      data: learningPaths,
+      message: learningPathControllerMessages.learningPathsReceived,
+      statusCode: httpStatuses.ok,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(httpStatuses.serverError).json({
+      success: false,
+      message: error.message || smthWentWrong,
+      statusCode: httpStatuses.serverError,
+    });
+  }
+}
+
 module.exports = {
   httpCreateLearningPath,
+  httpGetUserLearningPaths,
 };

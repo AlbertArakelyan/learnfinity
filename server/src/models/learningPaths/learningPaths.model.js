@@ -29,7 +29,12 @@ async function createLearningPath(learningPath) {
   return createdLearningPath;
 }
 
+async function getUserLearningPaths(userId) {
+  return await LearningPath.find({userId, isCreatedInGroup: false});
+}
+
 module.exports = {
   validateLearningPath,
   createLearningPath,
+  getUserLearningPaths,
 };

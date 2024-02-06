@@ -32,6 +32,7 @@ const groupControllerMessages = {
 const learningPathControllerMessages = {
   learningPathsInGroupMustBePrivate: 'Learning paths in groups must be private',
   learningPathCreated: 'Learning path has been created',
+  learningPathsReceived: 'Learning paths received',
 };
 
 const smthWentWrong = 'Something went wrong';

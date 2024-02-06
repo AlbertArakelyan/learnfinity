@@ -29,10 +29,16 @@ const groupControllerMessages = {
   roleEdited: 'Role has been edited',
 };
 
+const learningPathControllerMessages = {
+  learningPathsInGroupMustBePrivate: 'Learning paths in groups must be private',
+  learningPathCreated: 'Learning path has been created',
+};
+
 const smthWentWrong = 'Something went wrong';
 
 module.exports = {
   userControllerMessages,
   groupControllerMessages,
+  learningPathControllerMessages,
   smthWentWrong,
 };

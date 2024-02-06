@@ -30,11 +30,22 @@ async function createLearningPath(learningPath) {
 }
 
 async function getUserLearningPaths(userId) {
-  return await LearningPath.find({userId, isCreatedInGroup: false});
+  return await LearningPath.find({ userId, isCreatedInGroup: false });
+}
+
+async function getUserLearningPath(userId, learningPathId) {
+  const learningPath = LearningPath.findOne({ _id: learningPathId, isCreatedInGroup: false });
+  if (learningPath.isPrivate) {
+    return await learningPath.userId === userId ? learningPath : null;
+    // TODO also add a separate condition for shared userIDs
+  }
+
+  return learningPath;
 }
 
 module.exports = {
   validateLearningPath,
   createLearningPath,
   getUserLearningPaths,
+  getUserLearningPath,
 };

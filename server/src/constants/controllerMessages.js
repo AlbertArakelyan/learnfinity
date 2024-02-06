@@ -33,6 +33,9 @@ const learningPathControllerMessages = {
   learningPathsInGroupMustBePrivate: 'Learning paths in groups must be private',
   learningPathCreated: 'Learning path has been created',
   learningPathsReceived: 'Learning paths received',
+  learningPathNotFound: 'Learning path not found',
+  learningPathsNotFound: 'Learning paths not found',
+  learningPathReceived: 'Learning path received',
 };
 
 const smthWentWrong = 'Something went wrong';

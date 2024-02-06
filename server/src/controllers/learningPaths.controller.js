@@ -2,6 +2,7 @@ const {
   validateLearningPath,
   createLearningPath,
   getUserLearningPaths,
+  getUserLearningPath,
 } = require('../models/learningPaths/learningPaths.model');
 
 const httpStatuses = require('../constants/httpStatuses');
@@ -70,6 +71,14 @@ async function httpGetUserLearningPaths(req, res) {
 
     const learningPaths = await getUserLearningPaths(userId);
 
+    if (!learningPaths?.length) {
+      return res.status(httpStatuses.notFound).json({
+        success: false,
+        message: learningPathControllerMessages.learningPathsNotFound,
+        statusCode: httpStatuses.notFound,
+      });
+    }
+
     return res.status(httpStatuses.ok).json({
       success: true,
       data: learningPaths,
@@ -86,7 +95,56 @@ async function httpGetUserLearningPaths(req, res) {
   }
 }
 
+async function httpGetUserLearningPath(req, res) {
+  try {
+    const { learningPathId } = req.params;
+
+    if (!learningPathId) {
+      return res.status(httpStatuses.badRequest).json({
+        success: false,
+        message: learningPathControllerMessages.learningPathNotFound,
+        statusCode: httpStatuses.badRequest,
+      });
+    }
+
+    const userId = req.user.id;
+
+    if (!userId) {
+      return res.status(httpStatuses.badRequest).json({
+        success: false,
+        message: learningPathControllerMessages.userNotFound,
+        statusCode: httpStatuses.badRequest,
+      });
+    }
+
+    const learningPath = await getUserLearningPath(userId, learningPathId);
+
+    if (!learningPath) {
+      return res.status(httpStatuses.notFound).json({
+        success: false,
+        message: learningPathControllerMessages.learningPathNotFound,
+        statusCode: httpStatuses.notFound,
+      });
+    }
+
+    return res.status(httpStatuses.ok).json({
+      success: true,
+      data: learningPath,
+      message: learningPathControllerMessages.learningPathReceived,
+      statusCode: httpStatuses.ok,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(httpStatuses.serverError).json({
+      success: false,
+      message: error.message || smthWentWrong,
+      statusCode: httpStatuses.serverError,
+    });
+  }
+}
+
 module.exports = {
   httpCreateLearningPath,
   httpGetUserLearningPaths,
+  httpGetUserLearningPath,
 };

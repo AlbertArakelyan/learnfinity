@@ -49,8 +49,9 @@ async function getUserLearningPaths(userId) {
  * otherwise null.
  */
 async function getUserLearningPath(userId, learningPathId) {
-  const learningPath = LearningPath.findOne({ _id: learningPathId, isCreatedInGroup: false });
-  if (learningPath.isPrivate) {
+  const learningPath = await LearningPath.findOne({ _id: learningPathId, isCreatedInGroup: false });
+
+  if (learningPath?.isPrivate) {
     return await learningPath.userId === userId ? learningPath : null;
     // TODO also add a separate condition for shared userIDs
   }

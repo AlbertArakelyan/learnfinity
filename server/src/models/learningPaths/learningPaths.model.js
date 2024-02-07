@@ -36,8 +36,12 @@ async function createLearningPath(learningPath) {
  * @param {string} userId - The ID of the user.
  * @return {Promise<Array>} An array of learning paths associated with the user.
  */
-async function getUserLearningPaths(userId) {
-  return await LearningPath.find({ userId, isCreatedInGroup: false });
+async function getUserLearningPaths(userId, skip, limit) {
+  return await LearningPath
+    .find({ userId, isCreatedInGroup: false })
+    .skip(skip)
+    .limit(limit)
+    .sort({ createdAt: -1 });
 }
 
 /**
@@ -59,8 +63,12 @@ async function getUserLearningPath(userId, learningPathId) {
   return learningPath;
 }
 
-async function getPublicLearningPaths() {
-  return await LearningPath.find({ isCreatedInGroup: false, isPrivate: false });
+async function getPublicLearningPaths(skip, limit) {
+  return await LearningPath
+    .find({ isCreatedInGroup: false, isPrivate: false })
+    .skip(skip)
+    .limit(limit)
+    .sort({ createdAt: -1 });
 }
 
 module.exports = {

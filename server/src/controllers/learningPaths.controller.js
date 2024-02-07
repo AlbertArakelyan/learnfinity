@@ -6,6 +6,8 @@ const {
   getPublicLearningPaths,
 } = require('../models/learningPaths/learningPaths.model');
 
+const { getPagination, getPaginatedDate } = require('../helpers/pagination');
+
 const httpStatuses = require('../constants/httpStatuses');
 const { learningPathControllerMessages, smthWentWrong } = require('../constants/controllerMessages');
 
@@ -70,9 +72,13 @@ async function httpGetUserLearningPaths(req, res) {
       });
     }
 
-    const learningPaths = await getUserLearningPaths(userId);
+    const { page, limit: perPage } = req.query;
+    const { skip, limit } = getPagination(req.query);
 
-    if (!learningPaths?.length) {
+    const learningPaths = await getUserLearningPaths(userId, skip, limit);
+    const paginatedLearningPaths = getPaginatedDate(learningPaths, page, perPage);
+
+    if (!paginatedLearningPaths.data?.length) {
       return res.status(httpStatuses.notFound).json({
         success: false,
         message: learningPathControllerMessages.learningPathsNotFound,
@@ -82,7 +88,7 @@ async function httpGetUserLearningPaths(req, res) {
 
     return res.status(httpStatuses.ok).json({
       success: true,
-      data: learningPaths,
+      data: paginatedLearningPaths,
       message: learningPathControllerMessages.learningPathsReceived,
       statusCode: httpStatuses.ok,
     });
@@ -146,9 +152,14 @@ async function httpGetUserLearningPath(req, res) {
 
 async function httpGetPublicLearningPaths(req, res) {
   try {
-    const learningPaths = await getPublicLearningPaths();
+    const { page, limit: perPage } = req.query;
+    const { skip, limit } = getPagination(req.query);
 
-    if (!learningPaths?.length) {
+    const learningPaths = await getPublicLearningPaths(skip, limit);
+    const paginatedLearningPaths = getPaginatedDate(learningPaths, page, perPage);
+    console.log(paginatedLearningPaths)
+
+    if (!paginatedLearningPaths.data?.length) {
       return res.status(httpStatuses.notFound).json({
         success: false,
         message: learningPathControllerMessages.learningPathsNotFound,
@@ -158,7 +169,7 @@ async function httpGetPublicLearningPaths(req, res) {
 
     return res.status(httpStatuses.ok).json({
       success: true,
-      data: learningPaths,
+      data: paginatedLearningPaths,
       message: learningPathControllerMessages.learningPathsReceived,
       statusCode: httpStatuses.ok,
     });

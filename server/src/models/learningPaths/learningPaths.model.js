@@ -59,9 +59,14 @@ async function getUserLearningPath(userId, learningPathId) {
   return learningPath;
 }
 
+async function getPublicLearningPaths() {
+  return await LearningPath.find({ isCreatedInGroup: false, isPrivate: false });
+}
+
 module.exports = {
   validateLearningPath,
   createLearningPath,
   getUserLearningPaths,
   getUserLearningPath,
+  getPublicLearningPaths,
 };

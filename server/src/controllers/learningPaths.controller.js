@@ -4,6 +4,7 @@ const {
   getUserLearningPaths,
   getUserLearningPath,
   getPublicLearningPaths,
+  getSharedLearningPaths,
 } = require('../models/learningPaths/learningPaths.model');
 
 const { getPagination, getPaginatedDate } = require('../helpers/pagination');
@@ -157,7 +158,39 @@ async function httpGetPublicLearningPaths(req, res) {
 
     const learningPaths = await getPublicLearningPaths(skip, limit);
     const paginatedLearningPaths = getPaginatedDate(learningPaths, page, perPage);
-    console.log(paginatedLearningPaths)
+
+    if (!paginatedLearningPaths.data?.length) {
+      return res.status(httpStatuses.notFound).json({
+        success: false,
+        message: learningPathControllerMessages.learningPathsNotFound,
+        statusCode: httpStatuses.notFound,
+      });
+    }
+
+    return res.status(httpStatuses.ok).json({
+      success: true,
+      data: paginatedLearningPaths,
+      message: learningPathControllerMessages.learningPathsReceived,
+      statusCode: httpStatuses.ok,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(httpStatuses.serverError).json({
+      success: false,
+      message: error.message || smthWentWrong,
+      statusCode: httpStatuses.serverError,
+    });
+  }
+}
+
+async function httpGetSharedLearningPaths(req, res) {
+  try {
+    const userId = req.user.id;
+    const { page, limit: perPage } = req.query;
+    const { skip, limit } = getPagination(req.query);
+
+    const learningPaths = await getSharedLearningPaths(userId, skip, limit);
+    const paginatedLearningPaths = getPaginatedDate(learningPaths, page, perPage);
 
     if (!paginatedLearningPaths.data?.length) {
       return res.status(httpStatuses.notFound).json({
@@ -188,4 +221,5 @@ module.exports = {
   httpGetUserLearningPaths,
   httpGetUserLearningPath,
   httpGetPublicLearningPaths,
+  httpGetSharedLearningPaths,
 };

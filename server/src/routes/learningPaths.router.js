@@ -5,6 +5,7 @@ const {
   httpGetUserLearningPaths,
   httpGetUserLearningPath,
   httpGetPublicLearningPaths,
+  httpGetSharedLearningPaths,
 } = require('../controllers/learningPaths.controller');
 
 const { authMiddleware } = require('../middlewares/users.middleware');
@@ -13,8 +14,8 @@ const { learningPathAccessMiddleware } = require('../middlewares/learningPaths.m
 const learningPathsRouter = express.Router();
 
 learningPathsRouter.post('/', authMiddleware, httpCreateLearningPath);
+learningPathsRouter.get('/shared', authMiddleware, httpGetSharedLearningPaths);
 learningPathsRouter.get('/public', authMiddleware, httpGetPublicLearningPaths);
-// TODO get shared learning paths
 learningPathsRouter.get('/', authMiddleware, httpGetUserLearningPaths);
 learningPathsRouter.get('/:learningPathId', authMiddleware, learningPathAccessMiddleware, httpGetUserLearningPath);
 

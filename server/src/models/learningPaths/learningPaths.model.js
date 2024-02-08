@@ -71,10 +71,27 @@ async function getPublicLearningPaths(skip, limit) {
     .sort({ createdAt: -1 });
 }
 
+/**
+ * Retrieves the shared learning paths for a given user.
+ *
+ * @param {string} userId - The ID of the user.
+ * @param {number} skip - The number of documents to skip.
+ * @param {number} limit - The maximum number of documents to return.
+ * @return {Promise<Array>} - A promise that resolves to an array of shared learning paths.
+ */
+async function getSharedLearningPaths(userId, skip, limit) {
+  return await LearningPath
+    .find({ sharedUserIds: { $in: [userId] } })
+    .skip(skip)
+    .limit(limit)
+    .sort({ createdAt: -1 });
+}
+
 module.exports = {
   validateLearningPath,
   createLearningPath,
   getUserLearningPaths,
   getUserLearningPath,
   getPublicLearningPaths,
+  getSharedLearningPaths,
 };

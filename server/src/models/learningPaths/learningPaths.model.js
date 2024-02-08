@@ -1,3 +1,5 @@
+const mongoose = require('mongoose');
+
 const LearningPath = require('./learningPaths.mongo');
 
 const { learningPathSchema } = require('../../utils/schemas/learningPaths.schema');
@@ -56,8 +58,8 @@ async function getUserLearningPath(userId, learningPathId) {
   const learningPath = await LearningPath.findOne({ _id: learningPathId, isCreatedInGroup: false });
 
   if (learningPath?.isPrivate) {
-    return await learningPath.userId === userId ? learningPath : null;
-    // TODO also add a separate condition for shared userIDs
+    const isShared = learningPath.sharedUserIds.includes(userId);
+    return await (learningPath.userId.equals(new mongoose.Types.ObjectId(userId)) || isShared) ? learningPath : null;
   }
 
   return learningPath;

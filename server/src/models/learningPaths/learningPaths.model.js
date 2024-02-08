@@ -65,6 +65,13 @@ async function getUserLearningPath(userId, learningPathId) {
   return learningPath;
 }
 
+/**
+ * Retrieves public learning paths from the database.
+ *
+ * @param {number} skip - The number of documents to skip.
+ * @param {number} limit - The maximum number of documents to return.
+ * @return {Promise<Array>} An array of public learning paths.
+ */
 async function getPublicLearningPaths(skip, limit) {
   return await LearningPath
     .find({ isCreatedInGroup: false, isPrivate: false })

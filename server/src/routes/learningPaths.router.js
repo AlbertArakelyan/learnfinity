@@ -19,8 +19,10 @@ learningPathsRouter.get('/shared', authMiddleware, httpGetSharedLearningPaths);
 learningPathsRouter.get('/public', authMiddleware, httpGetPublicLearningPaths);
 learningPathsRouter.get('/', authMiddleware, httpGetUserLearningPaths);
 learningPathsRouter.get('/:learningPathId', authMiddleware, learningPathAccessMiddleware, httpGetUserLearningPath);
-// TODO add delete API (for only creators for their ones and only for admins and managers in groups)
 learningPathsRouter.delete('/:learningPathId', authMiddleware, canEditOrDeleteLearningPathMiddleware, httpDeleteLearningPath);
 // TODO add update API (for only creators for their ones and only for admins and managers in groups)
+// TODO add API for sharing your private learning path with other users
+
+// TODO add delete API (only for creators(userId===) in groups)
 
 module.exports = learningPathsRouter;

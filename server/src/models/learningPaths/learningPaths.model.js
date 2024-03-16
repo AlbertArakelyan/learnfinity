@@ -118,6 +118,20 @@ async function getUsersCreatedLearningPath(userId, learningPathId) {
   return await LearningPath.findOne({ _id: learningPathId, userId, isCreatedInGroup: false });
 }
 
+/**
+ * Edits a user's learning path.
+ *
+ * @param {string} learningPathId - The ID of the learning path to edit.
+ * @param {string} userId - The ID of the user whose learning path is being edited.
+ * @param {object} learningPath - The new learning path data.
+ * @return {Promise<object>} The updated user's learning path.
+ */
+async function editUserLearningPath(learningPathId, userId, learningPath) {
+  await LearningPath.findOneAndUpdate({ _id: learningPathId, userId }, learningPath);
+
+  return await getUserLearningPath(userId, learningPathId);
+}
+
 module.exports = {
   validateLearningPath,
   createLearningPath,
@@ -127,4 +141,5 @@ module.exports = {
   getSharedLearningPaths,
   deleteLearningPath,
   getUsersCreatedLearningPath,
+  editUserLearningPath,
 };

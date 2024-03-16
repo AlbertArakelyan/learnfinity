@@ -37,6 +37,7 @@ const learningPathControllerMessages = {
   learningPathsNotFound: 'Learning paths not found',
   learningPathReceived: 'Learning path received',
   learningPathDeleted: 'Learning path has been deleted',
+  learningPathUpdated: 'Learning path has been updated',
 };
 
 const smthWentWrong = 'Something went wrong';

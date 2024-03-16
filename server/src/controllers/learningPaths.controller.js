@@ -6,6 +6,7 @@ const {
   getPublicLearningPaths,
   getSharedLearningPaths,
   deleteLearningPath,
+  editUserLearningPath,
 } = require('../models/learningPaths/learningPaths.model');
 
 const { getPagination, getPaginatedDate } = require('../helpers/pagination');
@@ -262,7 +263,35 @@ async function httpDeleteUserLearningPath(req, res) {
 
 async function httpEditUserLearningPath(req, res) {
   try {
-    
+    const learningPathData = req.body;
+    const { learningPathId } = req.params;
+
+    if (!learningPathId) {
+      return res.status(httpStatuses.badRequest).json({
+        success: false,
+        message: learningPathControllerMessages.learningPathNotFound,
+        statusCode: httpStatuses.badRequest,
+      });
+    }
+
+    const userId = req.user.id;
+
+    if (!userId) {
+      return res.status(httpStatuses.badRequest).json({
+        success: false,
+        message: learningPathControllerMessages.userNotFound,
+        statusCode: httpStatuses.badRequest,
+      });
+    }
+
+    const updatedLearningPath = await editUserLearningPath(learningPathId, userId, learningPathData);
+
+    return res.status(httpStatuses.ok).json({
+      success: true,
+      data: updatedLearningPath,
+      message: learningPathControllerMessages.learningPathUpdated,
+      statusCode: httpStatuses.ok,
+    });
   } catch (error) {
     console.log(error);
     return res.status(httpStatuses.serverError).json({
@@ -280,4 +309,5 @@ module.exports = {
   httpGetPublicLearningPaths,
   httpGetSharedLearningPaths,
   httpDeleteUserLearningPath,
+  httpEditUserLearningPath,
 };

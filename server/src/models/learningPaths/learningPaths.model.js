@@ -96,6 +96,28 @@ async function getSharedLearningPaths(userId, skip, limit) {
     .sort({ createdAt: -1 });
 }
 
+/**
+ * Deletes a learning path for a specific user.
+ *
+ * @param {string} userId - The ID of the user.
+ * @param {string} learningPathId - The ID of the learning path to be deleted.
+ * @return {Promise} A promise that resolves to the result of the delete operation.
+ */
+async function deleteLearningPath(userId, learningPathId) {
+  return await LearningPath.deleteOne({ _id: learningPathId, userId });
+}
+
+/**
+ * Retrieves the learning path created by a specific user.
+ *
+ * @param {string} userId - The ID of the user who created the learning path.
+ * @param {string} learningPathId - The ID of the learning path to retrieve.
+ * @return {Promise<Object>} A promise that resolves to the learning path object if found, or null if not found.
+ */
+async function getUsersCreatedLearningPath(userId, learningPathId) {
+  return await LearningPath.findOne({ _id: learningPathId, userId, isCreatedInGroup: false });
+}
+
 module.exports = {
   validateLearningPath,
   createLearningPath,
@@ -103,4 +125,6 @@ module.exports = {
   getUserLearningPath,
   getPublicLearningPaths,
   getSharedLearningPaths,
+  deleteLearningPath,
+  getUsersCreatedLearningPath,
 };

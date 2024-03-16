@@ -334,7 +334,12 @@ async function httpDeleteUserFromGroup(req, res) {
 
     return res.status(httpStatuses.ok).json({
       success: true,
-      data: deletedUser,
+      data: {
+        ...deletedUser,
+        userId,
+        groupId,
+        isDeleted: true
+      },
       message: groupControllerMessages.userDeletedFromGroup,
       statusCode: httpStatuses.ok,
     });

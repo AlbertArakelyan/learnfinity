@@ -6,7 +6,7 @@ const {
   httpGetUserLearningPath,
   httpGetPublicLearningPaths,
   httpGetSharedLearningPaths,
-  httpDeleteLearningPath,
+  httpDeleteUserLearningPath,
 } = require('../controllers/learningPaths.controller');
 
 const { authMiddleware } = require('../middlewares/users.middleware');
@@ -19,7 +19,8 @@ learningPathsRouter.get('/shared', authMiddleware, httpGetSharedLearningPaths);
 learningPathsRouter.get('/public', authMiddleware, httpGetPublicLearningPaths);
 learningPathsRouter.get('/', authMiddleware, httpGetUserLearningPaths);
 learningPathsRouter.get('/:learningPathId', authMiddleware, learningPathAccessMiddleware, httpGetUserLearningPath);
-learningPathsRouter.delete('/:learningPathId', authMiddleware, canEditOrDeleteLearningPathMiddleware, httpDeleteLearningPath);
+learningPathsRouter.delete('/:learningPathId', authMiddleware, canEditOrDeleteLearningPathMiddleware, httpDeleteUserLearningPath);
+
 // TODO add update API (for only creators for their ones and only for admins and managers in groups)
 // TODO add API for sharing your private learning path with other users
 

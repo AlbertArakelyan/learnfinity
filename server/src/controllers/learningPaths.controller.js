@@ -217,7 +217,7 @@ async function httpGetSharedLearningPaths(req, res) {
   }
 }
 
-async function httpDeleteLearningPath(req, res) {
+async function httpDeleteUserLearningPath(req, res) {
   try {
     const userId = req.user.id;
     const { learningPathId } = req.params;
@@ -260,11 +260,24 @@ async function httpDeleteLearningPath(req, res) {
   }
 }
 
+async function httpEditUserLearningPath(req, res) {
+  try {
+    
+  } catch (error) {
+    console.log(error);
+    return res.status(httpStatuses.serverError).json({
+      success: false,
+      message: error.message || smthWentWrong,
+      statusCode: httpStatuses.serverError,
+    });
+  }
+}
+
 module.exports = {
   httpCreateLearningPath,
   httpGetUserLearningPaths,
   httpGetUserLearningPath,
   httpGetPublicLearningPaths,
   httpGetSharedLearningPaths,
-  httpDeleteLearningPath,
+  httpDeleteUserLearningPath,
 };

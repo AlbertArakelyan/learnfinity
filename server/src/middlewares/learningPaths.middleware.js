@@ -8,7 +8,6 @@ async function learningPathAccessMiddleware(req, res, next) {
   try {
     const { id: userId } = req.user;
     const { learningPathId } = req.params;
-    console.log(userId, learningPathId);
 
     const learningPath = await getUserLearningPath(userId, learningPathId);
 

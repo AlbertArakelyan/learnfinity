@@ -37,7 +37,6 @@ async function canEditOrDeleteLearningPathMiddleware(req, res, next) {
 
     const userLearningPath = await getUsersCreatedLearningPath(userId, learningPathId);
 
-    // TODO add check if user is admin or manager in group
     if (!userLearningPath) {
       return res.status(httpStatuses.forbidden).json({
         success: false,
@@ -56,6 +55,8 @@ async function canEditOrDeleteLearningPathMiddleware(req, res, next) {
     });
   }
 }
+
+// TODO add check if user is admin or manager in group (to delete or edit) new middleware
 
 module.exports = {
   learningPathAccessMiddleware,

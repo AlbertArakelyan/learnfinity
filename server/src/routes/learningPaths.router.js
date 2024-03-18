@@ -23,7 +23,6 @@ learningPathsRouter.get('/:learningPathId', authMiddleware, learningPathAccessMi
 learningPathsRouter.delete('/:learningPathId', authMiddleware, canEditOrDeleteLearningPathMiddleware, httpDeleteUserLearningPath);
 // Can also be used for sharing by changing sharedUserIds (user can be got by emails in frontend and shared without invitation)
 learningPathsRouter.patch('/:learningPathId', authMiddleware, canEditOrDeleteLearningPathMiddleware, httpEditUserLearningPath);
-// TODO add add to group API (only for admins and managers in groups)
 // TODO add update API (only for admins and managers in groups)
 // TODO add delete API (only for creators(userId===) in groups)
 

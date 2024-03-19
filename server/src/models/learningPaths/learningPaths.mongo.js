@@ -22,10 +22,12 @@ const learningPathsSchema = new mongoose.Schema({
     ref: 'User',
     required: true
   },
-  groupIds: [{
+  groupId: {
+    // TODO create duplication functionality into other groups
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Group',
-  }],
+    default: null,
+  },
   tags: [{
     type: String,
     required: true,
@@ -34,7 +36,6 @@ const learningPathsSchema = new mongoose.Schema({
   sharedUserIds: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
-    default: [],
   }],
 }, {
   timestamps: {

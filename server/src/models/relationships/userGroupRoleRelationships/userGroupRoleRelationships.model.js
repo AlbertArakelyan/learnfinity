@@ -151,6 +151,7 @@ async function addUserToGroup(groupId, userId, roleId) {
 
   await userGroupRoleRelationship.save();
 
+  // TODO delete password
   await userGroupRoleRelationship.populate('userId');
 
   return userGroupRoleRelationship;

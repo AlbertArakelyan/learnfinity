@@ -29,10 +29,25 @@ const groupControllerMessages = {
   roleEdited: 'Role has been edited',
 };
 
+const learningPathControllerMessages = {
+  learningPathsInGroupMustBePrivate: 'Learning paths in groups must be private',
+  learningPathCreated: 'Learning path has been created',
+  learningPathsReceived: 'Learning paths received',
+  learningPathNotFound: 'Learning path not found',
+  learningPathsNotFound: 'Learning paths not found',
+  learningPathReceived: 'Learning path received',
+  learningPathDeleted: 'Learning path has been deleted',
+  learningPathUpdated: 'Learning path has been updated',
+  groupedLearningPathsNotFound: 'Grouped learning paths not found',
+  groupedLearningPathsReceived: 'Grouped learning paths received',
+  youDontHavePermission: 'You do not have permission to edit or delete this learning path',
+};
+
 const smthWentWrong = 'Something went wrong';
 
 module.exports = {
   userControllerMessages,
   groupControllerMessages,
+  learningPathControllerMessages,
   smthWentWrong,
 };

@@ -34,6 +34,5 @@ learningPathsRouter.patch('/:learningPathId', authMiddleware, canEditOrDeleteLea
 learningPathsRouter.get('/group/:groupId', authMiddleware, groupAccessMiddleware, httpGetGroupLearningPaths);
 learningPathsRouter.get('/:groupId/:learningPathId', authMiddleware, groupAccessMiddleware, httpGetGroupLearningPath);
 learningPathsRouter.patch('/:groupId/:learningPathId', authMiddleware, groupAccessMiddleware, canEditOrDeleteGroupLearningPathMiddleware, httpEditGroupLearningPath);
-// TODO add delete API (only for creators(userId===) in groups)
 
 module.exports = learningPathsRouter;

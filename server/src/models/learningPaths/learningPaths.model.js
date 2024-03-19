@@ -174,6 +174,13 @@ async function editGroupLearningPath(groupId, learningPathId, learningPath) {
   return await getGroupLearningPath(groupId, learningPathId);
 }
 
+/**
+ * Deletes a learning path associated with a group.
+ *
+ * @param {string} groupId - The ID of the group.
+ * @param {string} learningPathId - The ID of the learning path to delete.
+ * @return {Promise} A promise that resolves when the learning path is deleted.
+ */
 async function deleteGroupLearningPath(groupId, learningPathId) {
   return await LearningPath.deleteOne({ _id: learningPathId, groupId });
 }

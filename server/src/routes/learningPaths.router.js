@@ -33,10 +33,6 @@ learningPathsRouter.patch('/:learningPathId', authMiddleware, canEditOrDeleteLea
 learningPathsRouter.get('/group/:groupId', authMiddleware, groupAccessMiddleware, httpGetGroupLearningPaths);
 // TODO add API for getting group Learning Path
 learningPathsRouter.patch('/:groupId/:learningPathId', authMiddleware, groupAccessMiddleware, canEditOrDeleteGroupLearningPathMiddleware, httpEditGroupLearningPath);
-
-
-
-// TODO add update API (only for admins and managers in groups)
 // TODO add delete API (only for creators(userId===) in groups)
 
 module.exports = learningPathsRouter;

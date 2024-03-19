@@ -157,7 +157,7 @@ async function getGroupLearningPaths(groupId, skip, limit) {
  * @return {Promise<Object>} A promise that resolves to the learning path document.
  */
 async function getGroupLearningPath(groupId, learningPathId) {
-  return await LearningPath.findOne({_id: learningPathId, groupId });
+  return await LearningPath.findOne({ _id: learningPathId, groupId });
 }
 
 /**
@@ -174,6 +174,10 @@ async function editGroupLearningPath(groupId, learningPathId, learningPath) {
   return await getGroupLearningPath(groupId, learningPathId);
 }
 
+async function deleteGroupLearningPath(groupId, learningPathId) {
+  return await LearningPath.deleteOne({ _id: learningPathId, groupId });
+}
+
 module.exports = {
   validateLearningPath,
   createLearningPath,
@@ -187,4 +191,5 @@ module.exports = {
   getGroupLearningPaths,
   getGroupLearningPath,
   editGroupLearningPath,
+  deleteGroupLearningPath,
 };

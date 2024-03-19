@@ -10,6 +10,7 @@ const {
   getGroupLearningPaths,
   getGroupLearningPath,
   editGroupLearningPath,
+  deleteGroupLearningPath,
 } = require('../models/learningPaths/learningPaths.model');
 
 const { getPagination, getPaginatedDate } = require('../helpers/pagination');
@@ -431,6 +432,57 @@ async function httpEditGroupLearningPath(req, res) {
       success: true,
       data: updatedLearningPath,
       message: learningPathControllerMessages.learningPathUpdated,
+      statusCode: httpStatuses.ok,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(httpStatuses.serverError).json({
+      success: false,
+      message: error.message || smthWentWrong,
+      statusCode: httpStatuses.serverError,
+    });
+  }
+}
+
+async function httpDeleteGroupLearningPath(req, res) {
+  try {
+    const { groupId, learningPathId } = req.params;
+
+    if (!groupId) {
+      return res.status(httpStatuses.badRequest).json({
+        success: false,
+        message: learningPathControllerMessages.groupNotFound,
+        statusCode: httpStatuses.badRequest,
+      });
+    }
+
+    if (!learningPathId) {
+      return res.status(httpStatuses.badRequest).json({
+        success: false,
+        message: learningPathControllerMessages.learningPathNotFound,
+        statusCode: httpStatuses.badRequest,
+      });
+    }
+
+    const deletedLearningPath = await deleteGroupLearningPath(groupId, learningPathId);
+
+    if (!deletedLearningPath) {
+      return res.status(httpStatuses.notFound).json({
+        success: false,
+        message: learningPathControllerMessages.learningPathNotFound,
+        statusCode: httpStatuses.notFound,
+      });
+    }
+
+    return res.status(httpStatuses.ok).json({
+      success: true,
+      data: {
+        ...deletedLearningPath,
+        id: learningPathId,
+        groupId,
+        isDeleted: true,
+      },
+      message: learningPathControllerMessages.learningPathDeleted,
       statusCode: httpStatuses.ok,
     });
   } catch (error) {

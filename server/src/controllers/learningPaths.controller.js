@@ -506,4 +506,5 @@ module.exports = {
   httpGetGroupLearningPaths,
   httpGetGroupLearningPath,
   httpEditGroupLearningPath,
+  httpDeleteGroupLearningPath,
 };

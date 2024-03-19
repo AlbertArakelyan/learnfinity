@@ -8,6 +8,7 @@ const {
   deleteLearningPath,
   editUserLearningPath,
   getGroupLearningPaths,
+  getGroupLearningPath,
   editGroupLearningPath,
 } = require('../models/learningPaths/learningPaths.model');
 
@@ -357,6 +358,52 @@ async function httpGetGroupLearningPaths(req, res) {
   }
 }
 
+async function httpGetGroupLearningPath(req, res) {
+  try {
+    const { groupId, learningPathId } = req.params;
+
+    if (!groupId) {
+      return res.status(httpStatuses.badRequest).json({
+        success: false,
+        message: learningPathControllerMessages.groupNotFound,
+        statusCode: httpStatuses.badRequest,
+      });
+    }
+
+    if (!learningPathId) {
+      return res.status(httpStatuses.badRequest).json({
+        success: false,
+        message: learningPathControllerMessages.learningPathNotFound,
+        statusCode: httpStatuses.badRequest,
+      });
+    }
+
+    const learningPath = await getGroupLearningPath(groupId, learningPathId);
+
+    if (!learningPath) {
+      return res.status(httpStatuses.notFound).json({
+        success: false,
+        message: learningPathControllerMessages.learningPathNotFound,
+        statusCode: httpStatuses.notFound,
+      });
+    }
+
+    return res.status(httpStatuses.ok).json({
+      success: true,
+      data: learningPath,
+      message: learningPathControllerMessages.learningPathReceived,
+      statusCode: httpStatuses.ok,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(httpStatuses.serverError).json({
+      success: false,
+      message: error.message || smthWentWrong,
+      statusCode: httpStatuses.serverError,
+    });
+  }
+}
+
 async function httpEditGroupLearningPath(req, res) {
   try {
     const learningPathData = req.body;
@@ -385,7 +432,7 @@ async function httpEditGroupLearningPath(req, res) {
       data: updatedLearningPath,
       message: learningPathControllerMessages.learningPathUpdated,
       statusCode: httpStatuses.ok,
-    })
+    });
   } catch (error) {
     console.log(error);
     return res.status(httpStatuses.serverError).json({
@@ -405,5 +452,6 @@ module.exports = {
   httpDeleteUserLearningPath,
   httpEditUserLearningPath,
   httpGetGroupLearningPaths,
+  httpGetGroupLearningPath,
   httpEditGroupLearningPath,
 };

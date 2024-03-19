@@ -157,7 +157,7 @@ async function getGroupLearningPaths(groupId, skip, limit) {
  * @return {Promise<Object>} A promise that resolves to the learning path document.
  */
 async function getGroupLearningPath(groupId, learningPathId) {
-  return await LearningPath.findOne({ _id: learningPathId, groupId });
+  return await LearningPath.findOne({_id: learningPathId, groupId });
 }
 
 /**

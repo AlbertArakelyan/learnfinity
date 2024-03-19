@@ -9,6 +9,7 @@ const {
   httpDeleteUserLearningPath,
   httpEditUserLearningPath,
   httpGetGroupLearningPaths,
+  httpGetGroupLearningPath,
   httpEditGroupLearningPath,
 } = require('../controllers/learningPaths.controller');
 
@@ -31,7 +32,7 @@ learningPathsRouter.delete('/:learningPathId', authMiddleware, canEditOrDeleteLe
 // Can also be used for sharing by changing sharedUserIds (user can be got by emails in frontend and shared without invitation)
 learningPathsRouter.patch('/:learningPathId', authMiddleware, canEditOrDeleteLearningPathMiddleware, httpEditUserLearningPath);
 learningPathsRouter.get('/group/:groupId', authMiddleware, groupAccessMiddleware, httpGetGroupLearningPaths);
-// TODO add API for getting group Learning Path
+learningPathsRouter.get('/:groupId/:learningPathId', authMiddleware, groupAccessMiddleware, httpGetGroupLearningPath);
 learningPathsRouter.patch('/:groupId/:learningPathId', authMiddleware, groupAccessMiddleware, canEditOrDeleteGroupLearningPathMiddleware, httpEditGroupLearningPath);
 // TODO add delete API (only for creators(userId===) in groups)
 

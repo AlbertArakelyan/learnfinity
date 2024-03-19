@@ -8,6 +8,7 @@ const {
   deleteLearningPath,
   editUserLearningPath,
   getGroupLearningPaths,
+  editGroupLearningPath,
 } = require('../models/learningPaths/learningPaths.model');
 
 const { getPagination, getPaginatedDate } = require('../helpers/pagination');
@@ -356,6 +357,45 @@ async function httpGetGroupLearningPaths(req, res) {
   }
 }
 
+async function httpEditGroupLearningPath(req, res) {
+  try {
+    const learningPathData = req.body;
+    const { groupId, learningPathId } = req.params;
+
+    if (!learningPathId) {
+      return res.status(httpStatuses.badRequest).json({
+        success: false,
+        message: learningPathControllerMessages.learningPathNotFound,
+        statusCode: httpStatuses.badRequest,
+      });
+    }
+
+    if (!groupId) {
+      return res.status(httpStatuses.badRequest).json({
+        success: false,
+        message: learningPathControllerMessages.groupNotFound,
+        statusCode: httpStatuses.badRequest,
+      });
+    }
+
+    const updatedLearningPath = await editGroupLearningPath(groupId, learningPathId, learningPathData);
+
+    return res.status(httpStatuses.ok).json({
+      success: true,
+      data: updatedLearningPath,
+      message: learningPathControllerMessages.learningPathUpdated,
+      statusCode: httpStatuses.ok,
+    })
+  } catch (error) {
+    console.log(error);
+    return res.status(httpStatuses.serverError).json({
+      success: false,
+      message: error.message || smthWentWrong,
+      statusCode: httpStatuses.serverError,
+    });
+  }
+}
+
 module.exports = {
   httpCreateLearningPath,
   httpGetUserLearningPaths,
@@ -365,4 +405,5 @@ module.exports = {
   httpDeleteUserLearningPath,
   httpEditUserLearningPath,
   httpGetGroupLearningPaths,
+  httpEditGroupLearningPath,
 };

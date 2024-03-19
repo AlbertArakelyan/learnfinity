@@ -149,6 +149,31 @@ async function getGroupLearningPaths(groupId, skip, limit) {
     .sort({ createdAt: -1 });
 }
 
+/**
+ * Retrieves a group's learning path based on the provided group ID and learning path ID.
+ *
+ * @param {string} groupId - The ID of the group.
+ * @param {string} learningPathId - The ID of the learning path.
+ * @return {Promise<Object>} A promise that resolves to the learning path document.
+ */
+async function getGroupLearningPath(groupId, learningPathId) {
+  return await LearningPath.findOne({ _id: learningPathId, groupId });
+}
+
+/**
+ * Edit a group's learning path with the given ID.
+ *
+ * @param {string} groupId - The ID of the group.
+ * @param {string} learningPathId - The ID of the learning path.
+ * @param {object} learningPath - The updated learning path object.
+ * @return {Promise<object>} The updated group's learning path.
+ */
+async function editGroupLearningPath(groupId, learningPathId, learningPath) {
+  await LearningPath.findOneAndUpdate({ _id: learningPathId, groupId }, learningPath);
+
+  return await getGroupLearningPath(groupId, learningPathId);
+}
+
 module.exports = {
   validateLearningPath,
   createLearningPath,
@@ -160,4 +185,6 @@ module.exports = {
   getUsersCreatedLearningPath,
   editUserLearningPath,
   getGroupLearningPaths,
+  getGroupLearningPath,
+  editGroupLearningPath,
 };

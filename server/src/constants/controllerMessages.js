@@ -40,6 +40,7 @@ const learningPathControllerMessages = {
   learningPathUpdated: 'Learning path has been updated',
   groupedLearningPathsNotFound: 'Grouped learning paths not found',
   groupedLearningPathsReceived: 'Grouped learning paths received',
+  youDontHavePermission: 'You do not have permission to edit or delete this learning path',
 };
 
 const smthWentWrong = 'Something went wrong';

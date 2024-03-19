@@ -65,6 +65,7 @@ async function getUserLearningPath(userId, learningPathId) {
   return learningPath;
 }
 
+// TODO fix docstring
 /**
  * Retrieves public learning paths from the database.
  *
@@ -132,6 +133,22 @@ async function editUserLearningPath(learningPathId, userId, learningPath) {
   return await getUserLearningPath(userId, learningPathId);
 }
 
+/**
+ * Retrieves learning paths for a specific group based on group ID.
+ *
+ * @param {number} groupId - The ID of the group to retrieve learning paths for.
+ * @param {number} skip - Number of documents to skip.
+ * @param {number} limit - Maximum number of documents to return.
+ * @return {Promise} A promise that resolves to an array of learning paths.
+ */
+async function getGroupLearningPaths(groupId, skip, limit) {
+  return await LearningPath
+    .find({ groupId })
+    .skip(skip)
+    .limit(limit)
+    .sort({ createdAt: -1 });
+}
+
 module.exports = {
   validateLearningPath,
   createLearningPath,
@@ -142,4 +159,5 @@ module.exports = {
   deleteLearningPath,
   getUsersCreatedLearningPath,
   editUserLearningPath,
+  getGroupLearningPaths,
 };

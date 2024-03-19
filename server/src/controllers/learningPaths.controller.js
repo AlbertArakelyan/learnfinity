@@ -7,6 +7,7 @@ const {
   getSharedLearningPaths,
   deleteLearningPath,
   editUserLearningPath,
+  getGroupLearningPaths,
 } = require('../models/learningPaths/learningPaths.model');
 
 const { getPagination, getPaginatedDate } = require('../helpers/pagination');
@@ -302,6 +303,59 @@ async function httpEditUserLearningPath(req, res) {
   }
 }
 
+async function httpGetGroupLearningPaths(req, res) {
+  try {
+    const userId = req.user.id;
+
+    if (!userId) {
+      return res.status(httpStatuses.badRequest).json({
+        success: false,
+        message: learningPathControllerMessages.userNotFound,
+        statusCode: httpStatuses.badRequest,
+      });
+    }
+
+    const { groupId } = req.params;
+
+    if (!groupId) {
+      return res.status(httpStatuses.badRequest).json({
+        success: false,
+        message: learningPathControllerMessages.groupNotFound,
+        statusCode: httpStatuses.badRequest,
+      });
+    }
+
+
+    const { page, limit: perPage } = req.query;
+    const { skip, limit } = getPagination(req.query);
+
+    const groupedLearningPaths = await getGroupLearningPaths(groupId, skip, limit);
+    const paginatedGroupedLearningPaths = getPaginatedDate(groupedLearningPaths, page, perPage);
+
+    if (!paginatedGroupedLearningPaths.data?.length) {
+      return res.status(httpStatuses.notFound).json({
+        success: false,
+        message: learningPathControllerMessages.groupedLearningPathsNotFound,
+        statusCode: httpStatuses.notFound,
+      });
+    }
+
+    return res.status(httpStatuses.ok).json({
+      success: true,
+      data: paginatedGroupedLearningPaths,
+      message: learningPathControllerMessages.groupedLearningPathsReceived,
+      statusCode: httpStatuses.ok,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(httpStatuses.serverError).json({
+      success: false,
+      message: error.message || smthWentWrong,
+      statusCode: httpStatuses.serverError,
+    });
+  }
+}
+
 module.exports = {
   httpCreateLearningPath,
   httpGetUserLearningPaths,
@@ -310,4 +364,5 @@ module.exports = {
   httpGetSharedLearningPaths,
   httpDeleteUserLearningPath,
   httpEditUserLearningPath,
+  httpGetGroupLearningPaths,
 };

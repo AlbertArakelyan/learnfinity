@@ -38,6 +38,8 @@ const learningPathControllerMessages = {
   learningPathReceived: 'Learning path received',
   learningPathDeleted: 'Learning path has been deleted',
   learningPathUpdated: 'Learning path has been updated',
+  groupedLearningPathsNotFound: 'Grouped learning paths not found',
+  groupedLearningPathsReceived: 'Grouped learning paths received',
 };
 
 const smthWentWrong = 'Something went wrong';

@@ -43,11 +43,19 @@ const learningPathControllerMessages = {
   youDontHavePermission: 'You do not have permission to edit or delete this learning path',
 };
 
+const learningPathItemControllerMessages = {
+  learningPathItemCreated: 'Learning path item has been created',
+  learningPathItemNotFound: 'Learning path item not found',
+  learningPathItemUpdated: 'Learning path item has been updated',
+  learningPathItemDeleted: 'Learning path item has been deleted',
+};
+
 const smthWentWrong = 'Something went wrong';
 
 module.exports = {
   userControllerMessages,
   groupControllerMessages,
   learningPathControllerMessages,
+  learningPathItemControllerMessages,
   smthWentWrong,
 };

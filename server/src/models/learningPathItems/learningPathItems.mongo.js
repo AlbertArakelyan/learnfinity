@@ -13,6 +13,10 @@ const learningPathItemSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  type: {
+    type: String,
+    required: true,
+  },
   sourceUrl: {
     type: String,
     required: true,
@@ -26,6 +30,11 @@ const learningPathItemSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'LearningPath',
     required: true,
+  },
+}, {
+  timestamps: {
+    createdAt: 'created_at',
+    updatedAt: 'updated_at',
   },
 });
 

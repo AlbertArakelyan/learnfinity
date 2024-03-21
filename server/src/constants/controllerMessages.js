@@ -48,6 +48,8 @@ const learningPathItemControllerMessages = {
   learningPathItemNotFound: 'Learning path item not found',
   learningPathItemUpdated: 'Learning path item has been updated',
   learningPathItemDeleted: 'Learning path item has been deleted',
+  learningPathItemsReceived: 'Learning path items received',
+  learningPathItemsNotFound: 'Learning path items not found',
 };
 
 const smthWentWrong = 'Something went wrong';

@@ -28,7 +28,24 @@ async function createLearningPathItem(learningPathItem) {
   return createdLearningPathItem;
 }
 
+/**
+ * Retrieves a subset of learning path items for a given learning path ID.
+ *
+ * @param {string} learningPathId - The ID of the learning path to retrieve items for.
+ * @param {number} skip - The number of documents to skip.
+ * @param {number} limit - The maximum number of documents to return.
+ * @return {Promise<Array>} A promise that resolves to an array of learning path items.
+ */
+async function getUserLearningPathItems(learningPathId, skip, limit) {
+  return await LearningPathItem
+    .find({ learningPathId })
+    .skip(skip)
+    .limit(limit)
+    .sort({ createdAt: -1 });
+}
+
 module.exports = {
   validateLearningPathItem,
   createLearningPathItem,
+  getUserLearningPathItems,
 };

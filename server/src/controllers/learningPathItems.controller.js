@@ -2,6 +2,7 @@ const {
   validateLearningPathItem,
   createLearningPathItem,
   getUserLearningPathItems,
+  deleteUserLearningPathItem,
 } = require('../models/learningPathItems/learningPathItems.model');
 
 const { getPagination, getPaginatedDate } = require('../helpers/pagination');
@@ -100,7 +101,49 @@ async function httpGetUserLearningPathItems(req, res) {
   }
 }
 
+async function httpDeleteUserLearningPathItem(req, res) {
+  try {
+    const { learningPathItemId } = req.params;
+
+    if (!learningPathItemId) {
+      return res.status(httpStatuses.badRequest).json({
+        success: false,
+        message: smthWentWrong,
+        statusCode: httpStatuses.badRequest,
+      });
+    }
+
+    const deletedLearningPathItem = await deleteUserLearningPathItem(learningPathItemId);
+
+    if (!deletedLearningPathItem) {
+      return res.status(httpStatuses.notFound).json({
+        success: false,
+        message: learningPathItemControllerMessages.learningPathItemNotFound,
+        statusCode: httpStatuses.notFound,
+      });
+    }
+
+    return res.status(httpStatuses.ok).json({
+      success: true,
+      data: {
+        id: learningPathItemId,
+        isDeleted: true,
+      },
+      message: learningPathItemControllerMessages.learningPathItemDeleted,
+      statusCode: httpStatuses.ok,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(httpStatuses.serverError).json({
+      success: false,
+      message: error.message || smthWentWrong,
+      statusCode: httpStatuses.serverError,
+    });
+  }
+}
+
 module.exports = {
   httpCreateUserLearningPathItem,
   httpGetUserLearningPathItems,
+  httpDeleteUserLearningPathItem,
 };

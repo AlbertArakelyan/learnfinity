@@ -44,8 +44,19 @@ async function getUserLearningPathItems(learningPathId, skip, limit) {
     .sort({ createdAt: -1 });
 }
 
+/**
+ * Deletes a user learning path item by its ID.
+ *
+ * @param {string} learningPathItemId - The ID of the learning path item to delete
+ * @return {Promise<object>} The deleted learning path item
+ */
+async function deleteUserLearningPathItem(learningPathItemId) {
+  return await LearningPathItem.findByIdAndDelete(learningPathItemId);
+}
+
 module.exports = {
   validateLearningPathItem,
   createLearningPathItem,
   getUserLearningPathItems,
+  deleteUserLearningPathItem
 };

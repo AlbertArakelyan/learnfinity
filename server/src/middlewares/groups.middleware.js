@@ -40,6 +40,16 @@ async function canEditOrDeleteGroupMiddleware(req, res, next) {
     const { groupId } = req.params;
 
     const group = await getGroupByUserIdAndGroupId(userId, groupId);
+
+    // Instead can be used group access middleware in routes
+    if (!group) {
+      return res.status(httpStatuses.notFound).json({
+        success: false,
+        message: groupControllerMessages.youAreNotInThisGroup,
+        statusCode: httpStatuses.notFound,
+      });
+    }
+
     await group.populate('roleId');
 
     const userRole = await getUserRole();

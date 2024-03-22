@@ -9,9 +9,9 @@ const {
 const { getPagination, getPaginatedDate } = require('../helpers/pagination');
 
 const httpStatuses = require('../constants/httpStatuses');
-const { learningPathItemControllerMessages, smthWentWrong } = require('../constants/controllerMessages');
+const { learningPathItemControllerMessages, learningPathControllerMessages, smthWentWrong } = require('../constants/controllerMessages');
 
-async function httpCreateUserLearningPathItem(req, res) {
+async function httpCreateLearningPathItem(req, res) {
   try {
     const learningPathItem = req.body;
     const { learningPathId } = req.params;
@@ -21,6 +21,14 @@ async function httpCreateUserLearningPathItem(req, res) {
       return res.status(httpStatuses.badRequest).json({
         success: false,
         message: smthWentWrong,
+        statusCode: httpStatuses.badRequest,
+      });
+    }
+    
+    if (!learningPathId) {
+      return res.status(httpStatuses.badRequest).json({
+        success: false,
+        message: learningPathControllerMessages.learningPathNotFound,
         statusCode: httpStatuses.badRequest,
       });
     }
@@ -184,7 +192,7 @@ async function httpEditUserLearningPathItem(req, res) {
 }
 
 module.exports = {
-  httpCreateUserLearningPathItem,
+  httpCreateLearningPathItem,
   httpGetUserLearningPathItems,
   httpDeleteUserLearningPathItem,
   httpEditUserLearningPathItem,

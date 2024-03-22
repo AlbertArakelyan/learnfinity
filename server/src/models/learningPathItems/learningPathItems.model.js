@@ -54,9 +54,21 @@ async function deleteUserLearningPathItem(learningPathItemId) {
   return await LearningPathItem.findByIdAndDelete(learningPathItemId);
 }
 
+/**
+ * Edits a user's learning path item.
+ *
+ * @param {string} learningPathItemId - The ID of the learning path item to edit.
+ * @param {Object} updatedLearningPathItem - The updated learning path item object.
+ * @return {Promise<Object>} The updated learning path item object.
+ */
+async function editUserLearningPathItem(learningPathItemId, updatedLearningPathItem) {
+  return await LearningPathItem.findByIdAndUpdate(learningPathItemId, updatedLearningPathItem, { new: true });
+}
+
 module.exports = {
   validateLearningPathItem,
   createLearningPathItem,
   getUserLearningPathItems,
-  deleteUserLearningPathItem
+  deleteUserLearningPathItem,
+  editUserLearningPathItem,
 };

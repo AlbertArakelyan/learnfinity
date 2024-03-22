@@ -18,9 +18,8 @@ const { authMiddleware } = require('../middlewares/users.middleware');
 const {
   learningPathAccessMiddleware,
   canEditOrDeleteLearningPathMiddleware,
-  canEditOrDeleteGroupLearningPathMiddleware,
 } = require('../middlewares/learningPaths.middleware');
-const { groupAccessMiddleware } = require('../middlewares/groups.middleware');
+const { groupAccessMiddleware, canEditOrDeleteGroupMiddleware } = require('../middlewares/groups.middleware');
 
 const learningPathsRouter = express.Router();
 
@@ -34,7 +33,7 @@ learningPathsRouter.delete('/:learningPathId', authMiddleware, canEditOrDeleteLe
 learningPathsRouter.patch('/:learningPathId', authMiddleware, canEditOrDeleteLearningPathMiddleware, httpEditUserLearningPath);
 learningPathsRouter.get('/group/:groupId', authMiddleware, groupAccessMiddleware, httpGetGroupLearningPaths);
 learningPathsRouter.get('/:groupId/:learningPathId', authMiddleware, groupAccessMiddleware, httpGetGroupLearningPath);
-learningPathsRouter.patch('/:groupId/:learningPathId', authMiddleware, groupAccessMiddleware, canEditOrDeleteGroupLearningPathMiddleware, httpEditGroupLearningPath);
-learningPathsRouter.delete('/:groupId/:learningPathId', authMiddleware, groupAccessMiddleware, canEditOrDeleteGroupLearningPathMiddleware, httpDeleteGroupLearningPath);
+learningPathsRouter.patch('/:groupId/:learningPathId', authMiddleware, groupAccessMiddleware, canEditOrDeleteGroupMiddleware, httpEditGroupLearningPath);
+learningPathsRouter.delete('/:groupId/:learningPathId', authMiddleware, groupAccessMiddleware, canEditOrDeleteGroupMiddleware, httpDeleteGroupLearningPath);
 
 module.exports = learningPathsRouter;

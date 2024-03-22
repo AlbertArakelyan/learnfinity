@@ -65,4 +65,5 @@ async function canEditOrDeleteGroupMiddleware(req, res, next) {
 
 module.exports = {
   groupAccessMiddleware,
+  canEditOrDeleteGroupMiddleware,
 };

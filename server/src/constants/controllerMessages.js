@@ -27,6 +27,7 @@ const groupControllerMessages = {
   userDeletedFromGroup: 'User has been deleted from the group',
   roleNotFound: 'Role not found or invalid',
   roleEdited: 'Role has been edited',
+  youDontHavePermission: 'You do not have permission to edit or delete this group',
 };
 
 const learningPathControllerMessages = {

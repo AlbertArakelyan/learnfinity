@@ -57,37 +57,7 @@ async function canEditOrDeleteLearningPathMiddleware(req, res, next) {
   }
 }
 
-async function canEditOrDeleteGroupLearningPathMiddleware(req, res, next) {
-  try {
-    const { id: userId } = req.user;
-    const { groupId } = req.params;
-
-    const group = await getGroupByUserIdAndGroupId(userId, groupId);
-    await group.populate('roleId');
-
-    const userRole = await getUserRole();
-
-    if (group.roleId.power === userRole.power) {
-      return res.status(httpStatuses.forbidden).json({
-        success: false,
-        message: learningPathControllerMessages.youDontHavePermission,
-        statusCode: httpStatuses.forbidden,
-      });
-    }
-
-    next();
-  } catch (error) {
-    console.log(error);
-    res.status(httpStatuses.serverError).json({
-      success: false,
-      message: error.message || smthWentWrong,
-      statusCode: httpStatuses.serverError,
-    });
-  }
-}
-
 module.exports = {
   learningPathAccessMiddleware,
   canEditOrDeleteLearningPathMiddleware,
-  canEditOrDeleteGroupLearningPathMiddleware,
 };

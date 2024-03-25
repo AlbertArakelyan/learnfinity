@@ -27,6 +27,8 @@ const groupControllerMessages = {
   userDeletedFromGroup: 'User has been deleted from the group',
   roleNotFound: 'Role not found or invalid',
   roleEdited: 'Role has been edited',
+  youDontHavePermission: 'You do not have permission to edit or delete this group',
+  youAreNotInThisGroup: 'You are not in this group or you do not have permission',
 };
 
 const learningPathControllerMessages = {
@@ -43,11 +45,21 @@ const learningPathControllerMessages = {
   youDontHavePermission: 'You do not have permission to edit or delete this learning path',
 };
 
+const learningPathItemControllerMessages = {
+  learningPathItemCreated: 'Learning path item has been created',
+  learningPathItemNotFound: 'Learning path item not found',
+  learningPathItemUpdated: 'Learning path item has been updated',
+  learningPathItemDeleted: 'Learning path item has been deleted',
+  learningPathItemsReceived: 'Learning path items received',
+  learningPathItemsNotFound: 'Learning path items not found',
+};
+
 const smthWentWrong = 'Something went wrong';
 
 module.exports = {
   userControllerMessages,
   groupControllerMessages,
   learningPathControllerMessages,
+  learningPathItemControllerMessages,
   smthWentWrong,
 };

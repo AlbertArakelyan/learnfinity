@@ -3,7 +3,7 @@ const {
   createLearningPathItem,
   getLearningPathItems,
   deleteLearningPathItem,
-  editUserLearningPathItem,
+  editLearningPathItem,
 } = require('../models/learningPathItems/learningPathItems.model');
 
 const { getPagination, getPaginatedDate } = require('../helpers/pagination');
@@ -151,7 +151,7 @@ async function httpDeleteUserLearningPathItem(req, res) {
   }
 }
 
-async function httpEditUserLearningPathItem(req, res) {
+async function httpEditLearningPathItem(req, res) {
   try {
     const { learningPathItemId } = req.params;
     const learningPathItemData = req.body;
@@ -165,7 +165,7 @@ async function httpEditUserLearningPathItem(req, res) {
       });
     }
 
-    const updatedLearningPathItem = await editUserLearningPathItem(learningPathItemId, learningPathItemData);
+    const updatedLearningPathItem = await editLearningPathItem(learningPathItemId, learningPathItemData);
 
     if (!updatedLearningPathItem) {
       return res.status(httpStatuses.notFound).json({
@@ -270,7 +270,7 @@ module.exports = {
   httpCreateLearningPathItem,
   httpGetUserLearningPathItems,
   httpDeleteUserLearningPathItem,
-  httpEditUserLearningPathItem,
+  httpEditLearningPathItem,
   httpGetGroupLearningPathItems,
   httpDeleteGroupLearningPathItem,
 };

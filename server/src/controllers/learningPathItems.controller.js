@@ -1,7 +1,7 @@
 const {
   validateLearningPathItem,
   createLearningPathItem,
-  getUserLearningPathItems,
+  getLearningPathItems,
   deleteUserLearningPathItem,
   editUserLearningPathItem,
 } = require('../models/learningPathItems/learningPathItems.model');
@@ -83,7 +83,7 @@ async function httpGetUserLearningPathItems(req, res) {
     const { page, limit: perPage } = req.query;
     const { skip, limit } = getPagination(req.query);
 
-    const learningPathItems = await getUserLearningPathItems(learningPathId, skip, limit);
+    const learningPathItems = await getLearningPathItems(learningPathId, skip, limit);
     const paginatedLearningPathItems = getPaginatedDate(learningPathItems, page, perPage);
 
     if (!paginatedLearningPathItems.data?.length) {
@@ -191,9 +191,44 @@ async function httpEditUserLearningPathItem(req, res) {
   }
 }
 
+async function httpGetGroupLearningPathItems(req, res) {
+  try {
+    const { learningPathId } = req.params;
+
+    if (!learningPathId) {
+      return res.status(httpStatuses.badRequest).json({
+        success: false,
+        message: learningPathControllerMessages.learningPathNotFound,
+        statusCode: httpStatuses.badRequest,
+      });
+    }
+
+    const { page, limit: perPage } = req.query;
+    const { skip, limit } = getPagination(req.query);
+
+    const learningPathItems = await getLearningPathItems(learningPathId, skip, limit);
+    const paginatedLearningPathItems = getPaginatedDate(learningPathItems, page, perPage);
+
+    return res.status(httpStatuses.ok).json({
+      success: true,
+      data: paginatedLearningPathItems,
+      message: learningPathItemControllerMessages.learningPathItemsReceived,
+      statusCode: httpStatuses.ok,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(httpStatuses.serverError).json({
+      success: false,
+      message: error.message || smthWentWrong,
+      statusCode: httpStatuses.serverError,
+    });
+  }
+}
+
 module.exports = {
   httpCreateLearningPathItem,
   httpGetUserLearningPathItems,
   httpDeleteUserLearningPathItem,
   httpEditUserLearningPathItem,
+  httpGetGroupLearningPathItems,
 };

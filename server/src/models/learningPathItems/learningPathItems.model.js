@@ -50,7 +50,7 @@ async function getLearningPathItems(learningPathId, skip, limit) {
  * @param {string} learningPathItemId - The ID of the learning path item to delete
  * @return {Promise<object>} The deleted learning path item
  */
-async function deleteUserLearningPathItem(learningPathItemId) {
+async function deleteLearningPathItem(learningPathItemId) {
   return await LearningPathItem.findByIdAndDelete(learningPathItemId);
 }
 
@@ -69,6 +69,6 @@ module.exports = {
   validateLearningPathItem,
   createLearningPathItem,
   getLearningPathItems,
-  deleteUserLearningPathItem,
+  deleteLearningPathItem,
   editUserLearningPathItem,
 };

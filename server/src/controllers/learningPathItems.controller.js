@@ -2,7 +2,7 @@ const {
   validateLearningPathItem,
   createLearningPathItem,
   getLearningPathItems,
-  deleteUserLearningPathItem,
+  deleteLearningPathItem,
   editUserLearningPathItem,
 } = require('../models/learningPathItems/learningPathItems.model');
 
@@ -122,7 +122,7 @@ async function httpDeleteUserLearningPathItem(req, res) {
       });
     }
 
-    const deletedLearningPathItem = await deleteUserLearningPathItem(learningPathItemId);
+    const deletedLearningPathItem = await deleteLearningPathItem(learningPathItemId);
 
     if (!deletedLearningPathItem) {
       return res.status(httpStatuses.notFound).json({
@@ -225,10 +225,52 @@ async function httpGetGroupLearningPathItems(req, res) {
   }
 }
 
+async function httpDeleteGroupLearningPathItem(req, res) {
+  try {
+    const { learningPathItemId } = req.params;
+
+    if (!learningPathItemId) {
+      return res.status(httpStatuses.badRequest).json({
+        success: false,
+        message: learningPathItemControllerMessages.learningPathItemNotFound,
+        statusCode: httpStatuses.badRequest,
+      });
+    }
+
+    const deletedLearningPathItem = await deleteLearningPathItem(learningPathItemId);
+
+    if (!deletedLearningPathItem) {
+      return res.status(httpStatuses.notFound).json({
+        success: false,
+        message: learningPathItemControllerMessages.learningPathItemNotFound,
+        statusCode: httpStatuses.notFound,
+      });
+    }
+
+    return res.status(httpStatuses.ok).json({
+      success: true,
+      data: {
+        id: learningPathItemId,
+        isDeleted: true,
+      },
+      message: learningPathItemControllerMessages.learningPathItemDeleted,
+      statusCode: httpStatuses.ok,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(httpStatuses.serverError).json({
+      success: false,
+      message: error.message || smthWentWrong,
+      statusCode: httpStatuses.serverError,
+    });
+  }
+}
+
 module.exports = {
   httpCreateLearningPathItem,
   httpGetUserLearningPathItems,
   httpDeleteUserLearningPathItem,
   httpEditUserLearningPathItem,
   httpGetGroupLearningPathItems,
+  httpDeleteGroupLearningPathItem,
 };

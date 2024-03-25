@@ -6,6 +6,7 @@ const {
   httpDeleteUserLearningPathItem,
   httpEditUserLearningPathItem,
   httpGetGroupLearningPathItems,
+  httpDeleteGroupLearningPathItem,
 } = require('../controllers/learningPathItems.controller');
 
 const { authMiddleware } = require('../middlewares/users.middleware');
@@ -20,5 +21,6 @@ learningPathItemsRouter.delete('/:learningPathId/:learningPathItemId', authMiddl
 learningPathItemsRouter.patch('/:learningPathId/:learningPathItemId', authMiddleware, canEditOrDeleteLearningPathMiddleware, httpEditUserLearningPathItem);
 learningPathItemsRouter.post('/:groupId/:learningPathId', authMiddleware, canEditOrDeleteGroupMiddleware, httpCreateLearningPathItem);
 learningPathItemsRouter.get('/:groupId/:learningPathId', authMiddleware, groupAccessMiddleware, httpGetGroupLearningPathItems);
+learningPathItemsRouter.delete('/:groupId/:learningPathId/:learningPathItemId', authMiddleware, canEditOrDeleteGroupMiddleware, httpDeleteGroupLearningPathItem);
 
 module.exports = learningPathItemsRouter;

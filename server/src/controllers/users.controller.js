@@ -240,6 +240,7 @@ async function httpEditUser(req, res) {
     }
 
     // TODO add validation that userData doesn't contain any password and email fields
+    // TODO rather it can accept only fullName :)
 
     const editUserData = await editUser(userId, userData);
 

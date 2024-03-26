@@ -365,6 +365,13 @@ async function isChangePasswordAllowed(id, password) {
   };
 }
 
+/**
+ * Changes the password of a user identified by the given ID.
+ *
+ * @param {type} id - the ID of the user
+ * @param {type} password - the new password to set
+ * @return {type} the updated user object
+ */
 async function changeUserPassword(id, password) {
   const user = await findUserById(id);
 

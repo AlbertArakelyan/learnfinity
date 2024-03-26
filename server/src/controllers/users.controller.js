@@ -1,3 +1,6 @@
+const fs = require('fs');
+const path = require('path');
+
 const {
   findExistingUserByEmail,
   validateUser,
@@ -311,6 +314,53 @@ async function httpChangePassword(req, res) {
   }
 }
 
+async function httpChangeAvatar(req, res) {
+  try {
+    const userId = req.user.id;
+    const { image } = req.body;
+
+    // Extract image data from base64 string
+    const matches = image.match(/^data:image\/([A-Za-z-+\/]+);base64,(.+)$/);
+    if (!matches || matches.length !== 3) {
+      return res.status(400).json({ error: 'Invalid base64 image data.' });
+    }
+
+    const extension = matches[1].split('/')[0];
+    const bufferData = Buffer.from(matches[2], 'base64');
+
+    // Generate filename using user ID and image extension
+    const filename = `${userId}.${extension}`;
+
+    // Set the path to save avatars
+    const filePath = path.join(__dirname, '..', '..', 'storage', 'avatars');
+
+    // Check if the avatars directory exists, if not, create it
+    if (!fs.existsSync(filePath)) {
+      fs.mkdirSync(filePath, { recursive: true });
+    }
+
+    // Write the file to the avatars directory, overriding existing one if any
+    const avatarPath = path.join(filePath, filename);
+
+    fs.writeFileSync(avatarPath, bufferData);
+
+    return res.status(httpStatuses.ok).json({
+      success: true,
+      data: {
+        avatarUrl: `http://localhost:8000/storage/avatars/${filename}`, // TODO take from env
+      },
+      message: userControllerMessages.avatarChanged,
+      statusCode: httpStatuses.ok,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(httpStatuses.serverError).json({
+      success: false,
+      message: error.message || smthWentWrong,
+      statusCode: httpStatuses.serverError,
+    });
+  }
+}
 
 module.exports = {
   httpSignUp,
@@ -320,4 +370,5 @@ module.exports = {
   httpResetPassword,
   httpEditUser,
   httpChangePassword,
+  httpChangeAvatar,
 };

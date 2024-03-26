@@ -8,6 +8,7 @@ const {
   httpResetPassword,
   httpEditUser,
   httpChangePassword,
+  httpChangeAvatar,
 } = require('../controllers/users.controller');
 
 const { authMiddleware } = require('../middlewares/users.middleware');
@@ -21,5 +22,6 @@ usersRouter.post('/forgot-password', httpForgotPassword);
 usersRouter.post('/reset-password', httpResetPassword);
 usersRouter.patch('/edit', authMiddleware, httpEditUser);
 usersRouter.patch('/change-password', authMiddleware, httpChangePassword);
+usersRouter.patch('/change-avatar', authMiddleware, httpChangeAvatar);
 
 module.exports = usersRouter;

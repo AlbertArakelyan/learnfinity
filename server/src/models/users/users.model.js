@@ -323,6 +323,67 @@ async function resetPassword(token, password) {
   };
 }
 
+/**
+ * Updates a user's information by their ID.
+ *
+ * @param {string} id - The ID of the user to update.
+ * @param {Object} userData - The new user data to apply.
+ * @return {Promise<User>} The updated user object.
+ */
+function editUser(id, userData) {
+  return User.findByIdAndUpdate(id, userData, { new: true });
+}
+
+/**
+ * Check if changing password is allowed for a user.
+ *
+ * @param id The user id
+ * @param password The new password
+ * @return {Object} { isAllowed: boolean, reason?: string } - Object indicating if password change is allowed
+ */
+async function isChangePasswordAllowed(id, password) {
+  const user = await findUserById(id);
+
+  if (!user) {
+    return {
+      isAllowed: false,
+      reason: userControllerMessages.userNotFound,
+    };
+  }
+
+  const isPasswordCorrect = await bcrypt.compare(password, user.password);
+
+  if (!isPasswordCorrect) {
+    return {
+      isAllowed: false,
+      reason: userControllerMessages.invalidPassword,
+    };
+  }
+
+  return {
+    isAllowed: true,
+  };
+}
+
+/**
+ * Changes the password of a user identified by the given ID.
+ *
+ * @param {type} id - the ID of the user
+ * @param {type} password - the new password to set
+ * @return {type} the updated user object
+ */
+async function changeUserPassword(id, password) {
+  const user = await findUserById(id);
+
+  const hashedPassword = await bcrypt.hash(password, bcryptComplexity);
+
+  user.password = hashedPassword;
+
+  await user.save();
+
+  return user;
+}
+
 module.exports = {
   findUserById,
   findExistingUserByEmail,
@@ -336,4 +397,7 @@ module.exports = {
   forgotPassword,
   validateResetPassword,
   resetPassword,
+  editUser,
+  isChangePasswordAllowed,
+  changeUserPassword,
 };

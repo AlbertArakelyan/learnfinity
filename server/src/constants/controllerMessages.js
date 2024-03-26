@@ -12,6 +12,10 @@ const userControllerMessages = {
   passwordsDontMatch: 'Passwords do not match',
   invalidToken: 'Invalid token',
   passwordReset: 'Password has been reset',
+  userUpdated: 'User has been updated',
+  invalidPassword: 'Invalid password',
+  passwordChanged: 'Password has been changed',
+  avatarChanged: 'Avatar has been changed',
 };
 
 const groupControllerMessages = {

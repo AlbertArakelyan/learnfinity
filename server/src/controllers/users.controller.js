@@ -1,3 +1,6 @@
+const fs = require('fs');
+const path = require('path');
+
 const {
   findExistingUserByEmail,
   validateUser,
@@ -10,6 +13,9 @@ const {
   forgotPassword,
   validateResetPassword,
   resetPassword,
+  editUser,
+  isChangePasswordAllowed,
+  changeUserPassword,
 } = require('../models/users/users.model');
 
 const httpStatuses = require('../constants/httpStatuses');
@@ -225,10 +231,144 @@ async function httpResetPassword(req, res) {
   }
 }
 
+async function httpEditUser(req, res) {
+  try {
+    const userId = req.user.id;
+    const userData = req.body;
+
+    if (!userId) {
+      return res.status(httpStatuses.badRequest).json({
+        success: false,
+        message: userControllerMessages.userNotFound,
+        statusCode: httpStatuses.badRequest,
+      });
+    }
+
+    // TODO add validation that userData doesn't contain any password and email fields
+    // TODO rather it can accept only fullName :)
+
+    const editUserData = await editUser(userId, userData);
+
+    if (!editUserData) {
+      return res.status(httpStatuses.notFound).json({
+        success: false,
+        message: userControllerMessages.userNotFound,
+        statusCode: httpStatuses.notFound,
+      });
+    }
+
+    return res.status(httpStatuses.ok).json({
+      success: true,
+      data: editUserData,
+      message: userControllerMessages.userUpdated,
+      statusCode: httpStatuses.ok,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(httpStatuses.serverError).json({
+      success: false,
+      message: error.message || smthWentWrong,
+      statusCode: httpStatuses.serverError,
+    });
+  }
+}
+
+async function httpChangePassword(req, res) {
+  try {
+    const userId = req.user.id;
+    const { oldPassword, newPassword, confirmPassword } = req.body;
+
+    const isChangePasswordAllowedData = await isChangePasswordAllowed(userId, oldPassword);
+
+    if (!isChangePasswordAllowedData.isAllowed) {
+      return res.status(httpStatuses.badRequest).json({
+        success: false,
+        message: isChangePasswordAllowedData.reason,
+        statusCode: httpStatuses.badRequest,
+      });
+    }
+
+    if (newPassword !== confirmPassword) {
+      return res.status(httpStatuses.badRequest).json({
+        success: false,
+        message: userControllerMessages.passwordsDontMatch,
+        statusCode: httpStatuses.badRequest,
+      });
+    }
+
+    const updatedUser = await changeUserPassword(userId, newPassword);
+
+    return res.status(httpStatuses.ok).json({
+      success: true,
+      data: updatedUser,
+      message: userControllerMessages.passwordChanged,
+      statusCode: httpStatuses.ok,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(httpStatuses.serverError).json({
+      success: false,
+      message: error.message || smthWentWrong,
+      statusCode: httpStatuses.serverError,
+    });
+  }
+}
+
+async function httpChangeAvatar(req, res) {
+  try {
+    const userId = req.user.id;
+    const { image } = req.body;
+
+    // Extract image data from base64 string
+    const matches = image.match(/^data:image\/([A-Za-z-+\/]+);base64,(.+)$/);
+    if (!matches || matches.length !== 3) {
+      return res.status(400).json({ error: 'Invalid base64 image data.' });
+    }
+
+    const extension = matches[1].split('/')[0];
+    const bufferData = Buffer.from(matches[2], 'base64');
+
+    // Generate filename using user ID and image extension
+    const filename = `${userId}.${extension}`;
+
+    // Set the path to save avatars
+    const filePath = path.join(__dirname, '..', '..', 'storage', 'avatars');
+
+    // Check if the avatars directory exists, if not, create it
+    if (!fs.existsSync(filePath)) {
+      fs.mkdirSync(filePath, { recursive: true });
+    }
+
+    // Write the file to the avatars directory, overriding existing one if any
+    const avatarPath = path.join(filePath, filename);
+
+    fs.writeFileSync(avatarPath, bufferData);
+
+    return res.status(httpStatuses.ok).json({
+      success: true,
+      data: {
+        avatarUrl: `http://localhost:8000/storage/avatars/${filename}`, // TODO take from env
+      },
+      message: userControllerMessages.avatarChanged,
+      statusCode: httpStatuses.ok,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(httpStatuses.serverError).json({
+      success: false,
+      message: error.message || smthWentWrong,
+      statusCode: httpStatuses.serverError,
+    });
+  }
+}
+
 module.exports = {
   httpSignUp,
   httpVerifyEmail,
   httpSignIn,
   httpForgotPassword,
   httpResetPassword,
+  httpEditUser,
+  httpChangePassword,
+  httpChangeAvatar,
 };

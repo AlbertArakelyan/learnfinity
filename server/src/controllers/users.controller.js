@@ -11,6 +11,8 @@ const {
   validateResetPassword,
   resetPassword,
   editUser,
+  isChangePasswordAllowed,
+  changeUserPassword,
 } = require('../models/users/users.model');
 
 const httpStatuses = require('../constants/httpStatuses');
@@ -268,6 +270,48 @@ async function httpEditUser(req, res) {
   }
 }
 
+async function httpChangePassword(req, res) {
+  try {
+    const userId = req.user.id;
+    const { oldPassword, newPassword, confirmPassword } = req.body;
+
+    const isChangePasswordAllowedData = await isChangePasswordAllowed(userId, oldPassword);
+
+    if (!isChangePasswordAllowedData.isAllowed) {
+      return res.status(httpStatuses.badRequest).json({
+        success: false,
+        message: isChangePasswordAllowedData.reason,
+        statusCode: httpStatuses.badRequest,
+      });
+    }
+
+    if (newPassword !== confirmPassword) {
+      return res.status(httpStatuses.badRequest).json({
+        success: false,
+        message: userControllerMessages.passwordsDontMatch,
+        statusCode: httpStatuses.badRequest,
+      });
+    }
+
+    const updatedUser = await changeUserPassword(userId, newPassword);
+
+    return res.status(httpStatuses.ok).json({
+      success: true,
+      data: updatedUser,
+      message: userControllerMessages.passwordChanged,
+      statusCode: httpStatuses.ok,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(httpStatuses.serverError).json({
+      success: false,
+      message: error.message || smthWentWrong,
+      statusCode: httpStatuses.serverError,
+    });
+  }
+}
+
+
 module.exports = {
   httpSignUp,
   httpVerifyEmail,
@@ -275,4 +319,5 @@ module.exports = {
   httpForgotPassword,
   httpResetPassword,
   httpEditUser,
+  httpChangePassword,
 };

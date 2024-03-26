@@ -13,6 +13,8 @@ const userControllerMessages = {
   invalidToken: 'Invalid token',
   passwordReset: 'Password has been reset',
   userUpdated: 'User has been updated',
+  invalidPassword: 'Invalid password',
+  passwordChanged: 'Password has been changed',
 };
 
 const groupControllerMessages = {

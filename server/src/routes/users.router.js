@@ -6,7 +6,10 @@ const {
   httpSignIn,
   httpForgotPassword,
   httpResetPassword,
+  httpEditUser,
 } = require('../controllers/users.controller');
+
+const { authMiddleware } = require('../middlewares/users.middleware');
 
 const usersRouter = express.Router();
 
@@ -15,5 +18,6 @@ usersRouter.post('/verify-email/:token', httpVerifyEmail);
 usersRouter.post('/sign-in', httpSignIn);
 usersRouter.post('/forgot-password', httpForgotPassword);
 usersRouter.post('/reset-password', httpResetPassword);
+usersRouter.patch('/edit', authMiddleware, httpEditUser);
 
 module.exports = usersRouter;

@@ -10,6 +10,7 @@ const {
   forgotPassword,
   validateResetPassword,
   resetPassword,
+  editUser,
 } = require('../models/users/users.model');
 
 const httpStatuses = require('../constants/httpStatuses');
@@ -225,10 +226,52 @@ async function httpResetPassword(req, res) {
   }
 }
 
+async function httpEditUser(req, res) {
+  try {
+    const userId = req.user.id;
+    const userData = req.body;
+
+    if (!userId) {
+      return res.status(httpStatuses.badRequest).json({
+        success: false,
+        message: userControllerMessages.userNotFound,
+        statusCode: httpStatuses.badRequest,
+      });
+    }
+
+    // TODO add validation that userData doesn't contain any password and email fields
+
+    const editUserData = await editUser(userId, userData);
+
+    if (!editUserData) {
+      return res.status(httpStatuses.notFound).json({
+        success: false,
+        message: userControllerMessages.userNotFound,
+        statusCode: httpStatuses.notFound,
+      });
+    }
+
+    return res.status(httpStatuses.ok).json({
+      success: true,
+      data: editUserData,
+      message: userControllerMessages.userUpdated,
+      statusCode: httpStatuses.ok,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(httpStatuses.serverError).json({
+      success: false,
+      message: error.message || smthWentWrong,
+      statusCode: httpStatuses.serverError,
+    });
+  }
+}
+
 module.exports = {
   httpSignUp,
   httpVerifyEmail,
   httpSignIn,
   httpForgotPassword,
   httpResetPassword,
+  httpEditUser,
 };

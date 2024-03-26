@@ -323,6 +323,17 @@ async function resetPassword(token, password) {
   };
 }
 
+/**
+ * Updates a user's information by their ID.
+ *
+ * @param {string} id - The ID of the user to update.
+ * @param {Object} userData - The new user data to apply.
+ * @return {Promise<User>} The updated user object.
+ */
+function editUser(id, userData) {
+  return User.findByIdAndUpdate(id, userData, { new: true });
+}
+
 module.exports = {
   findUserById,
   findExistingUserByEmail,
@@ -336,4 +347,5 @@ module.exports = {
   forgotPassword,
   validateResetPassword,
   resetPassword,
+  editUser,
 };

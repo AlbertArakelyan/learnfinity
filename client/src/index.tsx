@@ -4,6 +4,8 @@ import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 
+import './assets/styles/index.scss';
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );

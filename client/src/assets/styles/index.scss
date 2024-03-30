@@ -1,5 +1,21 @@
 @import "./base/reset";
 @import "../fonts/fonts";
 
+// Abstracts
+@import "./abstracts/variables";
+@import "./abstracts/sassVariables";
+@import "./abstracts/mixins";
+
+// Shared
+@import "./shared/loader";
+@import "./shared/avatar";
+@import "./shared/modal";
+
+// UI
+@import "./UI/input";
+@import "./UI/button";
+@import "./UI/select";
+@import "./UI/separator";
+
 // Base
 @import "./base/main";

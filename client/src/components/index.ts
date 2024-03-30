@@ -1,2 +1,2 @@
-export * from './global';
+export * from './UI';
 export * from './shared';

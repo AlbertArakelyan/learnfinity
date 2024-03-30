@@ -1,9 +1,20 @@
 import { createReducer } from '@reduxjs/toolkit';
 
-const initialState = {};
+import { changeTheme } from './ui.actions';
 
-const uiReducer = createReducer(initialState, (builder) => {
-  builder.addDefaultCase((state) => state);
+import { IUIState } from './types';
+
+const initialState: IUIState = {
+  theme: 'light',
+  isAddFolderCommandModalOpen: false,
+};
+
+const uiReducer = createReducer(initialState, (buider) => {
+  buider
+    .addCase(changeTheme, (state, action) => {
+      state.theme = action.payload;
+    })
+    .addDefaultCase((state) => state);
 });
 
 export default uiReducer;

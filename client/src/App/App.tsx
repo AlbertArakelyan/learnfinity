@@ -1,10 +1,13 @@
+import { FC } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
-import { Button, Select, Option } from './components';
+import { Button, Select, Option } from '../components';
 
-const App = () => {
+import { IAppProps } from './types';
+
+const App: FC<IAppProps> = ({ theme }) => {
   return (
-    <div className="App">
+    <div className={`App ${theme}`}>
       <Routes>
         <Route>
           <Route
@@ -19,6 +22,7 @@ const App = () => {
                 <Select selectedOption={'test'} onChange={(val) => console.log(val)}>
                   <Option value="test">Love ya</Option>
                 </Select>
+                <h1>Hello world</h1>
               </div>
             }
           />

@@ -1,32 +1,25 @@
 import { FC } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
-import { Button, Select, Option } from '../components';
+import { Auth, LearningPaths } from 'pages';
+
+import { BaseLayout, AuthLayout } from 'components';
 
 import { IAppProps } from './types';
 
-const App: FC<IAppProps> = ({ theme }) => {
+const App: FC<IAppProps> = ({ theme, isUserAuth }) => {
   return (
     <div className={`App ${theme}`}>
       <Routes>
-        <Route>
-          <Route
-            path="/"
-            element={
-              <div>
-                <Button>Love ya</Button>
-                <Button isLoading>Love ya</Button>
-                <Button btnColor="danger" variant="rounded">
-                  Love ya
-                </Button>
-                <Select selectedOption={'test'} onChange={(val) => console.log(val)}>
-                  <Option value="test">Love ya</Option>
-                </Select>
-                <h1>Hello world</h1>
-              </div>
-            }
-          />
-        </Route>
+        {isUserAuth ? (
+          <Route element={<BaseLayout />}>
+            <Route path="/" element={<LearningPaths />} />
+          </Route>
+        ) : (
+          <Route element={<AuthLayout />}>
+            <Route path="/auth" element={<Auth />} />
+          </Route>
+        )}
       </Routes>
     </div>
   );

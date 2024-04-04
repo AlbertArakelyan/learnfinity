@@ -10,6 +10,8 @@ const useAppContainer = () => {
 
   const theme = useAppSelector(selectTheme);
 
+  const isUserAuth = false;
+
   useEffect(() => {
     const preferredTheme = getPreferredTheme();
 
@@ -20,6 +22,7 @@ const useAppContainer = () => {
 
   return {
     theme,
+    isUserAuth,
   };
 };
 

@@ -6,6 +6,9 @@
 @import "./abstracts/sassVariables";
 @import "./abstracts/mixins";
 
+// Components
+@import "./components/authForm";
+
 // Shared
 @import "./shared/loader";
 @import "./shared/avatar";

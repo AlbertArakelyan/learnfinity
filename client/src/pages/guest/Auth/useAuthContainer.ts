@@ -52,7 +52,7 @@ const useAuthContainer = () => {
 
   useEffect(() => {
     if (!isSignUp) {
-      unregister('name');
+      unregister('fullName');
       unregister('confirmPassword');
     }
   }, [isSignUp]);

@@ -27,9 +27,9 @@ const Auth: FC<IAuthProps> = ({
             labelClassName="auth-form__input-label"
             label="Name"
             type="text"
-            isDirty={!!(values as IUserSignUpData).name}
-            error={(errors as FieldErrors<IUserSignUpData>).name?.message}
-            {...register('name')}
+            isDirty={!!(values as IUserSignUpData).fullName}
+            error={(errors as FieldErrors<IUserSignUpData>).fullName?.message}
+            {...register('fullName')}
           />
         )}
         <Input

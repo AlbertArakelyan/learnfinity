@@ -11,3 +11,10 @@ export interface IUserSignUpData extends IUserSignInData {
 export interface IUserForgotPasswordData {
   email: string;
 }
+
+export interface IUser {
+  id: string;
+  email: string;
+  fullName: string;
+  photoUrl: null | string;
+}

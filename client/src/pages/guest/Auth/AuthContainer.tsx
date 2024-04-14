@@ -3,7 +3,7 @@ import Auth from './Auth';
 import useAuthContainer from './useAuthContainer';
 
 const AuthContainer = () => {
-  const { isSignUp, register, handleSubmit, handleFormSubmit, errors, values, isLoading, isVerificationEmailSent } =
+  const { isSignUp, register, handleSubmit, handleFormSubmit, errors, values, isLoading, verificationData } =
     useAuthContainer();
 
   return (
@@ -15,7 +15,7 @@ const AuthContainer = () => {
       errors={errors}
       values={values}
       isLoading={isLoading}
-      isVerificationEmailSent={isVerificationEmailSent}
+      verificationData={verificationData}
     />
   );
 };

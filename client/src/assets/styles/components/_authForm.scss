@@ -13,6 +13,9 @@
   margin-bottom: .75rem;
   @include font(1rem, 400, var(--primary-text-color), center);
 }
+.auth-from__verification-email {
+  @include font(1rem, 500, var(--primary-light));
+}
 .auth-form__inputs {
   &:not(:last-child) {
     margin-bottom: 1.5rem;

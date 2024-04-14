@@ -15,7 +15,7 @@ const Auth: FC<IAuthProps> = ({
   errors,
   values,
   isLoading,
-  isVerificationEmailSent,
+  verificationData,
 }) => {
   return (
     <form className="auth-form" onSubmit={handleSubmit(handleFormSubmit)}>
@@ -62,9 +62,10 @@ const Auth: FC<IAuthProps> = ({
           />
         )}
       </div>
-      {isVerificationEmailSent && (
+      {verificationData && (
         <span className="auth-from__verification-message">
-          Verification email has been sent, please check your email.
+          Verification email has been sent to{' '}
+          <span className="auth-from__verification-email">{verificationData.email}</span>. Please check your email.
         </span>
       )}
       <div className="auth-from__controls">

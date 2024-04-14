@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 import store from 'store';
 
-import { SIGN_UP, VERIFY_EMAIL, FORGOT_PASSWORD, RESET_PASSWORD } from './user.actionTypes';
+import { SIGN_UP, VERIFY_EMAIL, FORGOT_PASSWORD, RESET_PASSWORD, SIGN_IN } from './user.actionTypes';
 
 import { UserService } from 'services';
 
@@ -13,6 +13,8 @@ import {
   IVerificationForgotPasswordData,
   IResetPasswordActionReturnData,
   IResetPasswordPayloadData,
+  SignInPayloadDataType,
+  ISignInActionReturnData,
 } from './types';
 
 import { smthWentWrong } from 'constants/messages';
@@ -101,3 +103,24 @@ export const resetPassword = createAsyncThunk<IResetPasswordActionReturnData, IR
     }
   }
 );
+
+export const signIn = createAsyncThunk<ISignInActionReturnData, SignInPayloadDataType>(SIGN_IN, async (data) => {
+  try {
+    const response = await UserService.signIn<ISignInActionReturnData, SignInPayloadDataType>(data);
+
+    if (!response.data?.success) {
+      throw new Error(response.data.message || smthWentWrong);
+    }
+
+    store.set('accessToken', response.data.data.accessToken);
+
+    return response.data.data;
+  } catch (error: any) {
+    console.log('forgotPassword', error);
+    toast.error(error.message, {
+      type: 'error',
+      hideProgressBar: true,
+    });
+    throw error.message as string;
+  }
+});

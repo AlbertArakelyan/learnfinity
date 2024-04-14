@@ -5,13 +5,7 @@ import { useAppDispatch, useAppSelector } from 'store/index';
 
 import { useQuery } from 'hooks';
 
-import {
-  signUp,
-  // login,
-  // resetIsVerificationEmailSent,
-  selectIsLoading,
-  selectVerificationData,
-} from 'store/user';
+import { signUp, selectIsLoading, selectVerificationData, signIn } from 'store/user';
 
 import { signInSchema, signUpSchema } from 'utils';
 
@@ -47,7 +41,7 @@ const useAuthContainer = () => {
       dispatch(signUp(sendData));
     } else {
       const sendData = data as IUserSignInData;
-      // dispatch(login(sendData));
+      dispatch(signIn(sendData));
     }
   };
 

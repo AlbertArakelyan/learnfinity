@@ -1,7 +1,7 @@
 import { createReducer } from '@reduxjs/toolkit';
 import store from 'store';
 
-import { signUp, verifyEmail, forgotPassword } from './user.actions';
+import { signUp, verifyEmail, forgotPassword, signIn } from './user.actions';
 
 import { IUserState } from './types';
 
@@ -58,6 +58,22 @@ const userReducer = createReducer(initialState, (buider) => {
       state.error = null;
     })
     .addCase(forgotPassword.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.error?.message as string;
+    })
+
+    // signIn
+    .addCase(signIn.fulfilled, (state, action) => {
+      state.user = action.payload.user;
+      state.accessToken = action.payload.accessToken;
+      state.isLoading = false;
+      state.error = null;
+    })
+    .addCase(signIn.pending, (state) => {
+      state.isLoading = true;
+      state.error = null;
+    })
+    .addCase(signIn.rejected, (state, action) => {
       state.isLoading = false;
       state.error = action.error?.message as string;
     })

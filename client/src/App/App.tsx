@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 
 import { Auth, VerifyEmail, ForgotPassword, ResetPassword, LearningPaths } from 'pages';
@@ -15,6 +15,7 @@ const App: FC<IAppProps> = ({ theme, isUserAuth }) => {
         {isUserAuth ? (
           <Route element={<BaseLayout />}>
             <Route path="/" element={<LearningPaths />} />
+            <Route path="/*" element={<Navigate to="/" replace />} />
           </Route>
         ) : (
           <Route element={<AuthLayout />}>
@@ -22,6 +23,7 @@ const App: FC<IAppProps> = ({ theme, isUserAuth }) => {
             <Route path="/verify/:token" element={<VerifyEmail />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/reset-password/:resetToken" element={<ResetPassword />} />
+            <Route path="/*" element={<Navigate to="/auth" replace />} />
           </Route>
         )}
       </Routes>

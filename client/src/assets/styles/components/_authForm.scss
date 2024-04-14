@@ -9,11 +9,13 @@
   width: 100%;
   margin-bottom: 1rem;
 }
-.auth-from__verification-message {
+.auth-from__verification-message,
+.auth-form__forgot-password-message {
   margin-bottom: .75rem;
   @include font(1rem, 400, var(--primary-text-color), center);
 }
-.auth-from__verification-email {
+.auth-from__verification-email,
+.auth-form__forgot-password-email {
   @include font(1rem, 500, var(--primary-light));
 }
 .auth-form__inputs {

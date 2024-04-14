@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 
-import { Auth, VerifyEmail, LearningPaths } from 'pages';
+import { Auth, VerifyEmail, ForgotPassword, LearningPaths } from 'pages';
 
 import { BaseLayout, AuthLayout } from 'components';
 
@@ -20,6 +20,7 @@ const App: FC<IAppProps> = ({ theme, isUserAuth }) => {
           <Route element={<AuthLayout />}>
             <Route path="/auth" element={<Auth />} />
             <Route path="/verify/:token" element={<VerifyEmail />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
           </Route>
         )}
       </Routes>

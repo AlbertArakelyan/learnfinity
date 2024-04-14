@@ -1,6 +1,6 @@
 import { IUser, IUserSignUpData } from 'types';
 
-interface IVerificationForgotPasswordData {
+export interface IVerificationForgotPasswordData {
   email: string;
 }
 
@@ -9,6 +9,7 @@ export interface IUserState {
   accessToken: string | null;
   verificationData: IVerificationForgotPasswordData | null;
   isVerificationPassed: boolean | null;
+  forgotPasswordData: IVerificationForgotPasswordData | null;
   isLoading: boolean;
   error: string | null;
 }

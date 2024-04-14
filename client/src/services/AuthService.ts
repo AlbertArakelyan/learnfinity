@@ -15,6 +15,10 @@ class AuthService {
     return request<IResponseData<T>, D>('POST', 'users/forgot-password', data);
   }
 
+  static resetPassword<T, D>(data: D) {
+    return request<IResponseData<T>, D>('POST', 'users/reset-password', data);
+  }
+
   // static signIn<T, D>(data: D) {
   //   return request<T, D>();
   // }

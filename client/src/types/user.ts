@@ -18,3 +18,8 @@ export interface IUser {
   fullName: string;
   photoUrl: null | string;
 }
+
+export interface IUserResetPasswordData {
+  password: string;
+  confirmPassword: string;
+}

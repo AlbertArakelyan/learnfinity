@@ -1,4 +1,4 @@
-import { IUser, IUserSignUpData } from 'types';
+import { IUser, IUserSignUpData, IUserResetPasswordData } from 'types';
 
 export interface IVerificationForgotPasswordData {
   email: string;
@@ -27,4 +27,15 @@ export type SignUpActionReturnDataType = IVerificationForgotPasswordData;
 export interface IVerifyEmailActionReturnData {
   token: string;
   isEmailVerified: boolean;
+}
+
+/**
+ * resetPassword Action Types
+ */
+export interface IResetPasswordPayloadData extends IUserResetPasswordData {
+  resetToken: string;
+}
+
+export interface IResetPasswordActionReturnData {
+  isPasswordReset: boolean;
 }

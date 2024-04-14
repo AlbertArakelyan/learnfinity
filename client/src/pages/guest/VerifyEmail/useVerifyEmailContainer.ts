@@ -14,7 +14,7 @@ const useVerifyEmailContainer = () => {
     if (token) {
       dispatch(verifyEmail(token));
     } else {
-      // TODO make an alert with toastify
+      // TODO make an alert with toastify [Token is not provided or invalid]
     }
   }, []);
 

@@ -7,6 +7,10 @@ class AuthService {
     return request<IResponseData<T>, D>('POST', '/users/sign-up', data);
   }
 
+  static verifyEmail<T>(token: string) {
+    return request<IResponseData<T>>('POST', `/users/verify-email/${token}`);
+  }
+
   // static signIn<T, D>(data: D) {
   //   return request<T, D>();
   // }

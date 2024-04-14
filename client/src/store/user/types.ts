@@ -8,6 +8,7 @@ export interface IUserState {
   user: IUser | null;
   accessToken: string | null;
   verificationData: IVerificationForgotPasswordData | null;
+  isVerificationPassed: boolean | null;
   isLoading: boolean;
   error: string | null;
 }
@@ -18,3 +19,11 @@ export interface IUserState {
 export type SignUpPayloadDataType = IUserSignUpData;
 
 export type SignUpActionReturnDataType = IVerificationForgotPasswordData;
+
+/**
+ * verifyEmail Action Types
+ */
+export interface IVerifyEmailActionReturnData {
+  token: string;
+  isEmailVerified: boolean;
+}

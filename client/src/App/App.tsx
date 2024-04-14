@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { Routes, Route } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 
 import { Auth, VerifyEmail, LearningPaths } from 'pages';
 
@@ -22,6 +23,18 @@ const App: FC<IAppProps> = ({ theme, isUserAuth }) => {
           </Route>
         )}
       </Routes>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
     </div>
   );
 };

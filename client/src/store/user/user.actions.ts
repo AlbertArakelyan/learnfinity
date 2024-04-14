@@ -1,4 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
 import store from 'store';
 
 import { SIGN_UP, VERIFY_EMAIL } from './user.actionTypes';
@@ -20,6 +21,10 @@ export const signUp = createAsyncThunk<SignUpActionReturnDataType, SignUpPayload
     return response.data.data;
   } catch (error: any) {
     console.log('signUp', error);
+    toast.error(error.message, {
+      type: 'error',
+      hideProgressBar: true,
+    });
     throw error.message as string;
   }
 });
@@ -35,6 +40,10 @@ export const verifyEmail = createAsyncThunk<IVerifyEmailActionReturnData, string
     return response.data.data;
   } catch (error: any) {
     console.log('verifyEmail', error);
+    toast.error(error.message, {
+      type: 'error',
+      hideProgressBar: true,
+    });
     throw error.message as string;
   }
 });

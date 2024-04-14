@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '../store';
+import { useAppDispatch, useAppSelector } from 'store/index';
 
-import { changeTheme, selectTheme } from '../store/ui';
+import { changeTheme, selectTheme } from 'store/ui';
+import { selectAccessToken } from 'store/user';
 
 import { getPreferredTheme } from 'utils';
 
@@ -9,8 +10,9 @@ const useAppContainer = () => {
   const dispatch = useAppDispatch();
 
   const theme = useAppSelector(selectTheme);
+  const accessToken = useAppSelector(selectAccessToken);
 
-  const isUserAuth = false;
+  const isUserAuth = !!accessToken;
 
   useEffect(() => {
     const preferredTheme = getPreferredTheme();

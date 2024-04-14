@@ -10,7 +10,7 @@ import {
 } from 'constants/validation';
 
 const signUpSchema = yup.object({
-  name: yup.string().max(validationLength.base, maxLengthMessage.base).required(requiredMessage),
+  fullName: yup.string().max(validationLength.base, maxLengthMessage.base).required(requiredMessage),
   email: yup.string().email().max(validationLength.base, maxLengthMessage.base).required(requiredMessage),
   password: yup
     .string()

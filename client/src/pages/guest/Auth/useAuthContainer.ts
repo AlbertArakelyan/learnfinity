@@ -1,16 +1,11 @@
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { useQuery } from 'hooks';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useAppDispatch, useAppSelector } from 'store/index';
 
-// import {
-//   signUp,
-//   login,
-//   resetIsVerificationEmailSent,
-//   selectIsLoading,
-//   selectIsVerificationEmailSent,
-// } from 'store/auth';
+import { useQuery } from 'hooks';
+
+import { signUp, selectIsLoading, selectVerificationData, signIn } from 'store/user';
 
 import { signInSchema, signUpSchema } from 'utils';
 
@@ -22,8 +17,8 @@ const useAuthContainer = () => {
   const query = useQuery();
   const dispatch = useAppDispatch();
 
-  const isLoading = false;
-  const isVerificationEmailSent = false;
+  const isLoading = useAppSelector(selectIsLoading);
+  const verificationData = useAppSelector(selectVerificationData);
 
   const authMode = query.get(AuthQueries.authmode);
   const isSignUp = authMode === AuthModes.signup;
@@ -43,16 +38,16 @@ const useAuthContainer = () => {
   const handleFormSubmit = (data: IUserSignInData | IUserSignUpData) => {
     if (isSignUp) {
       const sendData = data as IUserSignUpData;
-      // dispatch(signUp(sendData));
+      dispatch(signUp(sendData));
     } else {
       const sendData = data as IUserSignInData;
-      // dispatch(login(sendData));
+      dispatch(signIn(sendData));
     }
   };
 
   useEffect(() => {
     if (!isSignUp) {
-      unregister('name');
+      unregister('fullName');
       unregister('confirmPassword');
     }
   }, [isSignUp]);
@@ -71,7 +66,7 @@ const useAuthContainer = () => {
     errors,
     values,
     isLoading,
-    isVerificationEmailSent,
+    verificationData,
   };
 };
 

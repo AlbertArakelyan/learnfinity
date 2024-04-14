@@ -15,7 +15,7 @@ const Auth: FC<IAuthProps> = ({
   errors,
   values,
   isLoading,
-  isVerificationEmailSent,
+  verificationData,
 }) => {
   return (
     <form className="auth-form" onSubmit={handleSubmit(handleFormSubmit)}>
@@ -27,9 +27,9 @@ const Auth: FC<IAuthProps> = ({
             labelClassName="auth-form__input-label"
             label="Name"
             type="text"
-            isDirty={!!(values as IUserSignUpData).name}
-            error={(errors as FieldErrors<IUserSignUpData>).name?.message}
-            {...register('name')}
+            isDirty={!!(values as IUserSignUpData).fullName}
+            error={(errors as FieldErrors<IUserSignUpData>).fullName?.message}
+            {...register('fullName')}
           />
         )}
         <Input
@@ -62,9 +62,10 @@ const Auth: FC<IAuthProps> = ({
           />
         )}
       </div>
-      {isVerificationEmailSent && (
+      {verificationData && (
         <span className="auth-from__verification-message">
-          Verification email has been sent, please check your email.
+          Verification email has been sent to{' '}
+          <span className="auth-from__verification-email">{verificationData.email}</span>. Please check your email.
         </span>
       )}
       <div className="auth-from__controls">

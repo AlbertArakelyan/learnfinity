@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 const {
+  findUserById,
   findExistingUserByEmail,
   validateUser,
   validateSignIn,
@@ -362,6 +363,35 @@ async function httpChangeAvatar(req, res) {
   }
 }
 
+async function httpGetUserData(req, res) {
+  try {
+    const userId = req.user.id;
+
+    const user = await findUserById(userId);
+
+    const userData = {
+      id: user._id,
+      email: user.email,
+      fullName: user.fullName,
+      photoUrl: user.photoUrl,
+    };
+
+    return res.status(httpStatuses.ok).json({
+      success: true,
+      data: userData,
+      message: userControllerMessages.userDataReceived,
+      statusCode: httpStatuses.ok,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(httpStatuses.serverError).json({
+      success: false,
+      message: error.message || smthWentWrong,
+      statusCode: httpStatuses.serverError,
+    });
+  }
+}
+
 module.exports = {
   httpSignUp,
   httpVerifyEmail,
@@ -371,4 +401,5 @@ module.exports = {
   httpEditUser,
   httpChangePassword,
   httpChangeAvatar,
+  httpGetUserData,
 };

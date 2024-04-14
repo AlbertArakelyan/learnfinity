@@ -16,6 +16,7 @@ const userControllerMessages = {
   invalidPassword: 'Invalid password',
   passwordChanged: 'Password has been changed',
   avatarChanged: 'Avatar has been changed',
+  userDataReceived: 'User data received',
 };
 
 const groupControllerMessages = {

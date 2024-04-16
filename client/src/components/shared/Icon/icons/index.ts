@@ -8,3 +8,6 @@ export { default as Close } from './Close';
 export { default as Folder } from './Folder';
 export { default as Edit } from './Edit';
 export { default as Delete } from './Delete';
+export { default as Chalkboard } from './Chalkboard';
+export { default as UserGroup } from './UserGroup';
+export { default as ScrewdriverWrench } from './ScrewdriverWrench';

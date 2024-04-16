@@ -1,7 +1,21 @@
 import { FC } from 'react';
 
 // Components
-import { Search, Terminal, UserAstronaut, Profile, Cogs, ChevronDown, Close, Folder, Delete, Edit } from './icons';
+import {
+  Search,
+  Terminal,
+  UserAstronaut,
+  Profile,
+  Cogs,
+  ChevronDown,
+  Close,
+  Folder,
+  Delete,
+  Edit,
+  Chalkboard,
+  UserGroup,
+  ScrewdriverWrench,
+} from './icons';
 
 // Types
 import { IIconProps } from './types';
@@ -17,6 +31,9 @@ export const icons = {
   folder: Folder,
   delete: Delete,
   edit: Edit,
+  chalkboard: Chalkboard,
+  'user-group': UserGroup,
+  'screwdriver-wrench': ScrewdriverWrench,
 };
 
 const Icon: FC<IIconProps> = ({ name, ...props }) => {

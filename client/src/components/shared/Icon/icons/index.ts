@@ -11,3 +11,4 @@ export { default as Delete } from './Delete';
 export { default as Chalkboard } from './Chalkboard';
 export { default as UserGroup } from './UserGroup';
 export { default as ScrewdriverWrench } from './ScrewdriverWrench';
+export { default as Logout } from './Logout';

@@ -1,7 +1,11 @@
 import Header from './Header';
 
+import useHeaderContainer from './useHeaderContainer';
+
 const HeaderContainer = () => {
-  return <Header />;
+  const { user } = useHeaderContainer();
+
+  return <Header user={user} />;
 };
 
 export default HeaderContainer;

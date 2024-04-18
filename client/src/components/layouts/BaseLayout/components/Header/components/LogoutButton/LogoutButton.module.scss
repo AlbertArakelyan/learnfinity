@@ -1,0 +1,26 @@
+@import "src/assets/styles/abstracts/mixins";
+
+.header__logout-button {
+  background-color: transparent;
+  border: none;
+  color: var(--primary-text-color);
+  padding: 0.5rem 1rem;
+  transition: background-color .2s ease-in-out;
+  width: 100%;
+  @include flex(row, center, flex-start);
+
+  &:hover {
+    background-color: var(--white-background-highlited-hover);
+    cursor: pointer;
+  }
+
+  &:active {
+    background-color: var(--white-background-highlited-active);
+    cursor: pointer;
+  }
+}
+
+.header__logout-button-text {
+  margin-left: 0.5rem;
+  @include font(1rem, 500, var(--primary-text-color));
+}

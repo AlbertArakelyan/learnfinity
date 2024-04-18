@@ -15,6 +15,7 @@ import {
   Chalkboard,
   UserGroup,
   ScrewdriverWrench,
+  Logout,
 } from './icons';
 
 // Types
@@ -34,6 +35,7 @@ export const icons = {
   chalkboard: Chalkboard,
   'user-group': UserGroup,
   'screwdriver-wrench': ScrewdriverWrench,
+  logout: Logout,
 };
 
 const Icon: FC<IIconProps> = ({ name, ...props }) => {

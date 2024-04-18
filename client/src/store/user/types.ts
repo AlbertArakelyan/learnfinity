@@ -43,10 +43,14 @@ export interface IResetPasswordActionReturnData {
 /**
  * signIn Action Types
  */
-// PayloadData
 export type SignInPayloadDataType = IUserSignInData;
 
 export interface ISignInActionReturnData {
   user: IUser;
   accessToken: string;
 }
+
+/**
+ * getUser Action Types
+ */
+export type GetUserActionReturnData = IUser;

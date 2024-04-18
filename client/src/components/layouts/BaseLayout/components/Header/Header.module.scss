@@ -11,3 +11,16 @@
   background-color: var(--header-footer-aside-background-color);
   @include flex(row, center, space-between);
 }
+
+.header__user-info {
+  @include flex(row, center, flex-end);
+}
+
+.header__user-full-name {
+  margin-right: 1rem;
+  @include font(1rem, 600, var(--primary-text-color));
+}
+
+.header__avatar {
+  width: 11rem;
+}

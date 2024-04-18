@@ -1,0 +1,32 @@
+.base-dropdown-wrapper {
+  position: relative;
+  z-index: $dropdown-z-index;
+
+  &:hover {
+    cursor: pointer;
+    
+    .base-dropdown {
+      display: block;
+    }
+  }
+}
+
+.base-dropdown {
+  display: none;
+  position: absolute;
+  z-index: $dropdown-z-index;
+  padding-top: 0.75rem;
+
+  &--bottom-right {
+    right: 0;
+    top: 100%;
+  }
+}
+
+.base-dropdown__content {
+  width: 100%;
+  padding: 0.5rem 0;
+  border-radius: 0.375rem;
+  background-color: var(--header-footer-aside-background-color);
+  box-shadow: 0 0 3px var(--shadow-md-color);
+}

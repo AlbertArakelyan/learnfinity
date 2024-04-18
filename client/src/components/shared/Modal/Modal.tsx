@@ -4,7 +4,7 @@ import { ModalHeader } from './components';
 
 import { IModalProps } from './types';
 
-const Modal: FC<IModalProps> = ({ title, isOpen, onClose, children }) => {
+const Modal: FC<IModalProps> = ({ title, onClose, children }) => {
   return (
     <div className="modal">
       {/* TODO: The upper div will become a portal root */}

@@ -18,7 +18,7 @@ const useAppContainer = () => {
     const preferredTheme = getPreferredTheme();
 
     if (theme !== preferredTheme) {
-      dispatch(changeTheme('light'));
+      dispatch(changeTheme(preferredTheme));
     }
   }, []);
 

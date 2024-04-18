@@ -12,3 +12,4 @@ export { default as Chalkboard } from './Chalkboard';
 export { default as UserGroup } from './UserGroup';
 export { default as ScrewdriverWrench } from './ScrewdriverWrench';
 export { default as Logout } from './Logout';
+export { default as Lock } from './Lock';

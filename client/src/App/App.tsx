@@ -15,7 +15,7 @@ const App: FC<IAppProps> = ({ theme, isUserAuth }) => {
         {isUserAuth ? (
           <Route element={<BaseLayout />}>
             <Route path="/" element={<LearningPaths />} />
-            <Route path="/*" element={<Navigate to="/" replace />} />
+            {/*<Route path="/*" element={<Navigate to="/" replace />} />*/}
           </Route>
         ) : (
           <Route element={<AuthLayout />}>

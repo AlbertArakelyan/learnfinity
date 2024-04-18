@@ -5,7 +5,15 @@ import { navLinks } from 'constants/navLinks';
 
 const NavBarContainer = () => {
   const navLinksContent = navLinks.map((navLink) => {
-    return <NavBarLink key={navLink.href} href={navLink.href} label={navLink.label} icon={navLink.icon} />;
+    return (
+      <NavBarLink
+        key={navLink.href}
+        href={navLink.href}
+        label={navLink.label}
+        icon={navLink.icon}
+        isComingSoon={navLink.isComingSoon}
+      />
+    );
   });
 
   return <NavBar navLinksContent={navLinksContent} />;

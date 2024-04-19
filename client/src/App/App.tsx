@@ -4,7 +4,7 @@ import { ToastContainer } from 'react-toastify';
 
 import { Auth, VerifyEmail, ForgotPassword, ResetPassword, LearningPaths } from 'pages';
 
-import { BaseLayout, AuthLayout } from 'components';
+import { BaseLayout, AuthLayout, LearningPathsLayout } from 'components';
 
 import { IAppProps } from './types';
 
@@ -14,7 +14,10 @@ const App: FC<IAppProps> = ({ theme, isUserAuth }) => {
       <Routes>
         {isUserAuth ? (
           <Route element={<BaseLayout />}>
-            <Route path="/" element={<LearningPaths />} />
+            <Route path="/" element={<LearningPathsLayout />}>
+              <Route path="/" element={<LearningPaths />} />
+              <Route path="/shared" element={<LearningPaths />} />
+            </Route>
             <Route path="/*" element={<Navigate to="/" replace />} />
           </Route>
         ) : (

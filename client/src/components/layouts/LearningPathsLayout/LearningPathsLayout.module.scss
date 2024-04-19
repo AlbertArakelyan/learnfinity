@@ -1,0 +1,15 @@
+@import "/src/assets/styles/abstracts/mixins";
+
+.learning-paths-layout__nav {
+  @include flex(row, center, flex-start);
+  column-gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.learning-paths-layout__nav-link {
+  &--active {
+    .learning-paths-layout__nav-link-button {
+      background-color: var(--white-background-highlited-active);
+    }
+  }
+}

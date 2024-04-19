@@ -2,7 +2,17 @@
 
 .nav-bar__link-wrapper {
   width: 100%;
+
+  &--coming-soon {
+    cursor: pointer;
+    opacity: 0.4;
+
+    .nav-bar__link {
+      pointer-events: none;
+    }
+  }
 }
+
 .nav-bar__link {
   @include flex(row, center, flex-start);
   padding: 1rem;
@@ -33,11 +43,17 @@
     }
   }
 }
+
 .nav-bar__link-icon-wrapper {
   margin-right: .75rem;
 }
+
 .nav-bar__link-icon {
   fill: var(--primary-text-color);
   width: 1.125rem;
   height: 1.125rem;
+}
+
+.nav-bar__link-coming-soon-icon {
+  margin-left: auto;
 }

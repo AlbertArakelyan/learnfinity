@@ -16,7 +16,7 @@ const ForgotPassword: FC<IForgotPasswordProps> = ({
 }) => {
   return (
     <form className="auth-form" onSubmit={handleSubmit(handleFormSubmit)}>
-      <h2 className="auth-form__title">Email Verification</h2>
+      <h2 className="auth-form__title">Forgot Password</h2>
       <div className="auth-form__inputs">
         <Input
           wrapperClassName="auth-form__inputs"

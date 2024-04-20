@@ -13,7 +13,7 @@ const learningPathItemSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  type: {
+  type: { // Documentation, Course, Video, Article, Book, Podcast, Other
     type: String,
     required: true,
   },

@@ -52,8 +52,6 @@ export const getLearningPaths = createAsyncThunk<IGetLearningPathsActionReturnDa
         throw new Error(response.data.message || smthWentWrong);
       }
 
-      console.log(response.data.data.pageInfo);
-
       return {
         data: response.data.data.data,
         pagination: response.data.data.pageInfo,

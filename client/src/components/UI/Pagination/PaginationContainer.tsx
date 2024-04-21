@@ -17,8 +17,6 @@ const PaginationContainer: FC<IPaginationContainerProps> = ({
 }) => {
   const { pagination } = usePaginationContainer(totalPages);
 
-  console.log('totalPages', totalPages);
-
   const paginationContent = pagination.map((page) => {
     return (
       <li

@@ -19,7 +19,7 @@ const learningPathReducer = createReducer(initialState, (builder) => {
     .addCase(createLearningPath.fulfilled, (state, action) => {
       state.isLoading = false;
       state.error = null;
-      state.list = [action.payload, ...state.list];
+      state.myList = [action.payload, ...state.myList];
     })
     .addCase(createLearningPath.pending, (state) => {
       state.isLoading = true;

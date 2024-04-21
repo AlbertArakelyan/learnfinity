@@ -107,6 +107,11 @@ async function getSharedLearningPaths(userId, skip, limit) {
     .sort({ createdAt: -1 });
 }
 
+async function getSharedLearningPathsCount(userId) {
+  return await LearningPath
+    .countDocuments({ sharedUserIds: { $in: [userId] } });
+}
+
 /**
  * Deletes a learning path for a specific user.
  *
@@ -204,6 +209,7 @@ module.exports = {
   getPublicLearningPaths,
   getPublicLearningPathsCount,
   getSharedLearningPaths,
+  getSharedLearningPathsCount,
   deleteLearningPath,
   getUsersCreatedLearningPath,
   editUserLearningPath,

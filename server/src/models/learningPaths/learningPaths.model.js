@@ -46,6 +46,12 @@ async function getUserLearningPaths(userId, skip, limit) {
     .sort({ createdAt: -1 });
 }
 
+/**
+ * Retrieves the count of learning paths associated with a specific user.
+ *
+ * @param {string} userId - The ID of the user to retrieve learning paths count for.
+ * @return {number} The count of learning paths associated with the user.
+ */
 async function getUserLearningPathsCount(userId) {
   return await LearningPath
     .countDocuments({ userId, isCreatedInGroup: false });
@@ -87,6 +93,16 @@ async function getPublicLearningPaths(skip, limit) {
 }
 
 /**
+ * Retrieves the count of public learning paths.
+ *
+ * @return {Promise<number>} The count of public learning paths.
+ */
+async function getPublicLearningPathsCount() {
+  return await LearningPath
+    .countDocuments({ isCreatedInGroup: false, isPrivate: false });
+}
+
+/**
  * Retrieves the shared learning paths for a given user.
  *
  * @param {string} userId - The ID of the user.
@@ -100,6 +116,17 @@ async function getSharedLearningPaths(userId, skip, limit) {
     .skip(skip)
     .limit(limit)
     .sort({ createdAt: -1 });
+}
+
+/**
+ * Retrieves the count of shared learning paths for a given user.
+ *
+ * @param {type} userId - The user ID for which to retrieve the count of shared learning paths.
+ * @return {Promise<number>} The count of shared learning paths for the user.
+ */
+async function getSharedLearningPathsCount(userId) {
+  return await LearningPath
+    .countDocuments({ sharedUserIds: { $in: [userId] } });
 }
 
 /**
@@ -197,7 +224,9 @@ module.exports = {
   getUserLearningPathsCount,
   getUserLearningPath,
   getPublicLearningPaths,
+  getPublicLearningPathsCount,
   getSharedLearningPaths,
+  getSharedLearningPathsCount,
   deleteLearningPath,
   getUsersCreatedLearningPath,
   editUserLearningPath,

@@ -17,6 +17,7 @@ const App: FC<IAppProps> = ({ theme, isUserAuth }) => {
             <Route path="/" element={<LearningPathsLayout />}>
               <Route path="/" element={<LearningPaths />} />
               <Route path="/shared" element={<LearningPaths />} />
+              <Route path="/public" element={<LearningPaths />} />
             </Route>
             <Route path="/*" element={<Navigate to="/" replace />} />
           </Route>

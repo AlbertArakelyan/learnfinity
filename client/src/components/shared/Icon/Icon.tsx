@@ -18,6 +18,7 @@ import {
   Logout,
   Lock,
   LaptopFile,
+  Globe,
 } from './icons';
 
 // Types
@@ -40,6 +41,7 @@ export const icons = {
   logout: Logout,
   lock: Lock,
   'laptop-file': LaptopFile,
+  globe: Globe,
 };
 
 const Icon: FC<IIconProps> = ({ name, ...props }) => {

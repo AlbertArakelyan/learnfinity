@@ -32,6 +32,18 @@ const LearningPathsLayout = () => {
             Shared Learning Paths
           </LinkButton>
         </NavLink>
+        <NavLink
+          className={({ isActive }) =>
+            isActive
+              ? `${styles['learning-paths-layout__nav-link']} ${styles['learning-paths-layout__nav-link--active']}`
+              : styles['learning-paths-layout__nav-link']
+          }
+          to="/public"
+        >
+          <LinkButton className={styles['learning-paths-layout__nav-link-button']} variant="rounded" icon="globe">
+            Public Learning Paths
+          </LinkButton>
+        </NavLink>
       </div>
       <Outlet />
     </div>

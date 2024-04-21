@@ -11,6 +11,7 @@ export const validationLength: IValidationLength = {
 } as const;
 
 export const minValidationLength: IMinValidationLength = {
+  min: 2,
   base: 8,
 } as const;
 
@@ -29,5 +30,6 @@ export const maxLengthMessage = {
 } as const;
 
 export const minLengthMessage = {
+  min: generateMinLengthMessage('min'),
   base: generateMinLengthMessage('base'),
 } as const;

@@ -20,6 +20,14 @@
   color: var(--primary-text-color);
   cursor: pointer;
   text-align: left;
+
+  &--error {
+    border-color: var(--danger) !important;
+
+    .base-select__label {
+      color: var(--danger) !important;
+    }
+  }
 }
 
 .base-select__label {
@@ -99,4 +107,11 @@
   &--selected {
     background-color: var(--white-background-highlited);
   }
+}
+
+.base-select__error-message {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  @include font(.75rem, 400, var(--danger));
 }

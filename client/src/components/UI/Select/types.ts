@@ -15,6 +15,7 @@ export interface ISelectContainerProps extends PropsWithChildren {
   optionsListClassName?: string;
   labelClassName?: string;
   label?: string;
+  error?: string;
 }
 
 export interface ISelectProps extends ISelectContainerProps, UseSelectContainerType {}

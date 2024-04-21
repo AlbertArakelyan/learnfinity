@@ -1,27 +1,77 @@
+import { FC } from 'react';
+import { Controller } from 'react-hook-form';
+
 import { Select, Option, Input, Textarea, Button } from 'components';
+
+import { ICreateLearningPathModalProps } from './types';
 
 import styles from './CreateLearningPathModal.module.scss';
 
-const CreateLearningPathModal = () => {
+const CreateLearningPathModal: FC<ICreateLearningPathModalProps> = ({
+  register,
+  errors,
+  handleSubmit,
+  handleFormSubmit,
+  control,
+  getTagsInputValueArray,
+  values,
+}) => {
   return (
-    <form className={styles['create-learning-path-modal']}>
-      <Input labelClassName={styles['create-learning-path-modal__input-label']} name="name" label="Name" />
+    <form className={styles['create-learning-path-modal']} onSubmit={handleSubmit(handleFormSubmit)}>
+      <Input
+        labelClassName={styles['create-learning-path-modal__input-label']}
+        label="Name"
+        error={errors.name?.message}
+        isDirty={!!values.name}
+        {...register('name')}
+      />
       <Textarea
         className={styles['create-learning-path-modal__textarea']}
         labelClassName={styles['create-learning-path-modal__input-label']}
-        name="description"
         label="Description"
+        error={errors.description?.message}
+        isDirty={!!values.description}
+        {...register('description')}
       />
-      <Select
-        labelClassName={styles['create-learning-path-modal__input-label']}
-        selectedOption={1}
-        onChange={() => console.log('change')}
-        label="Is Private?"
-      >
-        <Option value={1}>Yes</Option>
-        <Option value={0}>No</Option>
-      </Select>
-      <Input labelClassName={styles['create-learning-path-modal__input-label']} name="tags" label="Tags" />
+      <Controller
+        render={({ field: { value, onChange } }) => {
+          return (
+            <Select
+              labelClassName={styles['create-learning-path-modal__input-label']}
+              selectedOption={Number(value)}
+              onChange={(option) => {
+                onChange(Boolean(option));
+              }}
+              label="Is Private?"
+              error={errors.isPrivate?.message}
+            >
+              <Option value={1}>Yes</Option>
+              <Option value={0}>No</Option>
+            </Select>
+          );
+        }}
+        control={control}
+        name="isPrivate"
+      />
+      <Controller
+        render={({ field: { value, onChange } }) => {
+          return (
+            <Input
+              labelClassName={styles['create-learning-path-modal__input-label']}
+              label="Tags"
+              error={errors.tags?.message}
+              value={value?.join(', ')}
+              onChange={(e) => {
+                const tagsArray = getTagsInputValueArray(e.target.value);
+                onChange(tagsArray);
+              }}
+            />
+          );
+        }}
+        name="tags"
+        control={control}
+      />
+
       <Button className={styles['create-learning-path-modal__button']}>Create</Button>
     </form>
   );

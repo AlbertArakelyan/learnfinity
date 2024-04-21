@@ -1,9 +1,13 @@
 import NavBar from './NavBar';
 import { NavBarLink } from './components';
 
+import useNavBarContainer from './useNavBarContainer';
+
 import { navLinks } from 'constants/navLinks';
 
 const NavBarContainer = () => {
+  const { isCreateLearningPathModalOpen, handleCreateButtonClick, handleClose } = useNavBarContainer();
+
   const navLinksContent = navLinks.map((navLink) => {
     return (
       <NavBarLink
@@ -16,7 +20,14 @@ const NavBarContainer = () => {
     );
   });
 
-  return <NavBar navLinksContent={navLinksContent} />;
+  return (
+    <NavBar
+      navLinksContent={navLinksContent}
+      isCreateLearningPathModalOpen={isCreateLearningPathModalOpen}
+      handleCreateButtonClick={handleCreateButtonClick}
+      handleClose={handleClose}
+    />
+  );
 };
 
 export default NavBarContainer;

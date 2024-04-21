@@ -8,7 +8,6 @@ import { NavBarLinkPropsType } from './types';
 import styles from './NavBarLink.module.scss';
 
 const NavBarLink: FC<NavBarLinkPropsType> = ({ href, label, icon, isComingSoon }) => {
-  console.log(isComingSoon);
   return (
     <li
       className={`${styles['nav-bar__link-wrapper']} ${isComingSoon ? styles['nav-bar__link-wrapper--coming-soon'] : ''}`}

@@ -1,4 +1,5 @@
-import { ILearningPath, ILearningPathSendData } from 'types';
+import { ILearningPath, ILearningPathSendData, GetLearningPathsRequestType } from 'types';
+import { IPageInfo } from 'services/types';
 
 export interface ILearningPathState {
   lists: {
@@ -6,8 +7,13 @@ export interface ILearningPathState {
     sharedList: ILearningPath[];
     publicList: ILearningPath[];
   };
+  pagination: IPageInfo;
+  currentPage: number;
   entry: ILearningPath | null;
-  isLoading: boolean;
+  isLoading: {
+    createLearningPath: boolean;
+    getLearningPaths: boolean;
+  };
   error: string | null;
 }
 
@@ -17,3 +23,17 @@ export interface ILearningPathState {
 export type CreateLearningPathPayloadDataType = ILearningPathSendData;
 
 export type CreateLearningPathActionReturnDataType = ILearningPath;
+
+/**
+ * getLearningPaths Action Types
+ */
+export interface IGetLearningPathsPayloadData {
+  learningPathsType: GetLearningPathsRequestType;
+  page: number;
+}
+
+export interface IGetLearningPathsActionReturnData {
+  data: ILearningPath[];
+  pagination: IPageInfo;
+  listType: keyof ILearningPathState['lists'];
+}

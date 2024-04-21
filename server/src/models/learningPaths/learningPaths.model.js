@@ -46,6 +46,11 @@ async function getUserLearningPaths(userId, skip, limit) {
     .sort({ createdAt: -1 });
 }
 
+async function getUserLearningPathsCount(userId) {
+  return await LearningPath
+    .countDocuments({ userId, isCreatedInGroup: false });
+}
+
 /**
  * Retrieves the learning path for a specific user.
  *
@@ -189,6 +194,7 @@ module.exports = {
   validateLearningPath,
   createLearningPath,
   getUserLearningPaths,
+  getUserLearningPathsCount,
   getUserLearningPath,
   getPublicLearningPaths,
   getSharedLearningPaths,

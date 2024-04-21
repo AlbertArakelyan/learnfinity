@@ -1,0 +1,5 @@
+.base-loading-screen {
+  @include flex(row, center, center);
+  padding: 2rem 1rem;
+  width: 100%;
+}

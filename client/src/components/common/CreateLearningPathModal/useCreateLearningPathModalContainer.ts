@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useAppDispatch, useAppSelector } from 'store/index';
 
-import { createLearningPath, selectIsLoading } from 'store/learningPath';
+import { createLearningPath, selectIsLoadingCreateLearningPath } from 'store/learningPath';
 
 import { learningPathSchema } from 'utils';
 
@@ -13,7 +13,7 @@ const useCreateLearningPathModalContainer = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const isLoading = useAppSelector(selectIsLoading);
+  const isLoading = useAppSelector(selectIsLoadingCreateLearningPath);
 
   const {
     register,

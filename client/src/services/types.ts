@@ -17,14 +17,14 @@ interface IPaginatedData<T> {
   pageInfo: IPageInfo;
 }
 
-interface IPageInfo {
-  page: string;
-  limit: string;
+export interface IPageInfo {
+  page: number;
+  limit: number;
   totalItems: number;
   totalPages: number;
   hasNextPage: boolean;
   hasPrevPage: boolean;
-  nextPage: string;
+  nextPage: number;
   prevPage: number;
   lastPage: number;
   nextPageUrl: string;

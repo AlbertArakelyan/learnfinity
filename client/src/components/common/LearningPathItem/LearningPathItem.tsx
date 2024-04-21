@@ -6,12 +6,12 @@ import { ILearningPathItemProps } from './types';
 
 import styles from './LearningPathItem.module.scss';
 
-const LearningPathItem: FC<ILearningPathItemProps> = () => {
+const LearningPathItem: FC<ILearningPathItemProps> = ({ name, description, id }) => {
   return (
     <div className={styles['learning-path-item']}>
       <button className={styles['learning-path-item__header']}>
-        <h3 className={styles['learning-path-item__title']}>Name</h3>
-        <p className={styles['learning-path-item__description']}>Description</p>
+        <h3 className={styles['learning-path-item__title']}>{name}</h3>
+        <p className={styles['learning-path-item__description']}>{description}</p>
       </button>
       <div className={styles['learning-path-item__actions-bar']}>
         <button className={styles['learning-path-item__action']}>

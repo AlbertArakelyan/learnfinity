@@ -48,6 +48,7 @@
   width: 100%;
   @include flex(row, center, flex-start);
   gap: 1rem;
+  margin-top: auto;
   padding: 0 0.5rem;
   min-height: 2.5rem;
   opacity: 0;

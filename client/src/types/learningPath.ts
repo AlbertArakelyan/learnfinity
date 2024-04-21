@@ -1,3 +1,5 @@
+import { LearningPathsRequestTypes } from 'constants/learningPath';
+
 export interface ILearningPathCreateData {
   name: string;
   description: string;
@@ -22,3 +24,5 @@ export interface ILearningPath {
 export type ILearningPathWithoutId = Omit<ILearningPath, '_id'>;
 
 export type ILearningPathSendData = Omit<ILearningPathWithoutId, 'userId' | 'created_at' | 'updated_at'>;
+
+export type GetLearningPathsRequestType = keyof typeof LearningPathsRequestTypes;

@@ -11,21 +11,21 @@ function getPagination(query) {
   };
 }
 
-function getPaginatedDate(data, page, limit) {
- const totalItems = data.length;
- const totalPages = Math.ceil(totalItems / limit);
+function getPaginatedDate(data, page, limit, dataCount = 9) {
+  const totalItems = data.length;
+  const totalPages = Math.ceil(dataCount / limit);
 
   return {
     data,
     pageInfo: {
-     page,
-     limit,
+     page: +page,
+     limit: +limit,
      totalItems,
      totalPages,
      hasNextPage: page < totalPages,
      hasPrevPage: page > 1,
-     nextPage: page + 1,
-     prevPage: page - 1,
+     nextPage: +page + 1,
+     prevPage: +page - 1,
      lastPage: totalPages,
      // TODO rework
      nextPageUrl: `/api/groups?page=${page + 1}&limit=${limit}`,

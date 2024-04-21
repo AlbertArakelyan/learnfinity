@@ -2,6 +2,7 @@ const {
   validateLearningPath,
   createLearningPath,
   getUserLearningPaths,
+  getUserLearningPathsCount,
   getUserLearningPath,
   getPublicLearningPaths,
   getSharedLearningPaths,
@@ -83,7 +84,8 @@ async function httpGetUserLearningPaths(req, res) {
     const { skip, limit } = getPagination(req.query);
 
     const learningPaths = await getUserLearningPaths(userId, skip, limit);
-    const paginatedLearningPaths = getPaginatedDate(learningPaths, page, perPage);
+    const learningPathsCount = await getUserLearningPathsCount(userId);
+    const paginatedLearningPaths = getPaginatedDate(learningPaths, page, perPage, learningPathsCount);
 
     if (!paginatedLearningPaths.data?.length) {
       return res.status(httpStatuses.notFound).json({

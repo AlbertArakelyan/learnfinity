@@ -1,11 +1,19 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
+import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 
-import { CREATE_LEARNING_PATH } from './learningPath.actionTypes';
+import { CREATE_LEARNING_PATH, GET_LEARNING_PATHS, SET_CURRENT_PAGE } from './learningPath.actionTypes';
 
 import { LearningPathService } from 'services';
 
-import { CreateLearningPathPayloadDataType, CreateLearningPathActionReturnDataType } from './types';
+import { LearningPathsListAndRequestTypes } from 'constants/learningPath';
+
+import {
+  CreateLearningPathPayloadDataType,
+  CreateLearningPathActionReturnDataType,
+  IGetLearningPathsPayloadData,
+  IGetLearningPathsActionReturnData,
+} from './types';
+import { ILearningPath } from 'types';
 
 import { smthWentWrong } from 'constants/messages';
 
@@ -33,3 +41,31 @@ export const createLearningPath = createAsyncThunk<
     throw error.message as string;
   }
 });
+
+export const getLearningPaths = createAsyncThunk<IGetLearningPathsActionReturnData, IGetLearningPathsPayloadData>(
+  GET_LEARNING_PATHS,
+  async ({ learningPathsType, page = 1 }) => {
+    try {
+      const response = await LearningPathService.getLearningPaths<ILearningPath[]>(learningPathsType, page);
+
+      if (!response.data?.success) {
+        throw new Error(response.data.message || smthWentWrong);
+      }
+
+      return {
+        data: response.data.data.data,
+        pagination: response.data.data.pageInfo,
+        listType: LearningPathsListAndRequestTypes[learningPathsType],
+      };
+    } catch (error: any) {
+      console.log('createLearningPath', error);
+      toast.error(error.message, {
+        type: 'error',
+        hideProgressBar: true,
+      });
+      throw error.message as string;
+    }
+  }
+);
+
+export const setCurrentPage = createAction<number>(SET_CURRENT_PAGE);

@@ -13,3 +13,5 @@ export type DropdownPositionType =
   | 'top-right'
   | 'top-left'
   | 'top-center';
+
+export type PaginationItemSizeType = 'sm' | 'md' | 'lg';

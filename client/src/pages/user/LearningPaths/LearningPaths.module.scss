@@ -2,7 +2,14 @@
 
 .learning-paths {
   width: 100%;
-  @include flex(row, flex-start, flex-start); // TODO change with grid
+  @include flex(row, stretch, flex-start); // TODO change with grid
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.learning-paths__content {
+  width: 100%;
+  @include flex(row, stretch, flex-start); // TODO change with grid
   flex-wrap: wrap;
   gap: 1rem;
 }

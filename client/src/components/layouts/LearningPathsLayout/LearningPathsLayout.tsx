@@ -16,7 +16,7 @@ const LearningPathsLayout = () => {
           }
           to="/"
         >
-          <LinkButton className={styles['learning-paths-layout__nav-link-button']} variant="rounded">
+          <LinkButton className={styles['learning-paths-layout__nav-link-button']} variant="rounded" icon="laptop-file">
             My Learning Paths
           </LinkButton>
         </NavLink>
@@ -28,7 +28,7 @@ const LearningPathsLayout = () => {
           }
           to="/shared"
         >
-          <LinkButton className={styles['learning-paths-layout__nav-link-button']} variant="rounded">
+          <LinkButton className={styles['learning-paths-layout__nav-link-button']} variant="rounded" icon="user-group">
             Shared Learning Paths
           </LinkButton>
         </NavLink>

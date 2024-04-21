@@ -1,7 +1,9 @@
 import { ILearningPath, ILearningPathSendData } from 'types';
 
 export interface ILearningPathState {
-  list: ILearningPath[];
+  myList: ILearningPath[];
+  sharedList: ILearningPath[];
+  publicList: ILearningPath[];
   entry: ILearningPath | null;
   isLoading: boolean;
   error: string | null;

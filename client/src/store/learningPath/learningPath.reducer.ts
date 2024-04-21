@@ -5,7 +5,9 @@ import { createLearningPath } from './learningPath.actions';
 import { ILearningPathState } from './types';
 
 const initialState: ILearningPathState = {
-  list: [],
+  myList: [],
+  sharedList: [],
+  publicList: [],
   entry: null,
   isLoading: false,
   error: null,

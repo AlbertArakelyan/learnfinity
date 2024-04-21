@@ -15,6 +15,7 @@ const SelectContainer: FC<ISelectContainerProps> = ({
   labelClassName,
   optionsListClassName,
   label,
+  error,
   children,
 }) => {
   const {
@@ -66,6 +67,7 @@ const SelectContainer: FC<ISelectContainerProps> = ({
       dropdownRef={dropdownRef}
       selectedOptionRef={selectedOptionRef}
       label={label}
+      error={error}
     >
       {optionsContent}
     </Select>

@@ -1,0 +1,20 @@
+@import "/src/assets/styles/abstracts/mixins";
+
+.create-learning-path-modal {
+  @include flex(column, flex-start, flex-start);
+  row-gap: 2rem;
+}
+
+.create-learning-path-modal__textarea {
+  resize: none;
+  min-height: 10rem;
+  max-height: 10rem;
+}
+
+.create-learning-path-modal__input-label {
+  background-color: var(--card-color);
+}
+
+.create-learning-path-modal__button {
+  align-self: flex-end;
+}

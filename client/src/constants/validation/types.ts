@@ -5,5 +5,6 @@ export interface IValidationLength {
 }
 
 export interface IMinValidationLength {
+  min: 2;
   base: 8;
 }

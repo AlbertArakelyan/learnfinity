@@ -16,23 +16,25 @@ const Select: FC<ISelectProps> = ({
   dropdownRef,
   selectedOptionRef,
   label,
+  error,
   children,
 }) => {
   return (
     <div
-      className={`base-select-wrapper ${wrapperClassName}`}
+      className={`base-select-wrapper ${error ? 'base-select-wrapper--error' : ''} ${wrapperClassName}`}
       role="combobox"
       aria-expanded={isOpen}
       tabIndex={0}
       onKeyDown={handleKeyDown}
     >
       <button
-        className={`base-select ${className}`}
+        className={`base-select ${error ? 'base-select--error' : ''} ${className}`}
         onClick={handleToggle}
         aria-haspopup="listbox"
         aria-controls="options"
         id="select"
         ref={selectedOptionRef}
+        type="button"
       >
         {label && (
           <span
@@ -57,6 +59,11 @@ const Select: FC<ISelectProps> = ({
       >
         {children}
       </div>
+      {error && (
+        <span className="base-select__error-message" id="select-hint">
+          {error}
+        </span>
+      )}
     </div>
   );
 };

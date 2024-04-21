@@ -86,6 +86,11 @@ async function getPublicLearningPaths(skip, limit) {
     .sort({ createdAt: -1 });
 }
 
+async function getPublicLearningPathsCount() {
+  return await LearningPath
+    .countDocuments({ isCreatedInGroup: false, isPrivate: false });
+}
+
 /**
  * Retrieves the shared learning paths for a given user.
  *
@@ -197,6 +202,7 @@ module.exports = {
   getUserLearningPathsCount,
   getUserLearningPath,
   getPublicLearningPaths,
+  getPublicLearningPathsCount,
   getSharedLearningPaths,
   deleteLearningPath,
   getUsersCreatedLearningPath,

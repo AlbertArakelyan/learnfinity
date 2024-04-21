@@ -4,10 +4,12 @@ import { UseSelectContainerType } from './useSelectContainer';
 
 import { IOptionProps } from '../Option/types';
 
+export type SelectOnChangeType = (option: string | number) => void;
+
 export interface ISelectContainerProps extends PropsWithChildren {
-  selectedOption: string | null;
+  selectedOption: string | number | null;
   selectedOptionContent?: React.ReactElement<IOptionProps, string | React.JSXElementConstructor<any>> | null;
-  onChange: (option: string) => void;
+  onChange: SelectOnChangeType;
   className?: string;
   wrapperClassName?: string;
   optionsListClassName?: string;

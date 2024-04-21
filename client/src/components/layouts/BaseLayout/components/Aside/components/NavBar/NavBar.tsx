@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { Button } from 'components';
+import { Button, Modal, CreateLearningPathModal } from 'components';
 
 import { INavBarProps } from './types';
 
@@ -13,6 +13,9 @@ const NavBar: FC<INavBarProps> = ({ navLinksContent }) => {
         <Button variant="rounded">+ Add Path</Button>
       </div>
       <ul className={styles['nav-bar__links']}>{navLinksContent}</ul>
+      <Modal isOpen={true} title="Create Learning Path">
+        <CreateLearningPathModal />
+      </Modal>
     </nav>
   );
 };

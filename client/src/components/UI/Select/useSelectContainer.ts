@@ -1,12 +1,14 @@
 import { useState, useRef, useEffect, KeyboardEvent } from 'react';
 
-const useSelectContainer = (onChange: (option: string) => void) => {
+import { SelectOnChangeType } from './types';
+
+const useSelectContainer = (onChange: SelectOnChangeType) => {
   const [isOpen, setIsOpen] = useState(false);
   const [highlightedIndex, setHighlightedIndex] = useState<number | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const selectedOptionRef = useRef<HTMLButtonElement>(null);
 
-  const handleSelect = (option: string) => {
+  const handleSelect: SelectOnChangeType = (option: string | number) => {
     onChange(option);
     setIsOpen(false);
   };

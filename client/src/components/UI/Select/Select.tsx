@@ -33,6 +33,7 @@ const Select: FC<ISelectProps> = ({
         aria-controls="options"
         id="select"
         ref={selectedOptionRef}
+        type="button"
       >
         {label && (
           <span

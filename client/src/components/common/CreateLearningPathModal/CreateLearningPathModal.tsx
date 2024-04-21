@@ -15,6 +15,7 @@ const CreateLearningPathModal: FC<ICreateLearningPathModalProps> = ({
   control,
   getTagsInputValueArray,
   values,
+  isLoading,
 }) => {
   return (
     <form className={styles['create-learning-path-modal']} onSubmit={handleSubmit(handleFormSubmit)}>
@@ -72,7 +73,9 @@ const CreateLearningPathModal: FC<ICreateLearningPathModalProps> = ({
         control={control}
       />
 
-      <Button className={styles['create-learning-path-modal__button']}>Create</Button>
+      <Button className={styles['create-learning-path-modal__button']} isLoading={isLoading}>
+        Create
+      </Button>
     </form>
   );
 };

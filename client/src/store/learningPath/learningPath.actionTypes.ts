@@ -1,0 +1,1 @@
+export const CREATE_LEARNING_PATH = 'learningPath/CREATE_LEARNING_PATH';

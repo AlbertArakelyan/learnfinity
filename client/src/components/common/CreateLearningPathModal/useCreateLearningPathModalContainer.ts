@@ -1,11 +1,20 @@
+import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useAppDispatch, useAppSelector } from 'store/index';
+
+import { createLearningPath, selectIsLoading } from 'store/learningPath';
 
 import { learningPathSchema } from 'utils';
 
-import { ILearningPathCreateData } from 'types';
+import { ILearningPathCreateData, ILearningPathSendData } from 'types';
 
 const useCreateLearningPathModalContainer = () => {
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
+  const isLoading = useAppSelector(selectIsLoading);
+
   const {
     register,
     handleSubmit,
@@ -20,7 +29,20 @@ const useCreateLearningPathModalContainer = () => {
 
   const handleFormSubmit = (data: ILearningPathCreateData) => {
     // TODO if useParams(:groupId) then dispatch another action for creating learning path in group
-    console.log(data);
+    const sendData: ILearningPathSendData = {
+      ...data,
+      groupId: null,
+      isCreatedInGroup: false,
+      sharedUserIds: [],
+    };
+
+    dispatch(createLearningPath(sendData)).then((res: any) => {
+      if (!res.error) {
+        navigate({
+          search: '',
+        });
+      }
+    });
   };
 
   const getTagsInputValueArray = (value: string) => {
@@ -35,6 +57,7 @@ const useCreateLearningPathModalContainer = () => {
     control,
     getTagsInputValueArray,
     values,
+    isLoading,
   };
 };
 

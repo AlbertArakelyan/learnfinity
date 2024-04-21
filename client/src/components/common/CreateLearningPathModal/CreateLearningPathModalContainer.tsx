@@ -3,7 +3,7 @@ import CreateLearningPathModal from './CreateLearningPathModal';
 import useCreateLearningPathModalContainer from './useCreateLearningPathModalContainer';
 
 const CreateLearningPathModalContainer = () => {
-  const { register, errors, handleSubmit, handleFormSubmit, control, getTagsInputValueArray, values } =
+  const { register, errors, handleSubmit, handleFormSubmit, control, getTagsInputValueArray, values, isLoading } =
     useCreateLearningPathModalContainer();
 
   return (
@@ -15,6 +15,7 @@ const CreateLearningPathModalContainer = () => {
       control={control}
       getTagsInputValueArray={getTagsInputValueArray}
       values={values}
+      isLoading={isLoading}
     />
   );
 };

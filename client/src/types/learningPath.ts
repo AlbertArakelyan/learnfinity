@@ -20,3 +20,5 @@ export interface ILearningPath {
 }
 
 export type ILearningPathWithoutId = Omit<ILearningPath, '_id'>;
+
+export type ILearningPathSendData = Omit<ILearningPathWithoutId, 'userId' | 'created_at' | 'updated_at'>;

@@ -6,7 +6,7 @@ const learningPathSchema = Joi.object({
   isPrivate: Joi.boolean().required(),
   isCreatedInGroup: Joi.boolean().required(),
   userId: Joi.string().required(),
-  groupId: Joi.string(),
+  groupId: Joi.string().allow(null),
   tags: Joi.array().required(),
   sharedUserIds: Joi.array(),
 });

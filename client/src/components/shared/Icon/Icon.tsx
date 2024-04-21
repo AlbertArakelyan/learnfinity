@@ -17,6 +17,7 @@ import {
   ScrewdriverWrench,
   Logout,
   Lock,
+  LaptopFile,
 } from './icons';
 
 // Types
@@ -38,6 +39,7 @@ export const icons = {
   'screwdriver-wrench': ScrewdriverWrench,
   logout: Logout,
   lock: Lock,
+  'laptop-file': LaptopFile,
 };
 
 const Icon: FC<IIconProps> = ({ name, ...props }) => {

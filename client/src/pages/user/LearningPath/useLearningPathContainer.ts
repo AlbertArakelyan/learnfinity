@@ -1,4 +1,4 @@
-import { useLocation, useNavigation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 const useLearningPathContainer = () => {
   const location = useLocation();

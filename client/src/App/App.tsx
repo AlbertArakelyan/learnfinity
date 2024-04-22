@@ -14,13 +14,13 @@ const App: FC<IAppProps> = ({ theme, isUserAuth }) => {
       <Routes>
         {isUserAuth ? (
           <Route element={<BaseLayout />}>
-            <Route path="/" element={<LearningPathsLayout />}>
-              <Route path="/" element={<LearningPaths />} />
-              <Route path="/shared" element={<LearningPaths />} />
-              <Route path="/public" element={<LearningPaths />} />
-              <Route path="/:learningPathId" element={<LearningPath />} />
+            <Route path="/learning-paths" element={<LearningPathsLayout />}>
+              <Route path="/learning-paths" element={<LearningPaths />} />
+              <Route path="/learning-paths/shared" element={<LearningPaths />} />
+              <Route path="/learning-paths/public" element={<LearningPaths />} />
+              <Route path="/learning-paths/:learningPathId" element={<LearningPath />} />
             </Route>
-            <Route path="/*" element={<Navigate to="/" replace />} />
+            <Route path="/*" element={<Navigate to="/learning-paths" replace />} />
           </Route>
         ) : (
           <Route element={<AuthLayout />}>

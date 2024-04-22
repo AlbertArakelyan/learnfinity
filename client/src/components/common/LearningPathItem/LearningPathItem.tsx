@@ -9,7 +9,7 @@ import styles from './LearningPathItem.module.scss';
 
 const LearningPathItem: FC<ILearningPathItemProps> = ({ name, description, id }) => {
   return (
-    <Link className={styles['learning-path-item']} to={`/${id}`}>
+    <Link className={styles['learning-path-item']} to={`/learning-paths/${id}`}>
       <button className={styles['learning-path-item__header']}>
         <h3 className={styles['learning-path-item__title']}>{name}</h3>
         <p className={styles['learning-path-item__description']}>{description}</p>

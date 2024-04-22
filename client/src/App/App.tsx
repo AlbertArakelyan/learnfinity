@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 
-import { Auth, VerifyEmail, ForgotPassword, ResetPassword, LearningPaths } from 'pages';
+import { Auth, VerifyEmail, ForgotPassword, ResetPassword, LearningPaths, LearningPath } from 'pages';
 
 import { BaseLayout, AuthLayout, LearningPathsLayout } from 'components';
 
@@ -18,6 +18,7 @@ const App: FC<IAppProps> = ({ theme, isUserAuth }) => {
               <Route path="/" element={<LearningPaths />} />
               <Route path="/shared" element={<LearningPaths />} />
               <Route path="/public" element={<LearningPaths />} />
+              <Route path="/:learningPathId" element={<LearningPath />} />
             </Route>
             <Route path="/*" element={<Navigate to="/" replace />} />
           </Route>

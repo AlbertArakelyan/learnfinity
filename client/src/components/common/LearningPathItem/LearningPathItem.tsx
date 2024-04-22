@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { Link } from 'react-router-dom';
 
 import { Icon } from 'components';
 
@@ -8,7 +9,7 @@ import styles from './LearningPathItem.module.scss';
 
 const LearningPathItem: FC<ILearningPathItemProps> = ({ name, description, id }) => {
   return (
-    <div className={styles['learning-path-item']}>
+    <Link className={styles['learning-path-item']} to={`/${id}`}>
       <button className={styles['learning-path-item__header']}>
         <h3 className={styles['learning-path-item__title']}>{name}</h3>
         <p className={styles['learning-path-item__description']}>{description}</p>
@@ -21,7 +22,7 @@ const LearningPathItem: FC<ILearningPathItemProps> = ({ name, description, id })
           <Icon className={styles['learning-path-item__action-icon']} name="delete" />
         </button>
       </div>
-    </div>
+    </Link>
   );
 };
 

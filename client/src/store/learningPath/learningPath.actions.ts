@@ -88,7 +88,6 @@ export const getUserLearningPath = createAsyncThunk<IGetLearningPathActionReturn
       }
 
       if (!learningPathItemsResponse.data?.success) {
-        // throw new Error(learningPathItemsResponse.data.message || smthWentWrong);
         toast.error(learningPathItemsResponse.data.message, {
           type: 'error',
           hideProgressBar: true,

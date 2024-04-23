@@ -9,8 +9,8 @@ export interface ILearningPathState {
   };
   pagination: IPageInfo;
   currentPage: number;
-  entry: ILearningPath | null; // learningPathItems
-  entryItems: ILearningPathItem[];
+  entry: ILearningPath | null;
+  entryItems: ILearningPathItem[]; // learningPathItems
   isLoading: {
     createLearningPath: boolean;
     getLearningPaths: boolean;

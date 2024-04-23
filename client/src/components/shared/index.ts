@@ -3,3 +3,4 @@ export { default as Icon } from './Icon';
 export { default as Avatar } from './Avatar';
 export { default as Modal } from './Modal';
 export { default as LoadingScreen } from './LoadingScreen';
+export { default as ItemNotFound } from './ItemNotFound';

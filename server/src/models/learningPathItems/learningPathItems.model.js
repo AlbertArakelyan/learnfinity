@@ -36,11 +36,9 @@ async function createLearningPathItem(learningPathItem) {
  * @param {number} limit - The maximum number of documents to return.
  * @return {Promise<Array>} A promise that resolves to an array of learning path items.
  */
-async function getLearningPathItems(learningPathId, skip, limit) {
+async function getLearningPathItems(learningPathId) {
   return await LearningPathItem
     .find({ learningPathId })
-    .skip(skip)
-    .limit(limit)
     .sort({ createdAt: -1 });
 }
 

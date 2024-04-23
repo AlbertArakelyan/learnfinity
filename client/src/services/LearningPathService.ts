@@ -16,6 +16,14 @@ class LearningPathService {
       `learning-paths/${GetLearningPathsRequestType}?page=${page}&limit=${limit}`
     );
   }
+
+  static getUserLearningPath<T>(learningPathId: string) {
+    return request<IResponseData<T>>('GET', `learning-paths/${learningPathId}`);
+  }
+
+  static getUserLearningPathItems<T>(learningPathId: string) {
+    return request<IResponseData<T>>('GET', `learning-path-items/${learningPathId}`);
+  }
 }
 
 export default LearningPathService;

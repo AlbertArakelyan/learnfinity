@@ -14,7 +14,8 @@ const LearningPathsLayout = () => {
               ? `${styles['learning-paths-layout__nav-link']} ${styles['learning-paths-layout__nav-link--active']}`
               : styles['learning-paths-layout__nav-link']
           }
-          to="/"
+          to="/learning-paths"
+          end
         >
           <LinkButton className={styles['learning-paths-layout__nav-link-button']} variant="rounded" icon="laptop-file">
             My Learning Paths
@@ -26,7 +27,8 @@ const LearningPathsLayout = () => {
               ? `${styles['learning-paths-layout__nav-link']} ${styles['learning-paths-layout__nav-link--active']}`
               : styles['learning-paths-layout__nav-link']
           }
-          to="/shared"
+          to="/learning-paths/shared"
+          end
         >
           <LinkButton className={styles['learning-paths-layout__nav-link-button']} variant="rounded" icon="user-group">
             Shared Learning Paths
@@ -38,7 +40,8 @@ const LearningPathsLayout = () => {
               ? `${styles['learning-paths-layout__nav-link']} ${styles['learning-paths-layout__nav-link--active']}`
               : styles['learning-paths-layout__nav-link']
           }
-          to="/public"
+          to="/learning-paths/public"
+          end
         >
           <LinkButton className={styles['learning-paths-layout__nav-link-button']} variant="rounded" icon="globe">
             Public Learning Paths

@@ -32,6 +32,8 @@
   --auth-container-border-color: var(--primary);
   --input-border-color: #A2ACC0;
   --input-border-focus-color: #1665D8;
+  --separator-border-color: rgba(0, 0, 0, .12);
+  --learning-path-item-dot-border-color: var(--primary-alpha);
 
   // Natural colors
   --white: #FFFFFF;
@@ -68,6 +70,7 @@
   // Border colors
   --input-border-color: #F0F0F0;
   --input-border-focus-color: #478dfe;
+  --separator-border-color: rgba(255, 255, 255, .2);
 
   // Natural colors
   --gray: #767676;

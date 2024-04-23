@@ -1,0 +1,16 @@
+.item__not-found {
+  @include flex(column, center, center);
+  padding: 2rem 0;
+  background-color: var(--card-color); // Maybe --danger-alpha
+  border-radius: 0.375rem;
+  box-shadow: 0 0 5px var(--shadow-md-color);
+}
+
+.item__not-found-title {
+  @include font(1.5rem, 700, var(--danger), center);
+}
+
+.item__not-found-description {
+  @include font(1.2rem, 400, var(--primary-text-color), center);
+  margin-top: 1rem;
+}

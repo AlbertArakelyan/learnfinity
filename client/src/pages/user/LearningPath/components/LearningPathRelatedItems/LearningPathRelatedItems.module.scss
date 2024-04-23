@@ -1,0 +1,15 @@
+.learning-path__related-items {
+  position: relative;
+  padding: 2rem 0;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: .5rem;
+    height: 100%;
+    background-color: var(--separator-border-color);
+    border-radius: .375rem;
+  }
+}

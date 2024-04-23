@@ -80,13 +80,13 @@ async function httpGetUserLearningPathItems(req, res) {
       });
     }
 
-    const { page, limit: perPage } = req.query;
-    const { skip, limit } = getPagination(req.query);
+    // const { page, limit: perPage } = req.query;
+    // const { skip, limit } = getPagination(req.query);
 
-    const learningPathItems = await getLearningPathItems(learningPathId, skip, limit);
-    const paginatedLearningPathItems = getPaginatedDate(learningPathItems, page, perPage);
+    const learningPathItems = await getLearningPathItems(learningPathId);
+    // const paginatedLearningPathItems = getPaginatedDate(learningPathItems, page, perPage);
 
-    if (!paginatedLearningPathItems.data?.length) {
+    if (!learningPathItems?.length) {
       return res.status(httpStatuses.notFound).json({
         success: false,
         message: learningPathItemControllerMessages.learningPathItemsNotFound,
@@ -96,7 +96,7 @@ async function httpGetUserLearningPathItems(req, res) {
 
     return res.status(httpStatuses.ok).json({
       success: true,
-      data: paginatedLearningPathItems,
+      data: learningPathItems,
       message: learningPathItemControllerMessages.learningPathItemsReceived,
       statusCode: httpStatuses.ok,
     });

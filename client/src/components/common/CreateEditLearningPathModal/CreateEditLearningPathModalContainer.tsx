@@ -1,13 +1,13 @@
-import CreateLearningPathModal from './CreateLearningPathModal';
+import CreateEditLearningPathModal from './CreateEditLearningPathModal';
 
-import useCreateLearningPathModalContainer from './useCreateLearningPathModalContainer';
+import useCreateEditLearningPathModalContainer from './useCreateEditLearningPathModalContainer';
 
-const CreateLearningPathModalContainer = () => {
+const CreateEditLearningPathModalContainer = () => {
   const { register, errors, handleSubmit, handleFormSubmit, control, getTagsInputValueArray, values, isLoading } =
-    useCreateLearningPathModalContainer();
+    useCreateEditLearningPathModalContainer();
 
   return (
-    <CreateLearningPathModal
+    <CreateEditLearningPathModal
       register={register}
       errors={errors}
       handleSubmit={handleSubmit}
@@ -20,4 +20,4 @@ const CreateLearningPathModalContainer = () => {
   );
 };
 
-export default CreateLearningPathModalContainer;
+export default CreateEditLearningPathModalContainer;

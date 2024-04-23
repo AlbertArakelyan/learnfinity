@@ -5,9 +5,9 @@ import { Select, Option, Input, Textarea, Button } from 'components';
 
 import { ICreateLearningPathModalProps } from './types';
 
-import styles from './CreateLearningPathModal.module.scss';
+import styles from './CreateEditLearningPathModal.module.scss';
 
-const CreateLearningPathModal: FC<ICreateLearningPathModalProps> = ({
+const CreateEditLearningPathModal: FC<ICreateLearningPathModalProps> = ({
   register,
   errors,
   handleSubmit,
@@ -80,4 +80,4 @@ const CreateLearningPathModal: FC<ICreateLearningPathModalProps> = ({
   );
 };
 
-export default CreateLearningPathModal;
+export default CreateEditLearningPathModal;

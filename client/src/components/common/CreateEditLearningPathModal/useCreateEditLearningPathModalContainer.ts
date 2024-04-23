@@ -9,7 +9,7 @@ import { learningPathSchema } from 'utils';
 
 import { ILearningPathCreateData, ILearningPathSendData } from 'types';
 
-const useCreateLearningPathModalContainer = () => {
+const useCreateEditLearningPathModalContainer = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
@@ -61,6 +61,6 @@ const useCreateLearningPathModalContainer = () => {
   };
 };
 
-export type UseCreateLearningPathModalContainerType = ReturnType<typeof useCreateLearningPathModalContainer>;
+export type UseCreateEditLearningPathModalContainerType = ReturnType<typeof useCreateEditLearningPathModalContainer>;
 
-export default useCreateLearningPathModalContainer;
+export default useCreateEditLearningPathModalContainer;

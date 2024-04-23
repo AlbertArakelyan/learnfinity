@@ -44,6 +44,21 @@
   @include font(0.875rem, 400, var(--secondary-text-color));
 }
 
+.learning-path-item__tags {
+  margin-top: 0.875rem;
+  padding: 0 1rem;
+  @include flex(row, flex-start, flex-start, wrap);
+  gap: 0.5rem;
+}
+
+.learning-path-item__tag {
+  box-shadow: 0 0 5px var(--shadow-md-color);
+  border-radius: 0.375rem;
+  padding: 0.5rem 0.75rem;
+  background-color: var(--primary-alpha);
+  @include font(0.875rem, 400, var(--primary-text-color));
+}
+
 .learning-path-item__actions-bar {
   width: 100%;
   @include flex(row, center, flex-start);

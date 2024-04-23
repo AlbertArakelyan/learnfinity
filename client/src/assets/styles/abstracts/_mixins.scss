@@ -1,8 +1,9 @@
-@mixin flex($direction: row, $align: stretch, $justify: flex-start) {
+@mixin flex($direction: row, $align: stretch, $justify: flex-start, $wrap: nowrap) {
   display: flex;
   flex-direction: $direction;
   align-items: $align;
   justify-content: $justify;
+  flex-wrap: $wrap;
 }
 
 @mixin border($side: all, $color: var(--border-color), $width: 0.0625rem, $type: solid) {

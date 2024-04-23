@@ -3,9 +3,9 @@ import LearningPath from './LearningPath';
 import useLearningPathContainer from './useLearningPathContainer';
 
 const LearningPathContainer = () => {
-  useLearningPathContainer();
+  const { learningPath, isLoadingGetLearningPath } = useLearningPathContainer();
 
-  return <LearningPath />;
+  return <LearningPath learningPath={learningPath} isLoadingGetLearningPath={isLoadingGetLearningPath} />;
 };
 
 export default LearningPathContainer;

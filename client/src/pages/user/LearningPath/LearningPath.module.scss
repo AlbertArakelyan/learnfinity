@@ -1,0 +1,10 @@
+@import "/src/assets/styles/abstracts/mixins";
+
+.learning-path__title {
+  @include font(2.5rem, 700, var(--primary-text-color), left);
+  margin-bottom: 1.5rem;
+}
+
+.learning-path__info {
+  margin-bottom: 2rem;
+}

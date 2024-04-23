@@ -19,6 +19,7 @@ import {
   Lock,
   LaptopFile,
   Globe,
+  Link,
 } from './icons';
 
 // Types
@@ -42,6 +43,7 @@ export const icons = {
   lock: Lock,
   'laptop-file': LaptopFile,
   globe: Globe,
+  link: Link,
 };
 
 const Icon: FC<IIconProps> = ({ name, ...props }) => {

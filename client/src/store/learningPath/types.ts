@@ -1,4 +1,4 @@
-import { ILearningPath, ILearningPathSendData, GetLearningPathsRequestType } from 'types';
+import { ILearningPath, ILearningPathSendData, GetLearningPathsRequestType, ILearningPathItem } from 'types';
 import { IPageInfo } from 'services/types';
 
 export interface ILearningPathState {
@@ -9,10 +9,12 @@ export interface ILearningPathState {
   };
   pagination: IPageInfo;
   currentPage: number;
-  entry: ILearningPath | null;
+  entry: ILearningPath | null; // learningPathItems
+  entryItems: ILearningPathItem[];
   isLoading: {
     createLearningPath: boolean;
     getLearningPaths: boolean;
+    getLearningPath: boolean;
   };
   error: string | null;
 }
@@ -36,4 +38,12 @@ export interface IGetLearningPathsActionReturnData {
   data: ILearningPath[];
   pagination: IPageInfo;
   listType: keyof ILearningPathState['lists'];
+}
+
+/**
+ * getLearningPath Action Types
+ */
+export interface IGetLearningPathActionReturnData {
+  learningPath: ILearningPath;
+  learningPathItems: ILearningPathItem[];
 }

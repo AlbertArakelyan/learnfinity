@@ -1,11 +1,28 @@
-import { useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from 'store/index';
+
+import { getUserLearningPath, selectEntry, selectIsLoadingGetLearningPath } from 'store/learningPath';
 
 const useLearningPathContainer = () => {
-  const location = useLocation();
+  const { learningPathId } = useParams();
+  const dispatch = useAppDispatch();
 
-  console.log(location);
+  const learningPath = useAppSelector(selectEntry);
+  const isLoadingGetLearningPath = useAppSelector(selectIsLoadingGetLearningPath);
 
-  return {};
+  useEffect(() => {
+    if (learningPathId) {
+      dispatch(getUserLearningPath(learningPathId));
+    }
+  }, []);
+
+  return {
+    learningPath,
+    isLoadingGetLearningPath,
+  };
 };
+
+export type UseLearningPathContainerType = ReturnType<typeof useLearningPathContainer>;
 
 export default useLearningPathContainer;

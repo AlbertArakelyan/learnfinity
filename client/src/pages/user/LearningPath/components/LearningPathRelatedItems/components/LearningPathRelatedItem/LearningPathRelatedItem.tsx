@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { Icon } from 'components';
+import { Icon, LinkButton } from 'components';
 
 import { ILearningPathRelatedItemProps } from './types';
 
@@ -16,9 +16,18 @@ const LearningPathRelatedItem: FC<ILearningPathRelatedItemProps> = ({
 }) => {
   return (
     <li className={styles['learning-path__related-item']}>
-      <h3 className={styles['learning-path__related-item-title']}>
-        {number}. {name}
-      </h3>
+      <div className={styles['learning-path__related-item-top-bar']}>
+        <h3 className={styles['learning-path__related-item-title']}>
+          {number}. {name}
+        </h3>
+        {/*TODO show the block below only to the owner of the learning path*/}
+        <div className={styles['learning-path__related-item-actions']}>
+          <LinkButton icon="edit">Edit</LinkButton>
+          <LinkButton icon="delete" color="danger">
+            Delete
+          </LinkButton>
+        </div>
+      </div>
       <p className={styles['learning-path__related-item-description']}>{description}</p>
       <p className={styles['learning-path__related-item-instructions']}>
         <span className={styles['learning-path__related-item-instructions-text']}>Instructions: </span> {instructions}

@@ -20,6 +20,7 @@ import {
   LaptopFile,
   Globe,
   Link,
+  Plus,
 } from './icons';
 
 // Types
@@ -44,6 +45,7 @@ export const icons = {
   'laptop-file': LaptopFile,
   globe: Globe,
   link: Link,
+  plus: Plus,
 };
 
 const Icon: FC<IIconProps> = ({ name, ...props }) => {

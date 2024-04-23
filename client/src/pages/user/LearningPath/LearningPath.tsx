@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { LoadingScreen, ItemNotFound } from 'components';
+import { LoadingScreen, ItemNotFound, LinkButton } from 'components';
 import { LearningPathRelatedItems } from './components';
 
 import { ILearningPathProps } from './types';
@@ -13,7 +13,21 @@ const LearningPath: FC<ILearningPathProps> = ({ learningPath, isLoadingGetLearni
       {learningPath ? (
         <div className={styles['learning-path']}>
           <div className={styles['learning-path__info']}>
-            <h2 className={styles['learning-path__title']}>{learningPath.name}</h2>
+            <div className={styles['learning-path__top-bar']}>
+              <h2 className={styles['learning-path__title']}>{learningPath.name}</h2>
+              {/*TODO show the block below only to the owner of the learning path*/}
+              <div className={styles['learning-path__top-bar__actions']}>
+                <LinkButton className={styles['learning-path__top-bar__action']} icon="plus">
+                  Add Item
+                </LinkButton>
+                <LinkButton className={styles['learning-path__top-bar__action']} icon="edit">
+                  Edit
+                </LinkButton>
+                <LinkButton className={styles['learning-path__top-bar__action']} icon="delete" color="danger">
+                  Delete
+                </LinkButton>
+              </div>
+            </div>
             <p className={styles['learning-path__description']}>{learningPath.description}</p>
           </div>
           <LearningPathRelatedItems />

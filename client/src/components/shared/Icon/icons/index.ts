@@ -16,3 +16,4 @@ export { default as Lock } from './Lock';
 export { default as LaptopFile } from './LaptopFile';
 export { default as Globe } from './Globe';
 export { default as Link } from './Link';
+export { default as Plus } from './Plus';

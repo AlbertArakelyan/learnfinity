@@ -16,9 +16,11 @@ const AddEditLearningPathRelatedItemModal: FC<IAddEditLearningPathRelatedItemMod
   handleSubmit,
   handleFormSubmit,
   isLoadingCreateEditLearningPath,
+  isEditingLearningPathItem,
 }) => {
   return (
     <form className={styles['add-edit-learning-path-related-item-modal']} onSubmit={handleSubmit(handleFormSubmit)}>
+      {/*TODO change also title of the modal*/}
       <Input
         labelClassName={styles['add-edit-learning-path-related-item-modal__label']}
         label="Name"
@@ -94,7 +96,7 @@ const AddEditLearningPathRelatedItemModal: FC<IAddEditLearningPathRelatedItemMod
         className={styles['add-edit-learning-path-related-item-modal__button']}
         isLoading={isLoadingCreateEditLearningPath}
       >
-        Create
+        {isEditingLearningPathItem ? 'Edit Item' : 'Add Item'}
       </Button>
     </form>
   );

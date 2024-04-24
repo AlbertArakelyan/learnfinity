@@ -33,3 +33,8 @@ export const selectTotalPages = createSelector(userState, ({ pagination }) => pa
 export const selectEntry = createSelector(userState, ({ entry }) => entry);
 
 export const selectEntryItems = createSelector(userState, ({ entryItems }) => entryItems);
+
+export const selectEditingLearningPathItem = createSelector(
+  userState,
+  ({ editingLearningPathItem }) => editingLearningPathItem
+);

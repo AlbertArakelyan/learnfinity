@@ -8,7 +8,7 @@ const LearningPathContainer = () => {
     isLoadingGetLearningPath,
     isLoadingDeleteLearningPath,
     isLearningPathDeleteModalOpen,
-    isAddLearningPathItemModalOpen,
+    isAddEditLearningPathItemModalOpen,
     handleLearningPathEditClick,
     handleDeleteLearningPathClick,
     onDeleteLearningPath,
@@ -23,7 +23,7 @@ const LearningPathContainer = () => {
       isLoadingGetLearningPath={isLoadingGetLearningPath}
       isLoadingDeleteLearningPath={isLoadingDeleteLearningPath}
       isLearningPathDeleteModalOpen={isLearningPathDeleteModalOpen}
-      isAddLearningPathItemModalOpen={isAddLearningPathItemModalOpen}
+      isAddEditLearningPathItemModalOpen={isAddEditLearningPathItemModalOpen}
       handleLearningPathEditClick={handleLearningPathEditClick}
       handleDeleteLearningPathClick={handleDeleteLearningPathClick}
       onDeleteLearningPath={onDeleteLearningPath}

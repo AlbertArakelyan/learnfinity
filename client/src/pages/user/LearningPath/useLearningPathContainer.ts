@@ -9,6 +9,7 @@ import {
   selectEntry,
   selectIsLoadingGetLearningPath,
   selectIsLoadingDeleteLearningPath,
+  selectEditingLearningPathItem,
 } from 'store/learningPath';
 
 import { useQuery } from 'hooks';
@@ -27,7 +28,7 @@ const useLearningPathContainer = () => {
   const isLoadingDeleteLearningPath = useAppSelector(selectIsLoadingDeleteLearningPath);
 
   const isLearningPathDeleteModalOpen = query.get(Queries.deleteLearningPathId) === learningPathId;
-  const isAddLearningPathItemModalOpen = query.get(Queries.addLearningPathItem) === ModalQueryStates.true;
+  const isAddEditLearningPathItemModalOpen = query.get(Queries.addEditLearningPathItem) === ModalQueryStates.true;
 
   const handleLearningPathEditClick = () => {
     if (learningPathId) {
@@ -63,7 +64,7 @@ const useLearningPathContainer = () => {
   const handleAddItemClick = () => {
     if (learningPathId) {
       navigate({
-        search: `?${Queries.addLearningPathItem}=${ModalQueryStates.true}`,
+        search: `?${Queries.addEditLearningPathItem}=${ModalQueryStates.true}`,
       });
     }
   };
@@ -83,7 +84,7 @@ const useLearningPathContainer = () => {
     isLoadingGetLearningPath,
     isLoadingDeleteLearningPath,
     isLearningPathDeleteModalOpen,
-    isAddLearningPathItemModalOpen,
+    isAddEditLearningPathItemModalOpen,
     handleLearningPathEditClick,
     handleDeleteLearningPathClick,
     onDeleteLearningPath,

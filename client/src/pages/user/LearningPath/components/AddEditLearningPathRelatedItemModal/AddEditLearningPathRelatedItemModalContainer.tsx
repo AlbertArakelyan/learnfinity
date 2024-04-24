@@ -3,8 +3,16 @@ import AddEditLearningPathRelatedItemModal from './AddEditLearningPathRelatedIte
 import useAddEditLearningPathRelatedItemModalContainer from './useAddEditLearningPathRelatedItemModalContainer';
 
 const AddEditLearningPathRelatedItemModalContainer = () => {
-  const { register, control, errors, values, handleSubmit, handleFormSubmit, isLoadingCreateEditLearningPath } =
-    useAddEditLearningPathRelatedItemModalContainer();
+  const {
+    register,
+    control,
+    errors,
+    values,
+    handleSubmit,
+    handleFormSubmit,
+    isLoadingCreateEditLearningPath,
+    isEditingLearningPathItem,
+  } = useAddEditLearningPathRelatedItemModalContainer();
 
   return (
     <AddEditLearningPathRelatedItemModal
@@ -15,6 +23,7 @@ const AddEditLearningPathRelatedItemModalContainer = () => {
       handleSubmit={handleSubmit}
       handleFormSubmit={handleFormSubmit}
       isLoadingCreateEditLearningPath={isLoadingCreateEditLearningPath}
+      isEditingLearningPathItem={isEditingLearningPathItem}
     />
   );
 };

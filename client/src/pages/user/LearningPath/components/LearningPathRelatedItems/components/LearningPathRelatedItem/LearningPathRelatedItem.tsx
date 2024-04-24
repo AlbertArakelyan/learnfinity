@@ -13,6 +13,7 @@ const LearningPathRelatedItem: FC<ILearningPathRelatedItemProps> = ({
   type,
   sourceUrl,
   number = 1,
+  handleLearningLearningPathItemEditClick,
 }) => {
   return (
     <li className={styles['learning-path__related-item']}>
@@ -22,7 +23,9 @@ const LearningPathRelatedItem: FC<ILearningPathRelatedItemProps> = ({
         </h3>
         {/*TODO show the block below only to the owner of the learning path*/}
         <div className={styles['learning-path__related-item-actions']}>
-          <LinkButton icon="edit">Edit</LinkButton>
+          <LinkButton icon="edit" onClick={handleLearningLearningPathItemEditClick}>
+            Edit
+          </LinkButton>
           <LinkButton icon="delete" color="danger">
             Delete
           </LinkButton>

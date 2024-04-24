@@ -17,6 +17,7 @@ export interface ILearningPathState {
   currentPage: number;
   entry: ILearningPath | null;
   entryItems: ILearningPathItem[]; // learningPathItems
+  editingLearningPathItem: ILearningPathItem | null;
   isLoading: {
     createEditLearningPath: boolean;
     getLearningPaths: boolean;
@@ -83,4 +84,15 @@ export type CreateUserLearningPathItemReturnDataType = ILearningPathItem;
 export interface ICreateUserLearningPathItemPayloadData {
   learningPathId: string;
   data: ILearningPathItemData;
+}
+
+/**
+ * editUserLearningPathItem Action Types
+ */
+export type EditUserLearningPathItemReturnDataType = ILearningPathItem;
+
+export interface IEditUserLearningPathItemPayloadData {
+  learningPathId: string;
+  learningPathItemId: string;
+  learningPathItemData: ILearningPathItemData;
 }

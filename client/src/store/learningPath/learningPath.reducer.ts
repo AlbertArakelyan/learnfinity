@@ -7,7 +7,10 @@ import {
   updateUserLearningPath,
   deleteUserLearningPath,
   createUserLearningPathItem,
+  editUserLearningPathItem,
   resetLearningPath,
+  setEditingLearningPathItem,
+  resetEditingLearningPathItem,
   setLearningPath,
   setCurrentPage,
 } from './learningPath.actions';
@@ -28,6 +31,7 @@ const initialState: ILearningPathState = {
   currentPage: 1,
   entry: null,
   entryItems: [],
+  editingLearningPathItem: null,
   isLoading: {
     createEditLearningPath: false,
     getLearningPaths: false,
@@ -151,6 +155,27 @@ const learningPathReducer = createReducer(initialState, (builder) => {
       state.error = action.error?.message as string;
     })
 
+    // editUserLearningPathItem
+    .addCase(editUserLearningPathItem.fulfilled, (state, action) => {
+      state.entryItems = state.entryItems.map((item) => {
+        if (item._id === action.payload._id) {
+          return action.payload;
+        }
+
+        return item;
+      });
+      state.isLoading.createEditLearningPath = false;
+      state.error = null;
+    })
+    .addCase(editUserLearningPathItem.pending, (state) => {
+      state.isLoading.createEditLearningPath = true;
+      state.error = null;
+    })
+    .addCase(editUserLearningPathItem.rejected, (state, action) => {
+      state.isLoading.createEditLearningPath = false;
+      state.error = action.error?.message as string;
+    })
+
     // setLearningPath
     .addCase(setLearningPath, (state, action) => {
       state.entry = state.lists.myList.find((learningPath) => learningPath._id === action.payload) || null;
@@ -159,6 +184,16 @@ const learningPathReducer = createReducer(initialState, (builder) => {
     // resetLearningPath
     .addCase(resetLearningPath, (state) => {
       state.entry = null;
+    })
+
+    // setEditingLearningPathItem
+    .addCase(setEditingLearningPathItem, (state, action) => {
+      state.editingLearningPathItem = state.entryItems.find((item) => item._id === action.payload) || null;
+    })
+
+    // resetEditingLearningPathItem
+    .addCase(resetEditingLearningPathItem, (state) => {
+      state.editingLearningPathItem = null;
     })
 
     // setCurrentPage

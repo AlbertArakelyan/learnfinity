@@ -12,7 +12,7 @@ const LearningPath: FC<ILearningPathProps> = ({
   isLoadingGetLearningPath,
   isLoadingDeleteLearningPath,
   isLearningPathDeleteModalOpen,
-  isAddLearningPathItemModalOpen,
+  isAddEditLearningPathItemModalOpen,
   handleLearningPathEditClick,
   handleDeleteLearningPathClick,
   onDeleteLearningPath,
@@ -65,7 +65,7 @@ const LearningPath: FC<ILearningPathProps> = ({
             isLoading={isLoadingDeleteLearningPath}
           />
           <Modal
-            isOpen={isAddLearningPathItemModalOpen}
+            isOpen={isAddEditLearningPathItemModalOpen}
             title="Create Learning Path Item"
             onClose={handleAddItemModalClose}
           >

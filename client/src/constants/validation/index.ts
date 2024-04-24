@@ -33,3 +33,9 @@ export const minLengthMessage = {
   min: generateMinLengthMessage('min'),
   base: generateMinLengthMessage('base'),
 } as const;
+
+export const urlRegex = /\b((?:https?|ftp):\/\/[\w-]+(\.[\w-]+)+([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?)/;
+
+export const regexMessages = {
+  url: 'Invalid URL',
+};

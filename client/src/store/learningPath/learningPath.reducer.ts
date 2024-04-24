@@ -5,6 +5,7 @@ import {
   getLearningPaths,
   getUserLearningPath,
   updateUserLearningPath,
+  deleteUserLearningPath,
   resetLearningPath,
   setLearningPath,
   setCurrentPage,
@@ -30,6 +31,7 @@ const initialState: ILearningPathState = {
     createEditLearningPath: false,
     getLearningPaths: false,
     getLearningPath: false,
+    deleteLearningPath: false,
   },
   error: null,
 };
@@ -114,6 +116,22 @@ const learningPathReducer = createReducer(initialState, (builder) => {
     })
     .addCase(updateUserLearningPath.rejected, (state, action) => {
       state.isLoading.createEditLearningPath = false;
+      state.error = action.error?.message as string;
+    })
+
+    // deleteUserLearningPath
+    .addCase(deleteUserLearningPath.fulfilled, (state, action) => {
+      state.lists.myList = state.lists.myList.filter((learningPath) => learningPath._id !== action.payload.id);
+      state.isLoading.deleteLearningPath = false;
+      state.error = null;
+    })
+    .addCase(deleteUserLearningPath.pending, (state) => {
+      state.isLoading.deleteLearningPath = true;
+      state.error = null;
+    })
+    .addCase(deleteUserLearningPath.rejected, (state, action) => {
+      state.entry = null;
+      state.isLoading.deleteLearningPath = false;
       state.error = action.error?.message as string;
     })
 

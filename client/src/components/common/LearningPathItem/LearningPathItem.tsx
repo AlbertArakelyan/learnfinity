@@ -1,19 +1,23 @@
 import { FC } from 'react';
-import { Link } from 'react-router-dom';
 
-import { Icon } from 'components';
+import { Icon, ConfirmModal } from 'components';
 
 import { ILearningPathItemProps } from './types';
 
 import styles from './LearningPathItem.module.scss';
 
 const LearningPathItem: FC<ILearningPathItemProps> = ({
+  id,
   name,
   description,
   tagsContent,
   handleLearningPathClick,
   handleEditLearningPathClick,
-  id,
+  handleDeleteLearningPathClick,
+  isDeleteLearningPathModalOpen,
+  isLoadingDeleteLearningPath,
+  onDeleteLearningPath,
+  onCancelDeleteLearningPath,
 }) => {
   return (
     <div className={styles['learning-path-item']} onClick={() => handleLearningPathClick(id)}>
@@ -33,10 +37,18 @@ const LearningPathItem: FC<ILearningPathItemProps> = ({
         >
           <Icon className={styles['learning-path-item__action-icon']} name="edit" />
         </button>
-        <button className={styles['learning-path-item__action']}>
+        <button className={styles['learning-path-item__action']} onClick={handleDeleteLearningPathClick}>
           <Icon className={styles['learning-path-item__action-icon']} name="delete" />
         </button>
       </div>
+      <ConfirmModal
+        title="Confirm Delete"
+        description="Are you sure you want to delete this learning path?"
+        isOpen={isDeleteLearningPathModalOpen}
+        isLoading={isLoadingDeleteLearningPath}
+        onConfirm={onDeleteLearningPath}
+        onCancel={onCancelDeleteLearningPath}
+      />
     </div>
   );
 };

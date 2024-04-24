@@ -9,7 +9,15 @@ import { ILearningPathItemContainerProps } from './types';
 import styles from './LearningPathItem.module.scss';
 
 const LearningPathItemContainer: FC<ILearningPathItemContainerProps> = ({ name, description, tags, id }) => {
-  const { handleLearningPathClick, handleEditLearningPathClick } = useLearningPathItemContainer();
+  const {
+    handleLearningPathClick,
+    handleEditLearningPathClick,
+    handleDeleteLearningPathClick,
+    isDeleteLearningPathModalOpen,
+    isLoadingDeleteLearningPath,
+    onDeleteLearningPath,
+    onCancelDeleteLearningPath,
+  } = useLearningPathItemContainer(id);
 
   const tagsContent = tags.map((tag) => {
     return (
@@ -27,6 +35,11 @@ const LearningPathItemContainer: FC<ILearningPathItemContainerProps> = ({ name, 
       tagsContent={tagsContent}
       handleLearningPathClick={handleLearningPathClick}
       handleEditLearningPathClick={handleEditLearningPathClick}
+      handleDeleteLearningPathClick={handleDeleteLearningPathClick}
+      isDeleteLearningPathModalOpen={isDeleteLearningPathModalOpen}
+      isLoadingDeleteLearningPath={isLoadingDeleteLearningPath}
+      onDeleteLearningPath={onDeleteLearningPath}
+      onCancelDeleteLearningPath={onCancelDeleteLearningPath}
     />
   );
 };

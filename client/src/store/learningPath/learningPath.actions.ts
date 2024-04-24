@@ -9,6 +9,7 @@ import {
   UPDATE_USER_LEARNING_PATH,
   SET_LEARNING_PATH,
   RESET_LEARNING_PATH,
+  DELETE_USER_LEARNING_PATH,
 } from './learningPath.actionTypes';
 
 import { LearningPathService } from 'services';
@@ -23,6 +24,7 @@ import {
   IGetLearningPathActionReturnData,
   IEditLearningPathPayloadData,
   EditLearningPathActionReturnDataType,
+  IDeleteLearningPathPayloadData,
 } from './types';
 import { ILearningPath, ILearningPathItem } from 'types';
 
@@ -138,6 +140,30 @@ export const updateUserLearningPath = createAsyncThunk<
     throw error.message as string;
   }
 });
+
+export const deleteUserLearningPath = createAsyncThunk<IDeleteLearningPathPayloadData, string>(
+  DELETE_USER_LEARNING_PATH,
+  async (id) => {
+    try {
+      const response = await LearningPathService.deleteUserLearningPath<IDeleteLearningPathPayloadData>(id);
+
+      if (!response.data?.success) {
+        throw new Error(response.data.message || smthWentWrong);
+      }
+
+      // TODO fetch user learning path after delete with the same page user was in and return below with another prop (by changing the interface)
+
+      return response.data.data;
+    } catch (error: any) {
+      console.log('createLearningPath', error);
+      toast.error(error.message, {
+        type: 'error',
+        hideProgressBar: true,
+      });
+      throw error.message as string;
+    }
+  }
+);
 
 export const setLearningPath = createAction<string>(SET_LEARNING_PATH);
 

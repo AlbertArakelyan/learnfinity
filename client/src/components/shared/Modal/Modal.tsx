@@ -8,7 +8,13 @@ const Modal: FC<IModalProps> = ({ title, onClose, children }) => {
   return (
     <div className="modal">
       {/* TODO: The upper div will become a portal root */}
-      <div className="modal-overlay" onClick={onClose}>
+      <div
+        className="modal-overlay"
+        onClick={(e) => {
+          e.stopPropagation();
+          onClose && onClose();
+        }}
+      >
         <div className="modal-content-wrapper" role="dialog" aria-label="Add Command">
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <ModalHeader title={title} onClose={onClose} />

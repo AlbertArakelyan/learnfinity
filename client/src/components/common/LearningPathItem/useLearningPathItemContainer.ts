@@ -30,11 +30,10 @@ const useLearningPathItemContainer = (learningPathId: string, creatorId: string)
     navigate(`/learning-paths/${learningPathId}`);
   };
 
-  const handleEditLearningPathClick = (learningPathId: string) => {
-    // TODO remove learningPathId from argument
-    if (!learningPath) {
-      dispatch(setLearningPath(learningPathId));
-    }
+  const handleEditLearningPathClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.stopPropagation();
+
+    dispatch(setLearningPath(learningPathId));
 
     navigate({
       search: `${Queries.addEditLearningPath}=${ModalQueryStates.true}&${Queries.editLearningPathId}=${learningPathId}`,

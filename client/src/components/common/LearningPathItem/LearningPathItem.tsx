@@ -30,13 +30,7 @@ const LearningPathItem: FC<ILearningPathItemProps> = ({
       {canEditOrDeleteLearningPath && (
         <>
           <div className={styles['learning-path-item__actions-bar']}>
-            <button
-              className={styles['learning-path-item__action']}
-              onClick={(e) => {
-                e.stopPropagation();
-                handleEditLearningPathClick(id);
-              }}
-            >
+            <button className={styles['learning-path-item__action']} onClick={handleEditLearningPathClick}>
               <Icon className={styles['learning-path-item__action-icon']} name="edit" />
             </button>
             <button className={styles['learning-path-item__action']} onClick={handleDeleteLearningPathClick}>

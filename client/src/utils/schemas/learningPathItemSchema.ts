@@ -20,12 +20,12 @@ const learningPathItemSchema = yup.object({
     .string()
     .required(requiredMessage)
     .min(minValidationLength.min, minLengthMessage.min)
-    .max(validationLength.long, maxLengthMessage.long),
+    .max(validationLength.tooLong, maxLengthMessage),
   instructions: yup
     .string()
     .required(requiredMessage)
     .min(minValidationLength.min, minLengthMessage.min)
-    .max(validationLength.long, maxLengthMessage.long),
+    .max(validationLength.tooLong, maxLengthMessage),
   type: yup.string().required(requiredMessage),
   sourceUrl: yup.string().required(requiredMessage).matches(urlRegex, regexMessages.url),
 });

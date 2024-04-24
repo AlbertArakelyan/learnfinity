@@ -8,6 +8,8 @@ export const validationLength: IValidationLength = {
   short: 64,
   base: 128,
   long: 256,
+  veryLong: 512,
+  tooLong: 1024,
 } as const;
 
 export const minValidationLength: IMinValidationLength = {
@@ -27,6 +29,8 @@ export const maxLengthMessage = {
   short: generateMaxLengthMessage('short'),
   base: generateMaxLengthMessage('base'),
   long: generateMaxLengthMessage('long'),
+  veryLong: generateMaxLengthMessage('veryLong'),
+  tooLong: generateMaxLengthMessage('tooLong'),
 } as const;
 
 export const minLengthMessage = {

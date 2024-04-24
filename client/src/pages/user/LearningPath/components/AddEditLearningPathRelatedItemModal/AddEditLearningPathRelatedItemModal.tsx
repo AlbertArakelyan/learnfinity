@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { Controller } from 'react-hook-form';
 
 import { LearningPathItemOption } from './components';
-import { Input, Select, Option, Button } from 'components';
+import { Input, Textarea, Select, Option, Button } from 'components';
 
 import { IAddEditLearningPathRelatedItemModalProps } from './types';
 
@@ -25,14 +25,16 @@ const AddEditLearningPathRelatedItemModal: FC<IAddEditLearningPathRelatedItemMod
         error={errors.name?.message}
         isDirty={!!values.name}
       />
-      <Input
+      <Textarea
+        className={styles['add-edit-learning-path-related-item-modal__textarea']}
         labelClassName={styles['add-edit-learning-path-related-item-modal__label']}
         label="Description"
         {...register('description')}
         error={errors.description?.message}
         isDirty={!!values.description}
       />
-      <Input
+      <Textarea
+        className={styles['add-edit-learning-path-related-item-modal__textarea']}
         labelClassName={styles['add-edit-learning-path-related-item-modal__label']}
         label="Instructions"
         {...register('instructions')}

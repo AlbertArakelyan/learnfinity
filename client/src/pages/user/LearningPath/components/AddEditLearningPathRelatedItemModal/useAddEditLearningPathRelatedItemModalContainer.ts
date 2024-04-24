@@ -1,3 +1,4 @@
+import { useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
@@ -6,6 +7,8 @@ import { learningPathItemSchema } from 'utils';
 import { ILearningPathItemData } from 'types';
 
 const useAddEditLearningPathRelatedItemModalContainer = () => {
+  const { learningPathId } = useParams();
+
   const {
     register,
     control,
@@ -19,6 +22,7 @@ const useAddEditLearningPathRelatedItemModalContainer = () => {
   const values = watch();
 
   const handleFormSubmit = (data: ILearningPathItemData) => {
+    // TODO if useParams(:groupId) then dispatch another action for creating learning path in group
     console.log(data);
   };
 

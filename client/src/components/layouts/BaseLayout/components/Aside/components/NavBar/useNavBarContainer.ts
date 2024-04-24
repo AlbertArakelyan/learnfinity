@@ -8,11 +8,11 @@ const useNavBarContainer = () => {
   const navigate = useNavigate();
   const query = useQuery();
 
-  const isCreateLearningPathModalOpen = query.get(Queries.addLearningPath) === ModalQueryStates.true;
+  const isCreateLearningPathModalOpen = query.get(Queries.addEditLearningPath) === ModalQueryStates.true;
 
   const handleCreateButtonClick = () => {
     navigate({
-      search: `?${Queries.addLearningPath}=${ModalQueryStates.true}`,
+      search: `?${Queries.addEditLearningPath}=${ModalQueryStates.true}`,
     });
   };
 

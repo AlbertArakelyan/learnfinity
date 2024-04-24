@@ -1,6 +1,8 @@
 import { ILearningPathItem } from 'types';
 
-export interface ILearningPathRelatedItemProps {
+import { UseLearningPathRelatedItemContainerType } from './useLearningPathRelatedItemContainer';
+
+export interface ILearningPathRelatedItemContainerProps {
   id: ILearningPathItem['_id'];
   name: ILearningPathItem['name'];
   description: ILearningPathItem['description'];
@@ -8,4 +10,9 @@ export interface ILearningPathRelatedItemProps {
   type: ILearningPathItem['type'];
   sourceUrl: ILearningPathItem['sourceUrl'];
   number: number;
+  canEditOrDeleteLearningPathItem: boolean;
 }
+
+export interface ILearningPathRelatedItemProps
+  extends ILearningPathRelatedItemContainerProps,
+    UseLearningPathRelatedItemContainerType {}

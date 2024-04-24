@@ -1,3 +1,3 @@
-import LearningPathRelatedItem from './LearningPathRelatedItem';
+import LearningPathRelatedItem from './LearningPathRelatedItemContainer';
 
 export default LearningPathRelatedItem;

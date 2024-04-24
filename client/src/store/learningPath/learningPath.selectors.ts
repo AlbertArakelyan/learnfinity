@@ -4,9 +4,9 @@ import { RootState } from 'store/configureStore';
 
 const userState = (state: RootState) => state.learningPath;
 
-export const selectIsLoadingCreateLearningPath = createSelector(
+export const selectIsLoadingCreateEditLearningPath = createSelector(
   userState,
-  ({ isLoading: { createLearningPath } }) => createLearningPath
+  ({ isLoading: { createEditLearningPath } }) => createEditLearningPath
 );
 
 export const selectIsLoadingGetLearningPaths = createSelector(
@@ -19,6 +19,16 @@ export const selectIsLoadingGetLearningPath = createSelector(
   ({ isLoading: { getLearningPath } }) => getLearningPath
 );
 
+export const selectIsLoadingDeleteLearningPath = createSelector(
+  userState,
+  ({ isLoading: { deleteLearningPath } }) => deleteLearningPath
+);
+
+export const selectIsLoadingDeleteLearningPathItem = createSelector(
+  userState,
+  ({ isLoading: { deleteLearningPathItem } }) => deleteLearningPathItem
+);
+
 export const selectLists = createSelector(userState, ({ lists }) => lists);
 
 export const selectCurrentPage = createSelector(userState, ({ currentPage }) => currentPage);
@@ -28,3 +38,8 @@ export const selectTotalPages = createSelector(userState, ({ pagination }) => pa
 export const selectEntry = createSelector(userState, ({ entry }) => entry);
 
 export const selectEntryItems = createSelector(userState, ({ entryItems }) => entryItems);
+
+export const selectEditingLearningPathItem = createSelector(
+  userState,
+  ({ editingLearningPathItem }) => editingLearningPathItem
+);

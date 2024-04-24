@@ -3,6 +3,7 @@
   border: none;
   color: var(--primary-text-color);
   padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
   transition: background-color .2s ease-in-out;
   width: 100%;
   @include flex(row, center, flex-start);
@@ -25,6 +26,14 @@
   &--circle {
     border-radius: 50%;
   }
+
+  &--primary {
+    color: var(--primary);
+  }
+
+  &--danger {
+    color: var(--danger);
+  }
 }
 
 .base-link-button__icon {
@@ -32,5 +41,5 @@
 }
 
 .base-link-button__text {
-  @include font(1rem, 500, var(--primary-text-color));
+  @include font(1rem, 500, inherit);
 }

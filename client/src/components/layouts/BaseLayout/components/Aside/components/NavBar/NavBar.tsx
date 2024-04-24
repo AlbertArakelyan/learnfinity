@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { Button, Modal, CreateLearningPathModal } from 'components';
+import { Button, Modal, CreateEditLearningPathModal } from 'components';
 
 import { INavBarProps } from './types';
 
@@ -21,7 +21,7 @@ const NavBar: FC<INavBarProps> = ({
       </div>
       <ul className={styles['nav-bar__links']}>{navLinksContent}</ul>
       <Modal isOpen={isCreateLearningPathModalOpen} title="Create Learning Path" onClose={handleClose}>
-        <CreateLearningPathModal />
+        <CreateEditLearningPathModal />
       </Modal>
     </nav>
   );

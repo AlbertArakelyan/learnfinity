@@ -2,9 +2,23 @@
 
 .learning-path__title {
   @include font(2.5rem, 700, var(--primary-text-color), left);
-  margin-bottom: 1.5rem;
 }
 
 .learning-path__info {
   margin-bottom: 2rem;
+}
+
+.learning-path__top-bar {
+  @include flex(row, center, space-between);
+  margin-bottom: 1.5rem;
+}
+
+.learning-path__top-bar__actions {
+  @include flex(row, center, flex-end);
+  flex: 1;
+  column-gap: 0.5rem;
+
+  .learning-path__top-bar__action {
+    width: initial;
+  }
 }

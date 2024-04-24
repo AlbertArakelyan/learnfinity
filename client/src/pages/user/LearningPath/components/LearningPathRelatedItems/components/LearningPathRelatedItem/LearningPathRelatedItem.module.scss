@@ -5,6 +5,13 @@
   padding-left: 2.5rem;
   color: var(--primary-text-color);
 
+  &:hover {
+    .learning-path__related-item-actions {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
   &:not(:last-child) {
     margin-bottom: 4rem;
   }
@@ -22,9 +29,23 @@
   }
 }
 
+.learning-path__related-item-top-bar {
+  @include flex(row, center, flex-start);
+  margin-bottom: 1rem;
+}
+
 .learning-path__related-item-title {
   @include font(1.75rem, 700, var(--primary-text-color), left);
-  margin-bottom: 1rem;
+}
+
+.learning-path__related-item-actions {
+  @include flex(row, center, flex-start);
+  column-gap: 0.5rem;
+  width: fit-content;
+  margin-left: 1rem;
+  opacity: 0;
+  visibility: visible;
+  transition: opacity .2s ease, visibility .2s ease;
 }
 
 .learning-path__related-item-description {

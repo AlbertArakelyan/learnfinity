@@ -6,7 +6,12 @@ export enum ModalQueryStates {
 }
 
 export enum Queries {
-  addLearningPath = 'addLearningPath',
+  addEditLearningPath = 'addEditLearningPath',
+  editLearningPathId = 'editLearningPathId',
+  deleteLearningPathId = 'deleteLearningPathId',
+  addEditLearningPathItem = 'addEditLearningPathItem',
+  editLearningPathItemId = 'editLearningPathItemId',
+  deleteLearningPathItemId = 'deleteLearningPathItemId',
 }
 
 export const initialPagination: IPageInfo = {

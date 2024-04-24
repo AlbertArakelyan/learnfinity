@@ -5,9 +5,9 @@ import { Select, Option, Input, Textarea, Button } from 'components';
 
 import { ICreateLearningPathModalProps } from './types';
 
-import styles from './CreateLearningPathModal.module.scss';
+import styles from './CreateEditLearningPathModal.module.scss';
 
-const CreateLearningPathModal: FC<ICreateLearningPathModalProps> = ({
+const CreateEditLearningPathModal: FC<ICreateLearningPathModalProps> = ({
   register,
   errors,
   handleSubmit,
@@ -16,6 +16,7 @@ const CreateLearningPathModal: FC<ICreateLearningPathModalProps> = ({
   getTagsInputValueArray,
   values,
   isLoading,
+  isEdit,
 }) => {
   return (
     <form className={styles['create-learning-path-modal']} onSubmit={handleSubmit(handleFormSubmit)}>
@@ -74,10 +75,10 @@ const CreateLearningPathModal: FC<ICreateLearningPathModalProps> = ({
       />
 
       <Button className={styles['create-learning-path-modal__button']} isLoading={isLoading}>
-        Create
+        {isEdit ? 'Edit' : 'Create'}
       </Button>
     </form>
   );
 };
 
-export default CreateLearningPathModal;
+export default CreateEditLearningPathModal;

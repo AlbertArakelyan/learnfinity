@@ -1,4 +1,10 @@
-import { ILearningPath, ILearningPathSendData, GetLearningPathsRequestType, ILearningPathItem } from 'types';
+import {
+  ILearningPath,
+  ILearningPathSendData,
+  GetLearningPathsRequestType,
+  ILearningPathItem,
+  ILearningPathItemData,
+} from 'types';
 import { IPageInfo } from 'services/types';
 
 export interface ILearningPathState {
@@ -11,10 +17,13 @@ export interface ILearningPathState {
   currentPage: number;
   entry: ILearningPath | null;
   entryItems: ILearningPathItem[]; // learningPathItems
+  editingLearningPathItem: ILearningPathItem | null;
   isLoading: {
-    createLearningPath: boolean;
+    createEditLearningPath: boolean;
     getLearningPaths: boolean;
     getLearningPath: boolean;
+    deleteLearningPath: boolean;
+    deleteLearningPathItem: boolean;
   };
   error: string | null;
 }
@@ -46,4 +55,58 @@ export interface IGetLearningPathsActionReturnData {
 export interface IGetLearningPathActionReturnData {
   learningPath: ILearningPath;
   learningPathItems: ILearningPathItem[];
+}
+
+/**
+ * editLearningPath Action Types
+ */
+export interface IEditLearningPathPayloadData {
+  id: string;
+  data: ILearningPathSendData;
+}
+
+export type EditLearningPathActionReturnDataType = ILearningPath;
+
+/**
+ * deleteLearningPath Action Types
+ */
+export interface IDeleteLearningPathActionReturnData {
+  acknowledged: boolean;
+  deletedCount: number;
+  id: string;
+  isDeleted: boolean;
+}
+
+/**
+ * createUserLearningPathItem Action Types
+ */
+export type CreateUserLearningPathItemReturnDataType = ILearningPathItem;
+
+export interface ICreateUserLearningPathItemPayloadData {
+  learningPathId: string;
+  data: ILearningPathItemData;
+}
+
+/**
+ * editUserLearningPathItem Action Types
+ */
+export type EditUserLearningPathItemReturnDataType = ILearningPathItem;
+
+export interface IEditUserLearningPathItemPayloadData {
+  learningPathId: string;
+  learningPathItemId: string;
+  learningPathItemData: ILearningPathItemData;
+}
+
+/**
+ * deleteUserLearningPathItem Action Types
+ */
+export interface IDeleteLearningPathItemActionReturnData {
+  id: string;
+  isDeleted: boolean;
+}
+
+export interface IDeleteUserLearningPathItemPayloadData {
+  learningPathId: string;
+  learningPathItemId: string;
 }

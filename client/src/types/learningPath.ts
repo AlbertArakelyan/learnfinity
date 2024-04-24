@@ -27,6 +27,14 @@ export type ILearningPathSendData = Omit<ILearningPathWithoutId, 'userId' | 'cre
 
 export type GetLearningPathsRequestType = keyof typeof LearningPathsRequestTypes;
 
+export interface ILearningPathItemData {
+  name: string;
+  description: string;
+  instructions: string;
+  type: string;
+  sourceUrl: string;
+}
+
 export interface ILearningPathItem {
   _id: string;
   name: string;

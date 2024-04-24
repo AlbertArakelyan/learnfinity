@@ -1,0 +1,6 @@
+@import "/src/assets/styles/abstracts/mixins";
+
+.learning-path-item-option {
+  @include flex(row, center, flex-start);
+  column-gap: 0.5rem;
+}

@@ -1,0 +1,3 @@
+import AddEditLearningPathRelatedItemModal from './AddEditLearningPathRelatedItemModalContainer';
+
+export default AddEditLearningPathRelatedItemModal;

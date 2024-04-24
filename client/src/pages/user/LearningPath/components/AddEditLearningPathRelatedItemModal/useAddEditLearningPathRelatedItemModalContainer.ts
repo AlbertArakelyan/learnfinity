@@ -1,13 +1,21 @@
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useAppDispatch, useAppSelector } from 'store/index';
+
+import { createUserLearningPathItem, selectIsLoadingCreateEditLearningPath } from 'store/learningPath';
 
 import { learningPathItemSchema } from 'utils';
 
 import { ILearningPathItemData } from 'types';
 
 const useAddEditLearningPathRelatedItemModalContainer = () => {
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
   const { learningPathId } = useParams();
+
+  const isLoadingCreateEditLearningPath = useAppSelector(selectIsLoadingCreateEditLearningPath);
 
   const {
     register,
@@ -23,7 +31,19 @@ const useAddEditLearningPathRelatedItemModalContainer = () => {
 
   const handleFormSubmit = (data: ILearningPathItemData) => {
     // TODO if useParams(:groupId) then dispatch another action for creating learning path in group
-    console.log(data);
+
+    if (learningPathId) {
+      dispatch(
+        createUserLearningPathItem({
+          learningPathId: learningPathId,
+          data,
+        })
+      ).then((res: any) => {
+        if (!res.error) {
+          navigate({ search: '' });
+        }
+      });
+    }
   };
 
   return {
@@ -33,6 +53,7 @@ const useAddEditLearningPathRelatedItemModalContainer = () => {
     values,
     handleSubmit,
     handleFormSubmit,
+    isLoadingCreateEditLearningPath,
   };
 };
 

@@ -32,6 +32,14 @@ class LearningPathService {
   static deleteUserLearningPath<T>(learningPathId: string) {
     return request<IResponseData<T>>('DELETE', `learning-paths/${learningPathId}`);
   }
+
+  static createUserLearningPathItem<T, D>(learningPathId: string, data: D) {
+    return request<IResponseData<T>, D>('POST', `learning-path-items/${learningPathId}`, data);
+  }
+
+  static editUserLearningPathItem<T, D>(learningPathId: string, learningPathItemId: string, data: D) {
+    return request<IResponseData<T>, D>('PATCH', `learning-path-items/${learningPathId}/${learningPathItemId}`, data);
+  }
 }
 
 export default LearningPathService;

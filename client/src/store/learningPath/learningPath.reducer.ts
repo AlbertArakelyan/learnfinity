@@ -6,6 +6,7 @@ import {
   getUserLearningPath,
   updateUserLearningPath,
   deleteUserLearningPath,
+  createUserLearningPathItem,
   resetLearningPath,
   setLearningPath,
   setCurrentPage,
@@ -132,6 +133,21 @@ const learningPathReducer = createReducer(initialState, (builder) => {
     .addCase(deleteUserLearningPath.rejected, (state, action) => {
       state.entry = null;
       state.isLoading.deleteLearningPath = false;
+      state.error = action.error?.message as string;
+    })
+
+    // createUserLearningPathItem
+    .addCase(createUserLearningPathItem.fulfilled, (state, action) => {
+      state.entryItems.push(action.payload);
+      state.isLoading.createEditLearningPath = false;
+      state.error = null;
+    })
+    .addCase(createUserLearningPathItem.pending, (state) => {
+      state.isLoading.createEditLearningPath = true;
+      state.error = null;
+    })
+    .addCase(createUserLearningPathItem.rejected, (state, action) => {
+      state.isLoading.createEditLearningPath = false;
       state.error = action.error?.message as string;
     })
 

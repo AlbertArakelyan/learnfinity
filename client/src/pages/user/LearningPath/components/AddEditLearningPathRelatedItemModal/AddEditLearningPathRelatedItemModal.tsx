@@ -15,6 +15,7 @@ const AddEditLearningPathRelatedItemModal: FC<IAddEditLearningPathRelatedItemMod
   values,
   handleSubmit,
   handleFormSubmit,
+  isLoadingCreateEditLearningPath,
 }) => {
   return (
     <form className={styles['add-edit-learning-path-related-item-modal']} onSubmit={handleSubmit(handleFormSubmit)}>
@@ -89,7 +90,12 @@ const AddEditLearningPathRelatedItemModal: FC<IAddEditLearningPathRelatedItemMod
         error={errors.sourceUrl?.message}
         isDirty={!!values.sourceUrl}
       />
-      <Button className={styles['add-edit-learning-path-related-item-modal__button']}>Create</Button>
+      <Button
+        className={styles['add-edit-learning-path-related-item-modal__button']}
+        isLoading={isLoadingCreateEditLearningPath}
+      >
+        Create
+      </Button>
     </form>
   );
 };

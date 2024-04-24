@@ -1,4 +1,10 @@
-import { ILearningPath, ILearningPathSendData, GetLearningPathsRequestType, ILearningPathItem } from 'types';
+import {
+  ILearningPath,
+  ILearningPathSendData,
+  GetLearningPathsRequestType,
+  ILearningPathItem,
+  ILearningPathItemData,
+} from 'types';
 import { IPageInfo } from 'services/types';
 
 export interface ILearningPathState {
@@ -67,4 +73,14 @@ export interface IDeleteLearningPathPayloadData {
   deletedCount: number;
   id: string;
   isDeleted: boolean;
+}
+
+/**
+ * createUserLearningPathItem Action Types
+ */
+export type CreateUserLearningPathItemReturnDataType = ILearningPathItem;
+
+export interface ICreateUserLearningPathItemPayloadData {
+  learningPathId: string;
+  data: ILearningPathItemData;
 }

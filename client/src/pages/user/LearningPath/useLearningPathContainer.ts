@@ -9,7 +9,6 @@ import {
   selectEntry,
   selectIsLoadingGetLearningPath,
   selectIsLoadingDeleteLearningPath,
-  selectEditingLearningPathItem,
 } from 'store/learningPath';
 
 import { useQuery } from 'hooks';

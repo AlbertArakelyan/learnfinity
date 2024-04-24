@@ -24,6 +24,11 @@ export const selectIsLoadingDeleteLearningPath = createSelector(
   ({ isLoading: { deleteLearningPath } }) => deleteLearningPath
 );
 
+export const selectIsLoadingDeleteLearningPathItem = createSelector(
+  userState,
+  ({ isLoading: { deleteLearningPathItem } }) => deleteLearningPathItem
+);
+
 export const selectLists = createSelector(userState, ({ lists }) => lists);
 
 export const selectCurrentPage = createSelector(userState, ({ currentPage }) => currentPage);

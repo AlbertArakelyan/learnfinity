@@ -12,6 +12,7 @@ import {
   DELETE_USER_LEARNING_PATH,
   CREATE_USER_LEARNING_PATH_ITEM,
   EDIT_USER_LEARNING_PATH_ITEM,
+  DELETE_USER_LEARNING_PATH_ITEM,
   SET_EDITING_LEARNING_PATH_ITEM,
   RESET_EDITING_LEARNING_PATH_ITEM,
 } from './learningPath.actionTypes';
@@ -28,11 +29,13 @@ import {
   IGetLearningPathActionReturnData,
   IEditLearningPathPayloadData,
   EditLearningPathActionReturnDataType,
-  IDeleteLearningPathPayloadData,
+  IDeleteLearningPathActionReturnData,
   CreateUserLearningPathItemReturnDataType,
   ICreateUserLearningPathItemPayloadData,
   IEditUserLearningPathItemPayloadData,
   EditUserLearningPathItemReturnDataType,
+  IDeleteUserLearningPathItemPayloadData,
+  IDeleteLearningPathItemActionReturnData,
 } from './types';
 import { ILearningPath, ILearningPathItem } from 'types';
 
@@ -149,11 +152,11 @@ export const updateUserLearningPath = createAsyncThunk<
   }
 });
 
-export const deleteUserLearningPath = createAsyncThunk<IDeleteLearningPathPayloadData, string>(
+export const deleteUserLearningPath = createAsyncThunk<IDeleteLearningPathActionReturnData, string>(
   DELETE_USER_LEARNING_PATH,
   async (id) => {
     try {
-      const response = await LearningPathService.deleteUserLearningPath<IDeleteLearningPathPayloadData>(id);
+      const response = await LearningPathService.deleteUserLearningPath<IDeleteLearningPathActionReturnData>(id);
 
       if (!response.data?.success) {
         throw new Error(response.data.message || smthWentWrong);
@@ -207,6 +210,31 @@ export const editUserLearningPathItem = createAsyncThunk<
       EditUserLearningPathItemReturnDataType,
       IEditUserLearningPathItemPayloadData['learningPathItemData']
     >(learningPathId, learningPathItemId, learningPathItemData);
+
+    if (!response.data?.success) {
+      throw new Error(response.data.message || smthWentWrong);
+    }
+
+    return response.data.data;
+  } catch (error: any) {
+    console.log('createLearningPath', error);
+    toast.error(error.message, {
+      type: 'error',
+      hideProgressBar: true,
+    });
+    throw error.message as string;
+  }
+});
+
+export const deleteUserLearningPathItem = createAsyncThunk<
+  IDeleteLearningPathItemActionReturnData,
+  IDeleteUserLearningPathItemPayloadData
+>(DELETE_USER_LEARNING_PATH_ITEM, async ({ learningPathId, learningPathItemId }) => {
+  try {
+    const response = await LearningPathService.deleteUserLearningPathItem<IDeleteLearningPathItemActionReturnData>(
+      learningPathId,
+      learningPathItemId
+    );
 
     if (!response.data?.success) {
       throw new Error(response.data.message || smthWentWrong);

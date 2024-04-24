@@ -15,7 +15,14 @@ const LearningPathRelatedItemContainer: FC<ILearningPathRelatedItemContainerProp
   sourceUrl,
   number,
 }) => {
-  const { handleLearningLearningPathItemEditClick } = useLearningPathRelatedItemContainer(id);
+  const {
+    handleLearningLearningPathItemEditClick,
+    handleLearningLearningPathItemDeleteClick,
+    isLearningPathRelatedItemDeleteModalOpen,
+    onCancelDeleteLearningPathItem,
+    onDeleteLearningPathItem,
+    isLoadingDeleteLearningPathItem,
+  } = useLearningPathRelatedItemContainer(id);
 
   return (
     <LearningPathRelatedItem
@@ -27,6 +34,11 @@ const LearningPathRelatedItemContainer: FC<ILearningPathRelatedItemContainerProp
       sourceUrl={sourceUrl}
       number={number}
       handleLearningLearningPathItemEditClick={handleLearningLearningPathItemEditClick}
+      handleLearningLearningPathItemDeleteClick={handleLearningLearningPathItemDeleteClick}
+      isLearningPathRelatedItemDeleteModalOpen={isLearningPathRelatedItemDeleteModalOpen}
+      onCancelDeleteLearningPathItem={onCancelDeleteLearningPathItem}
+      onDeleteLearningPathItem={onDeleteLearningPathItem}
+      isLoadingDeleteLearningPathItem={isLoadingDeleteLearningPathItem}
     />
   );
 };

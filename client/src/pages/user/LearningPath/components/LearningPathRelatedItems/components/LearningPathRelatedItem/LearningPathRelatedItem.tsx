@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { Icon, LinkButton } from 'components';
+import { Icon, LinkButton, ConfirmModal } from 'components';
 
 import { ILearningPathRelatedItemProps } from './types';
 
@@ -14,6 +14,11 @@ const LearningPathRelatedItem: FC<ILearningPathRelatedItemProps> = ({
   sourceUrl,
   number = 1,
   handleLearningLearningPathItemEditClick,
+  handleLearningLearningPathItemDeleteClick,
+  isLearningPathRelatedItemDeleteModalOpen,
+  onCancelDeleteLearningPathItem,
+  onDeleteLearningPathItem,
+  isLoadingDeleteLearningPathItem,
 }) => {
   return (
     <li className={styles['learning-path__related-item']}>
@@ -26,7 +31,7 @@ const LearningPathRelatedItem: FC<ILearningPathRelatedItemProps> = ({
           <LinkButton icon="edit" onClick={handleLearningLearningPathItemEditClick}>
             Edit
           </LinkButton>
-          <LinkButton icon="delete" color="danger">
+          <LinkButton icon="delete" color="danger" onClick={handleLearningLearningPathItemDeleteClick}>
             Delete
           </LinkButton>
         </div>
@@ -52,6 +57,14 @@ const LearningPathRelatedItem: FC<ILearningPathRelatedItemProps> = ({
           {sourceUrl}
         </a>
       </p>
+      <ConfirmModal
+        title="Confirm Delete"
+        description="Are you sure you want to delete this learning path item?"
+        onConfirm={onDeleteLearningPathItem}
+        onCancel={onCancelDeleteLearningPathItem}
+        isOpen={isLearningPathRelatedItemDeleteModalOpen}
+        isLoading={isLoadingDeleteLearningPathItem}
+      />
     </li>
   );
 };

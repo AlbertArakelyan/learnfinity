@@ -23,6 +23,7 @@ export interface ILearningPathState {
     getLearningPaths: boolean;
     getLearningPath: boolean;
     deleteLearningPath: boolean;
+    deleteLearningPathItem: boolean;
   };
   error: string | null;
 }
@@ -69,7 +70,7 @@ export type EditLearningPathActionReturnDataType = ILearningPath;
 /**
  * deleteLearningPath Action Types
  */
-export interface IDeleteLearningPathPayloadData {
+export interface IDeleteLearningPathActionReturnData {
   acknowledged: boolean;
   deletedCount: number;
   id: string;
@@ -95,4 +96,17 @@ export interface IEditUserLearningPathItemPayloadData {
   learningPathId: string;
   learningPathItemId: string;
   learningPathItemData: ILearningPathItemData;
+}
+
+/**
+ * deleteUserLearningPathItem Action Types
+ */
+export interface IDeleteLearningPathItemActionReturnData {
+  id: string;
+  isDeleted: boolean;
+}
+
+export interface IDeleteUserLearningPathItemPayloadData {
+  learningPathId: string;
+  learningPathItemId: string;
 }

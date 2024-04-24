@@ -1,5 +1,7 @@
 import { ReactNode, HTMLAttributes } from 'react';
 
+import { UseLearningPathItemContainerType } from './useLearningPathItemContainer';
+
 export interface ILearningPathItemContainerProps extends HTMLAttributes<HTMLDivElement> {
   id: string;
   name: string;
@@ -7,6 +9,8 @@ export interface ILearningPathItemContainerProps extends HTMLAttributes<HTMLDivE
   tags: string[];
 }
 
-export interface ILearningPathItemProps extends Omit<ILearningPathItemContainerProps, 'tags'> {
+export interface ILearningPathItemProps
+  extends Omit<ILearningPathItemContainerProps, 'tags'>,
+    UseLearningPathItemContainerType {
   tagsContent: ReactNode[];
 }

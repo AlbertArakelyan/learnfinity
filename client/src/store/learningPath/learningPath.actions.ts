@@ -6,6 +6,9 @@ import {
   GET_LEARNING_PATHS,
   SET_CURRENT_PAGE,
   GET_USER_LEARNING_PATH,
+  UPDATE_USER_LEARNING_PATH,
+  SET_LEARNING_PATH,
+  RESET_LEARNING_PATH,
 } from './learningPath.actionTypes';
 
 import { LearningPathService } from 'services';
@@ -18,6 +21,8 @@ import {
   IGetLearningPathsPayloadData,
   IGetLearningPathsActionReturnData,
   IGetLearningPathActionReturnData,
+  IEditLearningPathPayloadData,
+  EditLearningPathActionReturnDataType,
 } from './types';
 import { ILearningPath, ILearningPathItem } from 'types';
 
@@ -108,5 +113,34 @@ export const getUserLearningPath = createAsyncThunk<IGetLearningPathActionReturn
     }
   }
 );
+
+export const updateUserLearningPath = createAsyncThunk<
+  EditLearningPathActionReturnDataType,
+  IEditLearningPathPayloadData
+>(UPDATE_USER_LEARNING_PATH, async ({ id, data }) => {
+  try {
+    const response = await LearningPathService.updateUserLearningPath<
+      EditLearningPathActionReturnDataType,
+      IEditLearningPathPayloadData['data']
+    >(id, data);
+
+    if (!response.data?.success) {
+      throw new Error(response.data.message || smthWentWrong);
+    }
+
+    return response.data.data;
+  } catch (error: any) {
+    console.log('createLearningPath', error);
+    toast.error(error.message, {
+      type: 'error',
+      hideProgressBar: true,
+    });
+    throw error.message as string;
+  }
+});
+
+export const setLearningPath = createAction<string>(SET_LEARNING_PATH);
+
+export const resetLearningPath = createAction(RESET_LEARNING_PATH);
 
 export const setCurrentPage = createAction<number>(SET_CURRENT_PAGE);

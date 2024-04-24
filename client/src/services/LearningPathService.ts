@@ -24,6 +24,10 @@ class LearningPathService {
   static getUserLearningPathItems<T>(learningPathId: string) {
     return request<IResponseData<T>>('GET', `learning-path-items/${learningPathId}`);
   }
+
+  static updateUserLearningPath<T, D>(learningPathId: string, data: D) {
+    return request<IResponseData<T>, D>('PATCH', `learning-paths/${learningPathId}`, data);
+  }
 }
 
 export default LearningPathService;

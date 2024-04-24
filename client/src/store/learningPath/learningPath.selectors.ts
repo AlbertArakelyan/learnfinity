@@ -4,9 +4,9 @@ import { RootState } from 'store/configureStore';
 
 const userState = (state: RootState) => state.learningPath;
 
-export const selectIsLoadingCreateLearningPath = createSelector(
+export const selectIsLoadingCreateEditLearningPath = createSelector(
   userState,
-  ({ isLoading: { createLearningPath } }) => createLearningPath
+  ({ isLoading: { createEditLearningPath } }) => createEditLearningPath
 );
 
 export const selectIsLoadingGetLearningPaths = createSelector(

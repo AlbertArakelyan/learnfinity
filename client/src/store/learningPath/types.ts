@@ -12,7 +12,7 @@ export interface ILearningPathState {
   entry: ILearningPath | null;
   entryItems: ILearningPathItem[]; // learningPathItems
   isLoading: {
-    createLearningPath: boolean;
+    createEditLearningPath: boolean;
     getLearningPaths: boolean;
     getLearningPath: boolean;
   };
@@ -47,3 +47,13 @@ export interface IGetLearningPathActionReturnData {
   learningPath: ILearningPath;
   learningPathItems: ILearningPathItem[];
 }
+
+/**
+ * editLearningPath Action Types
+ */
+export interface IEditLearningPathPayloadData {
+  id: string;
+  data: ILearningPathSendData;
+}
+
+export type EditLearningPathActionReturnDataType = ILearningPath;

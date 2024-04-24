@@ -1,6 +1,14 @@
 import { createReducer } from '@reduxjs/toolkit';
 
-import { createLearningPath, getLearningPaths, getUserLearningPath, setCurrentPage } from './learningPath.actions';
+import {
+  createLearningPath,
+  getLearningPaths,
+  getUserLearningPath,
+  updateUserLearningPath,
+  resetLearningPath,
+  setLearningPath,
+  setCurrentPage,
+} from './learningPath.actions';
 
 import { ILearningPathState } from './types';
 
@@ -19,7 +27,7 @@ const initialState: ILearningPathState = {
   entry: null,
   entryItems: [],
   isLoading: {
-    createLearningPath: false,
+    createEditLearningPath: false,
     getLearningPaths: false,
     getLearningPath: false,
   },
@@ -30,16 +38,16 @@ const learningPathReducer = createReducer(initialState, (builder) => {
   builder
     // createLearningPath
     .addCase(createLearningPath.fulfilled, (state, action) => {
-      state.isLoading.createLearningPath = false;
+      state.isLoading.createEditLearningPath = false;
       state.error = null;
       state.lists.myList = [action.payload, ...state.lists.myList];
     })
     .addCase(createLearningPath.pending, (state) => {
-      state.isLoading.createLearningPath = true;
+      state.isLoading.createEditLearningPath = true;
       state.error = null;
     })
     .addCase(createLearningPath.rejected, (state, action) => {
-      state.isLoading.createLearningPath = false;
+      state.isLoading.createEditLearningPath = false;
       state.error = action.error?.message as string;
     })
 
@@ -77,6 +85,46 @@ const learningPathReducer = createReducer(initialState, (builder) => {
       state.entry = null;
       state.isLoading.getLearningPath = false;
       state.error = action.error?.message as string;
+    })
+
+    // editUserLearningPath
+    .addCase(updateUserLearningPath.fulfilled, (state, action) => {
+      state.entry = action.payload;
+
+      // state.lists.myList = state.lists.myList.map((learningPath) => {
+      //   if (learningPath._id === action.payload._id) {
+      //     return action.payload;
+      //   }
+      //
+      //   return learningPath;
+      // });
+
+      const learningPath = state.lists.myList.find((learningPath) => learningPath._id === action.payload._id);
+
+      if (learningPath) {
+        Object.assign(learningPath, action.payload);
+      }
+
+      state.isLoading.createEditLearningPath = false;
+      state.error = null;
+    })
+    .addCase(updateUserLearningPath.pending, (state) => {
+      state.isLoading.createEditLearningPath = true;
+      state.error = null;
+    })
+    .addCase(updateUserLearningPath.rejected, (state, action) => {
+      state.isLoading.createEditLearningPath = false;
+      state.error = action.error?.message as string;
+    })
+
+    // setLearningPath
+    .addCase(setLearningPath, (state, action) => {
+      state.entry = state.lists.myList.find((learningPath) => learningPath._id === action.payload) || null;
+    })
+
+    // resetLearningPath
+    .addCase(resetLearningPath, (state) => {
+      state.entry = null;
     })
 
     // setCurrentPage

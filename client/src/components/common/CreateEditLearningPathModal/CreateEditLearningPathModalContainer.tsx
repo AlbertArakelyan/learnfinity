@@ -3,8 +3,17 @@ import CreateEditLearningPathModal from './CreateEditLearningPathModal';
 import useCreateEditLearningPathModalContainer from './useCreateEditLearningPathModalContainer';
 
 const CreateEditLearningPathModalContainer = () => {
-  const { register, errors, handleSubmit, handleFormSubmit, control, getTagsInputValueArray, values, isLoading } =
-    useCreateEditLearningPathModalContainer();
+  const {
+    register,
+    errors,
+    handleSubmit,
+    handleFormSubmit,
+    control,
+    getTagsInputValueArray,
+    values,
+    isLoading,
+    isEdit,
+  } = useCreateEditLearningPathModalContainer();
 
   return (
     <CreateEditLearningPathModal
@@ -16,6 +25,7 @@ const CreateEditLearningPathModalContainer = () => {
       getTagsInputValueArray={getTagsInputValueArray}
       values={values}
       isLoading={isLoading}
+      isEdit={isEdit}
     />
   );
 };

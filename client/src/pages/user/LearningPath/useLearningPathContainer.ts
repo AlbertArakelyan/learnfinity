@@ -1,15 +1,27 @@
 import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'store/index';
 
 import { getUserLearningPath, selectEntry, selectIsLoadingGetLearningPath } from 'store/learningPath';
 
+import { Queries, ModalQueryStates } from 'constants/global';
+
 const useLearningPathContainer = () => {
-  const { learningPathId } = useParams();
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
+
+  const { learningPathId } = useParams();
 
   const learningPath = useAppSelector(selectEntry);
   const isLoadingGetLearningPath = useAppSelector(selectIsLoadingGetLearningPath);
+
+  const handleLearningPathEditClick = () => {
+    if (learningPathId) {
+      navigate({
+        search: `?${Queries.addEditLearningPath}=${ModalQueryStates.true}&${Queries.editLearningPathId}=${learningPathId}`,
+      });
+    }
+  };
 
   useEffect(() => {
     if (learningPathId) {
@@ -20,6 +32,7 @@ const useLearningPathContainer = () => {
   return {
     learningPath,
     isLoadingGetLearningPath,
+    handleLearningPathEditClick,
   };
 };
 

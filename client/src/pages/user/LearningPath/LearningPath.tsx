@@ -7,7 +7,11 @@ import { ILearningPathProps } from './types';
 
 import styles from './LearningPath.module.scss';
 
-const LearningPath: FC<ILearningPathProps> = ({ learningPath, isLoadingGetLearningPath }) => {
+const LearningPath: FC<ILearningPathProps> = ({
+  learningPath,
+  isLoadingGetLearningPath,
+  handleLearningPathEditClick,
+}) => {
   return (
     <LoadingScreen isLoading={isLoadingGetLearningPath}>
       {learningPath ? (
@@ -20,7 +24,11 @@ const LearningPath: FC<ILearningPathProps> = ({ learningPath, isLoadingGetLearni
                 <LinkButton className={styles['learning-path__top-bar__action']} icon="plus">
                   Add Item
                 </LinkButton>
-                <LinkButton className={styles['learning-path__top-bar__action']} icon="edit">
+                <LinkButton
+                  className={styles['learning-path__top-bar__action']}
+                  icon="edit"
+                  onClick={handleLearningPathEditClick}
+                >
                   Edit
                 </LinkButton>
                 <LinkButton className={styles['learning-path__top-bar__action']} icon="delete" color="danger">

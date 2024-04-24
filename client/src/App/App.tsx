@@ -2,9 +2,9 @@ import { FC } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 
-import { Auth, VerifyEmail, ForgotPassword, ResetPassword, LearningPaths, LearningPath } from 'pages';
+import { Auth, VerifyEmail, ForgotPassword, ResetPassword, LearningPaths, LearningPath, Name } from 'pages';
 
-import { BaseLayout, AuthLayout, LearningPathsLayout } from 'components';
+import { BaseLayout, AuthLayout, LearningPathsLayout, ProfileLayout } from 'components';
 
 import { IAppProps } from './types';
 
@@ -19,6 +19,12 @@ const App: FC<IAppProps> = ({ theme, isUserAuth }) => {
               <Route path="/learning-paths/shared" element={<LearningPaths />} />
               <Route path="/learning-paths/public" element={<LearningPaths />} />
               <Route path="/learning-paths/:learningPathId" element={<LearningPath />} />
+            </Route>
+            <Route path="/profile" element={<ProfileLayout />}>
+              <Route path="/profile/name" element={<Name />} />
+              <Route path="/profile/avatar" element={<div>avatar</div>} />
+              <Route path="/profile/password" element={<div>password</div>} />
+              <Route path="/profile/delete" element={<div>delete</div>} />
             </Route>
             <Route path="/*" element={<Navigate to="/learning-paths" replace />} />
           </Route>

@@ -25,11 +25,11 @@ clientsClaim();
 precacheAndRoute(self.__WB_MANIFEST);
 
 // Set up App Shell-style routing, so that all navigation requests
-// are fulfilled with your index.html shell. Learn more at
+// are fulfilled with your index.ts.html shell. Learn more at
 // https://developers.google.com/web/fundamentals/architecture/app-shell
 const fileExtensionRegexp = new RegExp('/[^/?]+\\.[^/]+$');
 registerRoute(
-  // Return false to exempt requests from being fulfilled by index.html.
+  // Return false to exempt requests from being fulfilled by index.ts.html.
   ({ request, url }: { request: Request; url: URL }) => {
     // If this isn't a navigation, skip.
     if (request.mode !== 'navigate') {

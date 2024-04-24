@@ -1,0 +1,19 @@
+@import "/src/assets/styles/abstracts/mixins";
+
+.profile-layout__user-data {
+  @include flex(row, center, flex-start);
+}
+
+.profile-layout__user-full-name {
+  margin-left: 1.5rem;
+  @include font(1.6rem, 500, var(--primary-text-color));
+}
+
+.profile-layout__content {
+  margin-top: 1.5rem;
+  @include flex(row, flex-start, space-between, wrap);
+}
+
+.profile-layout__inner {
+  width: 55%;
+}

@@ -1,0 +1,32 @@
+@import "/src/assets/styles/abstracts/mixins";
+
+.profile-layout__tabs {
+  @include flex(column, flex-start, flex-start);
+  row-gap: 0.3rem;
+  width: 40%;
+}
+
+.profile-layout__tab,
+.profile-layout__tab-link {
+  width: 100%;
+}
+
+.profile-layout__tab {
+  &--delete {
+    .profile-layout__tab-link-button span {
+      color: var(--danger);
+    }
+  }
+}
+
+.profile-layout__tab-link {
+  .profile-layout__tab-link-button {
+    padding: 1rem;
+  }
+
+  &--active {
+    .profile-layout__tab-link-button {
+      background-color: var(--white-background-highlited-active);
+    }
+  }
+}

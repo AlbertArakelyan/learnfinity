@@ -14,6 +14,7 @@ const LearningPathRelatedItemContainer: FC<ILearningPathRelatedItemContainerProp
   type,
   sourceUrl,
   number,
+  canEditOrDeleteLearningPathItem,
 }) => {
   const {
     handleLearningLearningPathItemEditClick,
@@ -39,6 +40,7 @@ const LearningPathRelatedItemContainer: FC<ILearningPathRelatedItemContainerProp
       onCancelDeleteLearningPathItem={onCancelDeleteLearningPathItem}
       onDeleteLearningPathItem={onDeleteLearningPathItem}
       isLoadingDeleteLearningPathItem={isLoadingDeleteLearningPathItem}
+      canEditOrDeleteLearningPathItem={canEditOrDeleteLearningPathItem}
     />
   );
 };

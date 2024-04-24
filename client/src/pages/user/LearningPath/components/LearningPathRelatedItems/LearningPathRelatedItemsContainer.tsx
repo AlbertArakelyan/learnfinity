@@ -1,10 +1,16 @@
+import { FC } from 'react';
+
 import LearningPathRelatedItems from './LearningPathRelatedItems';
 
 import { LearningPathRelatedItem } from './components';
 
+import { ILearningPathRelatedItemsContainerProps } from './types';
+
 import useLearningPathRelatedItemsContainer from './useLearningPathRelatedItemsContainer';
 
-const LearningPathRelatedItemsContainer = () => {
+const LearningPathRelatedItemsContainer: FC<ILearningPathRelatedItemsContainerProps> = ({
+  canEditOrDeleteLearningPathItem,
+}) => {
   const { learningPathItems } = useLearningPathRelatedItemsContainer();
 
   const learningPathRelatedItemsContent = learningPathItems.map((learningPathItem, index) => {
@@ -18,6 +24,7 @@ const LearningPathRelatedItemsContainer = () => {
         type={learningPathItem.type}
         sourceUrl={learningPathItem.sourceUrl}
         number={index + 1}
+        canEditOrDeleteLearningPathItem={canEditOrDeleteLearningPathItem}
       />
     );
   });

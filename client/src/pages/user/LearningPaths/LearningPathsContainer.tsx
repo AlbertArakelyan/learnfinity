@@ -16,6 +16,7 @@ const LearningPathsContainer = () => {
         description={learningPath.description}
         tags={learningPath.tags}
         id={learningPath._id}
+        userId={learningPath.userId}
       />
     );
   });

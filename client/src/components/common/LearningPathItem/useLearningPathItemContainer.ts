@@ -8,12 +8,13 @@ import {
   selectEntry,
   selectIsLoadingDeleteLearningPath,
 } from 'store/learningPath';
+import { selectUserId } from 'store/user';
 
 import { useQuery } from 'hooks';
 
 import { Queries, ModalQueryStates } from 'constants/global';
 
-const useLearningPathItemContainer = (learningPathId: string) => {
+const useLearningPathItemContainer = (learningPathId: string, creatorId: string) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const query = useQuery();
@@ -21,6 +22,9 @@ const useLearningPathItemContainer = (learningPathId: string) => {
   const learningPath = useAppSelector(selectEntry);
   const isDeleteLearningPathModalOpen = query.get(Queries.deleteLearningPathId) === learningPathId;
   const isLoadingDeleteLearningPath = useAppSelector(selectIsLoadingDeleteLearningPath);
+  const userId = useAppSelector(selectUserId);
+
+  const canEditOrDeleteLearningPath = creatorId === userId;
 
   const handleLearningPathClick = (learningPathId: string) => {
     navigate(`/learning-paths/${learningPathId}`);
@@ -65,6 +69,7 @@ const useLearningPathItemContainer = (learningPathId: string) => {
     isLoadingDeleteLearningPath,
     onDeleteLearningPath,
     onCancelDeleteLearningPath,
+    canEditOrDeleteLearningPath,
   };
 };
 

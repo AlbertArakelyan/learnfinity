@@ -7,10 +7,11 @@ export interface ILearningPathItemContainerProps extends HTMLAttributes<HTMLDivE
   name: string;
   description: string;
   tags: string[];
+  userId: string;
 }
 
 export interface ILearningPathItemProps
-  extends Omit<ILearningPathItemContainerProps, 'tags'>,
+  extends Omit<ILearningPathItemContainerProps, 'tags' | 'userId'>,
     UseLearningPathItemContainerType {
   tagsContent: ReactNode[];
 }

@@ -18,6 +18,7 @@ const LearningPathItem: FC<ILearningPathItemProps> = ({
   isLoadingDeleteLearningPath,
   onDeleteLearningPath,
   onCancelDeleteLearningPath,
+  canEditOrDeleteLearningPath,
 }) => {
   return (
     <div className={styles['learning-path-item']} onClick={() => handleLearningPathClick(id)}>
@@ -26,29 +27,32 @@ const LearningPathItem: FC<ILearningPathItemProps> = ({
         <p className={styles['learning-path-item__description']}>{description}</p>
       </button>
       <div className={styles['learning-path-item__tags']}>{tagsContent}</div>
-      {/*TODO: show block below only for creators*/}
-      <div className={styles['learning-path-item__actions-bar']}>
-        <button
-          className={styles['learning-path-item__action']}
-          onClick={(e) => {
-            e.stopPropagation();
-            handleEditLearningPathClick(id);
-          }}
-        >
-          <Icon className={styles['learning-path-item__action-icon']} name="edit" />
-        </button>
-        <button className={styles['learning-path-item__action']} onClick={handleDeleteLearningPathClick}>
-          <Icon className={styles['learning-path-item__action-icon']} name="delete" />
-        </button>
-      </div>
-      <ConfirmModal
-        title="Confirm Delete"
-        description="Are you sure you want to delete this learning path?"
-        isOpen={isDeleteLearningPathModalOpen}
-        isLoading={isLoadingDeleteLearningPath}
-        onConfirm={onDeleteLearningPath}
-        onCancel={onCancelDeleteLearningPath}
-      />
+      {canEditOrDeleteLearningPath && (
+        <>
+          <div className={styles['learning-path-item__actions-bar']}>
+            <button
+              className={styles['learning-path-item__action']}
+              onClick={(e) => {
+                e.stopPropagation();
+                handleEditLearningPathClick(id);
+              }}
+            >
+              <Icon className={styles['learning-path-item__action-icon']} name="edit" />
+            </button>
+            <button className={styles['learning-path-item__action']} onClick={handleDeleteLearningPathClick}>
+              <Icon className={styles['learning-path-item__action-icon']} name="delete" />
+            </button>
+          </div>
+          <ConfirmModal
+            title="Confirm Delete"
+            description="Are you sure you want to delete this learning path?"
+            isOpen={isDeleteLearningPathModalOpen}
+            isLoading={isLoadingDeleteLearningPath}
+            onConfirm={onDeleteLearningPath}
+            onCancel={onCancelDeleteLearningPath}
+          />
+        </>
+      )}
     </div>
   );
 };

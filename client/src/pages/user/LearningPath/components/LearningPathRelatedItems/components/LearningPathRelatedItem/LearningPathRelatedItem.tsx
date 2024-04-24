@@ -19,6 +19,7 @@ const LearningPathRelatedItem: FC<ILearningPathRelatedItemProps> = ({
   onCancelDeleteLearningPathItem,
   onDeleteLearningPathItem,
   isLoadingDeleteLearningPathItem,
+  canEditOrDeleteLearningPathItem,
 }) => {
   return (
     <li className={styles['learning-path__related-item']}>
@@ -27,14 +28,16 @@ const LearningPathRelatedItem: FC<ILearningPathRelatedItemProps> = ({
           {number}. {name}
         </h3>
         {/*TODO show the block below only to the owner of the learning path*/}
-        <div className={styles['learning-path__related-item-actions']}>
-          <LinkButton icon="edit" onClick={handleLearningLearningPathItemEditClick}>
-            Edit
-          </LinkButton>
-          <LinkButton icon="delete" color="danger" onClick={handleLearningLearningPathItemDeleteClick}>
-            Delete
-          </LinkButton>
-        </div>
+        {canEditOrDeleteLearningPathItem && (
+          <div className={styles['learning-path__related-item-actions']}>
+            <LinkButton icon="edit" onClick={handleLearningLearningPathItemEditClick}>
+              Edit
+            </LinkButton>
+            <LinkButton icon="delete" color="danger" onClick={handleLearningLearningPathItemDeleteClick}>
+              Delete
+            </LinkButton>
+          </div>
+        )}
       </div>
       <p className={styles['learning-path__related-item-description']}>{description}</p>
       <p className={styles['learning-path__related-item-instructions']}>
@@ -57,14 +60,16 @@ const LearningPathRelatedItem: FC<ILearningPathRelatedItemProps> = ({
           {sourceUrl}
         </a>
       </p>
-      <ConfirmModal
-        title="Confirm Delete"
-        description="Are you sure you want to delete this learning path item?"
-        onConfirm={onDeleteLearningPathItem}
-        onCancel={onCancelDeleteLearningPathItem}
-        isOpen={isLearningPathRelatedItemDeleteModalOpen}
-        isLoading={isLoadingDeleteLearningPathItem}
-      />
+      {canEditOrDeleteLearningPathItem && (
+        <ConfirmModal
+          title="Confirm Delete"
+          description="Are you sure you want to delete this learning path item?"
+          onConfirm={onDeleteLearningPathItem}
+          onCancel={onCancelDeleteLearningPathItem}
+          isOpen={isLearningPathRelatedItemDeleteModalOpen}
+          isLoading={isLoadingDeleteLearningPathItem}
+        />
+      )}
     </li>
   );
 };

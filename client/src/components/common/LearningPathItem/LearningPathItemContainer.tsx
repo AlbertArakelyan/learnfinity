@@ -8,7 +8,7 @@ import { ILearningPathItemContainerProps } from './types';
 
 import styles from './LearningPathItem.module.scss';
 
-const LearningPathItemContainer: FC<ILearningPathItemContainerProps> = ({ name, description, tags, id }) => {
+const LearningPathItemContainer: FC<ILearningPathItemContainerProps> = ({ name, description, tags, id, userId }) => {
   const {
     handleLearningPathClick,
     handleEditLearningPathClick,
@@ -17,7 +17,8 @@ const LearningPathItemContainer: FC<ILearningPathItemContainerProps> = ({ name, 
     isLoadingDeleteLearningPath,
     onDeleteLearningPath,
     onCancelDeleteLearningPath,
-  } = useLearningPathItemContainer(id);
+    canEditOrDeleteLearningPath,
+  } = useLearningPathItemContainer(id, userId);
 
   const tagsContent = tags.map((tag) => {
     return (
@@ -40,6 +41,7 @@ const LearningPathItemContainer: FC<ILearningPathItemContainerProps> = ({ name, 
       isLoadingDeleteLearningPath={isLoadingDeleteLearningPath}
       onDeleteLearningPath={onDeleteLearningPath}
       onCancelDeleteLearningPath={onCancelDeleteLearningPath}
+      canEditOrDeleteLearningPath={canEditOrDeleteLearningPath}
     />
   );
 };

@@ -10,6 +10,7 @@ export interface ILearningPathRelatedItemContainerProps {
   type: ILearningPathItem['type'];
   sourceUrl: ILearningPathItem['sourceUrl'];
   number: number;
+  canEditOrDeleteLearningPathItem: boolean;
 }
 
 export interface ILearningPathRelatedItemProps

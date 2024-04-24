@@ -15,6 +15,7 @@ const LearningPathContainer = () => {
     onCancelDeleteLearningPath,
     handleAddItemClick,
     handleAddItemModalClose,
+    canEditOrDeleteLearningPath,
   } = useLearningPathContainer();
 
   return (
@@ -30,6 +31,7 @@ const LearningPathContainer = () => {
       onCancelDeleteLearningPath={onCancelDeleteLearningPath}
       handleAddItemClick={handleAddItemClick}
       handleAddItemModalClose={handleAddItemModalClose}
+      canEditOrDeleteLearningPath={canEditOrDeleteLearningPath}
     />
   );
 };

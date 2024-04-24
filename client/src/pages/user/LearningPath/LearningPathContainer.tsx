@@ -8,10 +8,13 @@ const LearningPathContainer = () => {
     isLoadingGetLearningPath,
     isLoadingDeleteLearningPath,
     isLearningPathDeleteModalOpen,
+    isAddLearningPathItemModalOpen,
     handleLearningPathEditClick,
     handleDeleteLearningPathClick,
     onDeleteLearningPath,
     onCancelDeleteLearningPath,
+    handleAddItemClick,
+    handleAddItemModalClose,
   } = useLearningPathContainer();
 
   return (
@@ -20,10 +23,13 @@ const LearningPathContainer = () => {
       isLoadingGetLearningPath={isLoadingGetLearningPath}
       isLoadingDeleteLearningPath={isLoadingDeleteLearningPath}
       isLearningPathDeleteModalOpen={isLearningPathDeleteModalOpen}
+      isAddLearningPathItemModalOpen={isAddLearningPathItemModalOpen}
       handleLearningPathEditClick={handleLearningPathEditClick}
       handleDeleteLearningPathClick={handleDeleteLearningPathClick}
       onDeleteLearningPath={onDeleteLearningPath}
       onCancelDeleteLearningPath={onCancelDeleteLearningPath}
+      handleAddItemClick={handleAddItemClick}
+      handleAddItemModalClose={handleAddItemModalClose}
     />
   );
 };

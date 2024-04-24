@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
-import { LoadingScreen, ItemNotFound, LinkButton, ConfirmModal } from 'components';
-import { LearningPathRelatedItems } from './components';
+import { LoadingScreen, ItemNotFound, LinkButton, Modal, ConfirmModal } from 'components';
+import { LearningPathRelatedItems, AddEditLearningPathRelatedItemModal } from './components';
 
 import { ILearningPathProps } from './types';
 
@@ -12,10 +12,13 @@ const LearningPath: FC<ILearningPathProps> = ({
   isLoadingGetLearningPath,
   isLoadingDeleteLearningPath,
   isLearningPathDeleteModalOpen,
+  isAddLearningPathItemModalOpen,
   handleLearningPathEditClick,
   handleDeleteLearningPathClick,
   onDeleteLearningPath,
   onCancelDeleteLearningPath,
+  handleAddItemClick,
+  handleAddItemModalClose,
 }) => {
   return (
     <LoadingScreen isLoading={isLoadingGetLearningPath}>
@@ -26,7 +29,11 @@ const LearningPath: FC<ILearningPathProps> = ({
               <h2 className={styles['learning-path__title']}>{learningPath.name}</h2>
               {/*TODO show the block below only to the owner of the learning path*/}
               <div className={styles['learning-path__top-bar__actions']}>
-                <LinkButton className={styles['learning-path__top-bar__action']} icon="plus">
+                <LinkButton
+                  className={styles['learning-path__top-bar__action']}
+                  icon="plus"
+                  onClick={handleAddItemClick}
+                >
                   Add Item
                 </LinkButton>
                 <LinkButton
@@ -57,6 +64,13 @@ const LearningPath: FC<ILearningPathProps> = ({
             isOpen={isLearningPathDeleteModalOpen}
             isLoading={isLoadingDeleteLearningPath}
           />
+          <Modal
+            isOpen={isAddLearningPathItemModalOpen}
+            title="Create Learning Path Item"
+            onClose={handleAddItemModalClose}
+          >
+            <AddEditLearningPathRelatedItemModal />
+          </Modal>
         </div>
       ) : (
         <ItemNotFound title="Learning Path Not Found" />

@@ -27,6 +27,7 @@ const useLearningPathContainer = () => {
   const isLoadingDeleteLearningPath = useAppSelector(selectIsLoadingDeleteLearningPath);
 
   const isLearningPathDeleteModalOpen = query.get(Queries.deleteLearningPathId) === learningPathId;
+  const isAddLearningPathItemModalOpen = query.get(Queries.addLearningPathItem) === ModalQueryStates.true;
 
   const handleLearningPathEditClick = () => {
     if (learningPathId) {
@@ -59,6 +60,18 @@ const useLearningPathContainer = () => {
     navigate({ search: '' });
   };
 
+  const handleAddItemClick = () => {
+    if (learningPathId) {
+      navigate({
+        search: `?${Queries.addLearningPathItem}=${ModalQueryStates.true}`,
+      });
+    }
+  };
+
+  const handleAddItemModalClose = () => {
+    navigate({ search: '' });
+  };
+
   useEffect(() => {
     if (learningPathId) {
       dispatch(getUserLearningPath(learningPathId));
@@ -70,10 +83,13 @@ const useLearningPathContainer = () => {
     isLoadingGetLearningPath,
     isLoadingDeleteLearningPath,
     isLearningPathDeleteModalOpen,
+    isAddLearningPathItemModalOpen,
     handleLearningPathEditClick,
     handleDeleteLearningPathClick,
     onDeleteLearningPath,
     onCancelDeleteLearningPath,
+    handleAddItemClick,
+    handleAddItemModalClose,
   };
 };
 

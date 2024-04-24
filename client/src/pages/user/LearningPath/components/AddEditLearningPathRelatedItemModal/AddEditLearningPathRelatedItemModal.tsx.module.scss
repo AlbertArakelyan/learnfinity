@@ -1,0 +1,14 @@
+@import "/src/assets/styles/abstracts/mixins";
+
+.add-edit-learning-path-related-item-modal {
+  @include flex(column, flex-start, flex-start);
+  row-gap: 2rem;
+}
+
+.add-edit-learning-path-related-item-modal__label {
+  background-color: var(--card-color);
+}
+
+.add-edit-learning-path-related-item-modal__button {
+  align-self: flex-end;
+}

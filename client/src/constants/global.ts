@@ -9,6 +9,7 @@ export enum Queries {
   addEditLearningPath = 'addEditLearningPath',
   editLearningPathId = 'editLearningPathId',
   deleteLearningPathId = 'deleteLearningPathId',
+  addLearningPathItem = 'addLearningPathItem',
 }
 
 export const initialPagination: IPageInfo = {

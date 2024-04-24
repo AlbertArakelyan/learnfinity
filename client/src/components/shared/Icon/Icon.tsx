@@ -21,6 +21,14 @@ import {
   Globe,
   Link,
   Plus,
+  FileLines,
+  CirclePlaySolid,
+  CirclePlay,
+  Youtube,
+  Newspaper,
+  Book,
+  MicrophoneLines,
+  Ellipsis,
 } from './icons';
 
 // Types
@@ -46,6 +54,14 @@ export const icons = {
   globe: Globe,
   link: Link,
   plus: Plus,
+  'file-lines': FileLines,
+  'circle-play-solid': CirclePlaySolid,
+  'circle-play': CirclePlay,
+  youtube: Youtube,
+  newspaper: Newspaper,
+  book: Book,
+  'microphone-lines': MicrophoneLines,
+  ellipsis: Ellipsis,
 };
 
 const Icon: FC<IIconProps> = ({ name, ...props }) => {

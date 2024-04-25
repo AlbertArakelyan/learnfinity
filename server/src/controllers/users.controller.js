@@ -258,9 +258,16 @@ async function httpEditUser(req, res) {
       });
     }
 
+    const editUserSendData = {
+      id: editUserData._id,
+      email: editUserData.email,
+      fullName: editUserData.fullName,
+      photoUrl: editUserData.photoUrl,
+    };
+
     return res.status(httpStatuses.ok).json({
       success: true,
-      data: editUserData,
+      data: editUserSendData,
       message: userControllerMessages.userUpdated,
       statusCode: httpStatuses.ok,
     });

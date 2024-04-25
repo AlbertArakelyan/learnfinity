@@ -1,0 +1,17 @@
+import * as yup from 'yup';
+
+import {
+  requiredMessage,
+  validationLength,
+  minValidationLength,
+  minLengthMessage,
+  maxLengthMessage,
+} from 'constants/validation';
+
+export const nameSchema = yup.object({
+  fullName: yup
+    .string()
+    .min(minValidationLength.min, minLengthMessage.min)
+    .max(validationLength.base, maxLengthMessage.base)
+    .required(requiredMessage),
+});

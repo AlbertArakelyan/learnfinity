@@ -1,0 +1,13 @@
+@import "src/assets/styles/abstracts/mixins";
+
+.name {
+  @include flex(column, flex-start, center);
+}
+
+.name__input-label {
+  background-color: var(--background-color);
+}
+
+.name__button {
+  margin-top: 2rem;
+}

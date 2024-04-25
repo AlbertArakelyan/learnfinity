@@ -12,6 +12,10 @@
 }
 
 .profile-layout__tab {
+  .profile-layout__tab-link-button span {
+    @include font(1.125rem, 500, var(--primary-text-color));
+  }
+
   &--delete {
     .profile-layout__tab-link-button span {
       color: var(--danger);

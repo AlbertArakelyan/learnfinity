@@ -1,4 +1,4 @@
-import { IUser, IUserSignUpData, IUserResetPasswordData, IUserSignInData } from 'types';
+import { IUser, IUserSignUpData, IUserResetPasswordData, IUserSignInData, INameData } from 'types';
 
 export interface IVerificationForgotPasswordData {
   email: string;
@@ -54,3 +54,10 @@ export interface ISignInActionReturnData {
  * getUser Action Types
  */
 export type GetUserActionReturnData = IUser;
+
+/**
+ * editUser Action Types
+ */
+export type EditUserPayloadDataType = Partial<IUser>;
+
+export type EditUserActionReturnDataType = IUser;

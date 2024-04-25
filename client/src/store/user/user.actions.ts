@@ -2,7 +2,15 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 import store from 'store';
 
-import { SIGN_UP, VERIFY_EMAIL, FORGOT_PASSWORD, RESET_PASSWORD, SIGN_IN, GET_USER } from './user.actionTypes';
+import {
+  SIGN_UP,
+  VERIFY_EMAIL,
+  FORGOT_PASSWORD,
+  RESET_PASSWORD,
+  SIGN_IN,
+  GET_USER,
+  EDIT_USER,
+} from './user.actionTypes';
 
 import { UserService } from 'services';
 
@@ -16,6 +24,8 @@ import {
   SignInPayloadDataType,
   ISignInActionReturnData,
   GetUserActionReturnData,
+  EditUserPayloadDataType,
+  EditUserActionReturnDataType,
 } from './types';
 
 import { smthWentWrong } from 'constants/messages';
@@ -144,3 +154,25 @@ export const getUser = createAsyncThunk<GetUserActionReturnData>(GET_USER, async
     throw error.message as string;
   }
 });
+
+export const editUser = createAsyncThunk<EditUserActionReturnDataType, EditUserPayloadDataType>(
+  EDIT_USER,
+  async (data) => {
+    try {
+      const response = await UserService.editUser<EditUserActionReturnDataType, EditUserPayloadDataType>(data);
+
+      if (!response.data?.success) {
+        throw new Error(response.data.message || smthWentWrong);
+      }
+
+      return response.data.data;
+    } catch (error: any) {
+      console.log('forgotPassword', error);
+      toast.error(error.message, {
+        type: 'error',
+        hideProgressBar: true,
+      });
+      throw error.message as string;
+    }
+  }
+);

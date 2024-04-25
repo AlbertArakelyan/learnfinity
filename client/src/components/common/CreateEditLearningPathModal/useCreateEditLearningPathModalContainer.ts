@@ -37,10 +37,10 @@ const useCreateEditLearningPathModalContainer = () => {
   } = useForm<ILearningPathCreateData>({
     resolver: yupResolver(learningPathSchema),
     defaultValues: {
-      name: editLearningPathId && learningPath ? learningPath.name : '',
-      description: editLearningPathId && learningPath ? learningPath.description : '',
-      tags: editLearningPathId && learningPath ? learningPath.tags : [],
-      isPrivate: editLearningPathId && learningPath ? learningPath.isPrivate : false,
+      name: editLearningPathId && learningPath ? learningPath.name : undefined,
+      description: editLearningPathId && learningPath ? learningPath.description : undefined,
+      tags: editLearningPathId && learningPath ? learningPath.tags : undefined,
+      isPrivate: editLearningPathId && learningPath ? learningPath.isPrivate : undefined,
     },
   });
 

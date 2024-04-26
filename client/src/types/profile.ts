@@ -6,3 +6,7 @@ export interface IChangePasswordData {
   oldPassword: string;
   newPassword: string;
 }
+
+export interface IDeleteAccountData {
+  password: string;
+}

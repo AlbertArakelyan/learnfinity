@@ -28,3 +28,11 @@ export const changePasswordSchema = yup.object({
     .max(validationLength.base, maxLengthMessage.base)
     .required(requiredMessage),
 });
+
+export const deleteAccountSchema = yup.object({
+  password: yup
+    .string()
+    .min(minValidationLength.base, minLengthMessage.base)
+    .max(validationLength.base, maxLengthMessage.base)
+    .required(requiredMessage),
+});

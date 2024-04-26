@@ -11,6 +11,7 @@ import {
   LearningPath,
   Name,
   ProfileAvatar,
+  Password,
 } from 'pages';
 
 import { BaseLayout, AuthLayout, LearningPathsLayout, ProfileLayout } from 'components';
@@ -32,7 +33,7 @@ const App: FC<IAppProps> = ({ theme, isUserAuth }) => {
             <Route path="/profile" element={<ProfileLayout />}>
               <Route path="/profile/name" element={<Name />} />
               <Route path="/profile/avatar" element={<ProfileAvatar />} />
-              <Route path="/profile/password" element={<div>password</div>} />
+              <Route path="/profile/password" element={<Password />} />
               <Route path="/profile/delete" element={<div>delete</div>} />
             </Route>
             <Route path="/*" element={<Navigate to="/learning-paths" replace />} />

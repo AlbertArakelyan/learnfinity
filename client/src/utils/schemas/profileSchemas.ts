@@ -15,3 +15,16 @@ export const nameSchema = yup.object({
     .max(validationLength.base, maxLengthMessage.base)
     .required(requiredMessage),
 });
+
+export const changePasswordSchema = yup.object({
+  oldPassword: yup
+    .string()
+    .min(minValidationLength.base, minLengthMessage.base)
+    .max(validationLength.base, maxLengthMessage.base)
+    .required(requiredMessage),
+  newPassword: yup
+    .string()
+    .min(minValidationLength.base, minLengthMessage.base)
+    .max(validationLength.base, maxLengthMessage.base)
+    .required(requiredMessage),
+});

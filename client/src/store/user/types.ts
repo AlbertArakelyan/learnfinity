@@ -1,4 +1,4 @@
-import { IUser, IUserSignUpData, IUserResetPasswordData, IUserSignInData, INameData } from 'types';
+import { IUser, IUserSignUpData, IUserResetPasswordData, IUserSignInData, IChangePasswordData } from 'types';
 
 export interface IVerificationForgotPasswordData {
   email: string;
@@ -71,4 +71,13 @@ export interface IChangeAvatarPayloadData {
 
 export interface IChangeAvatarActionReturnData {
   photoUrl: string;
+}
+
+/**
+ * changePassword Action Types
+ */
+export type ChangePasswordPayloadDataType = IChangePasswordData;
+
+export interface IChangePasswordActionReturnData {
+  isPasswordChanged: boolean;
 }

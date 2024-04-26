@@ -11,6 +11,7 @@ import {
   GET_USER,
   EDIT_USER,
   CHANGE_AVATAR,
+  CHANGE_PASSWORD,
 } from './user.actionTypes';
 
 import { UserService } from 'services';
@@ -29,6 +30,8 @@ import {
   EditUserActionReturnDataType,
   IChangeAvatarPayloadData,
   IChangeAvatarActionReturnData,
+  ChangePasswordPayloadDataType,
+  IChangePasswordActionReturnData,
 } from './types';
 
 import { smthWentWrong } from 'constants/messages';
@@ -188,6 +191,37 @@ export const changeAvatar = createAsyncThunk<IChangeAvatarActionReturnData, ICha
 
       if (!response.data?.success) {
         throw new Error(response.data.message || smthWentWrong);
+      }
+
+      return response.data.data;
+    } catch (error: any) {
+      console.log('forgotPassword', error);
+      toast.error(error.message, {
+        type: 'error',
+        hideProgressBar: true,
+      });
+      throw error.message as string;
+    }
+  }
+);
+
+export const changePassword = createAsyncThunk<IChangePasswordActionReturnData, ChangePasswordPayloadDataType>(
+  CHANGE_PASSWORD,
+  async (data) => {
+    try {
+      const response = await UserService.changePassword<IChangePasswordActionReturnData, ChangePasswordPayloadDataType>(
+        data
+      );
+
+      if (!response.data?.success) {
+        throw new Error(response.data.message || smthWentWrong);
+      }
+
+      if (response.data.data.isPasswordChanged) {
+        toast.success(response.data.message, {
+          type: 'success',
+          hideProgressBar: true,
+        });
       }
 
       return response.data.data;

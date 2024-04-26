@@ -19,6 +19,7 @@ const {
   editUser,
   isChangePasswordAllowed,
   changeUserPassword,
+  checkIsPasswordCorrect,
 } = require('../models/users/users.model');
 
 const httpStatuses = require('../constants/httpStatuses');
@@ -286,7 +287,7 @@ async function httpEditUser(req, res) {
 async function httpChangePassword(req, res) {
   try {
     const userId = req.user.id;
-    const { oldPassword, newPassword, confirmPassword } = req.body;
+    const { oldPassword, newPassword } = req.body;
 
     const isChangePasswordAllowedData = await isChangePasswordAllowed(userId, oldPassword);
 
@@ -298,19 +299,13 @@ async function httpChangePassword(req, res) {
       });
     }
 
-    if (newPassword !== confirmPassword) {
-      return res.status(httpStatuses.badRequest).json({
-        success: false,
-        message: userControllerMessages.passwordsDontMatch,
-        statusCode: httpStatuses.badRequest,
-      });
-    }
-
-    const updatedUser = await changeUserPassword(userId, newPassword);
+    await changeUserPassword(userId, newPassword);
 
     return res.status(httpStatuses.ok).json({
       success: true,
-      data: updatedUser,
+      data: {
+        isPasswordChanged: true,
+      },
       message: userControllerMessages.passwordChanged,
       statusCode: httpStatuses.ok,
     });

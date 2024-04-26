@@ -12,6 +12,10 @@ class UserService extends AuthService {
   static editUser<T, D>(data: D) {
     return request<IResponseData<T>, D>('PATCH', 'users/edit', data);
   }
+
+  static changeAvatar<T, D>(data: D) {
+    return request<IResponseData<T>, D>('PATCH', 'users/change-avatar', data);
+  }
 }
 
 export default UserService;

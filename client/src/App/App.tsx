@@ -2,7 +2,16 @@ import { FC } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 
-import { Auth, VerifyEmail, ForgotPassword, ResetPassword, LearningPaths, LearningPath, Name } from 'pages';
+import {
+  Auth,
+  VerifyEmail,
+  ForgotPassword,
+  ResetPassword,
+  LearningPaths,
+  LearningPath,
+  Name,
+  ProfileAvatar,
+} from 'pages';
 
 import { BaseLayout, AuthLayout, LearningPathsLayout, ProfileLayout } from 'components';
 
@@ -22,7 +31,7 @@ const App: FC<IAppProps> = ({ theme, isUserAuth }) => {
             </Route>
             <Route path="/profile" element={<ProfileLayout />}>
               <Route path="/profile/name" element={<Name />} />
-              <Route path="/profile/avatar" element={<div>avatar</div>} />
+              <Route path="/profile/avatar" element={<ProfileAvatar />} />
               <Route path="/profile/password" element={<div>password</div>} />
               <Route path="/profile/delete" element={<div>delete</div>} />
             </Route>

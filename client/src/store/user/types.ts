@@ -61,3 +61,14 @@ export type GetUserActionReturnData = IUser;
 export type EditUserPayloadDataType = Partial<IUser>;
 
 export type EditUserActionReturnDataType = IUser;
+
+/**
+ * changeAvatar Action Types
+ */
+export interface IChangeAvatarPayloadData {
+  image: string;
+}
+
+export interface IChangeAvatarActionReturnData {
+  photoUrl: string;
+}

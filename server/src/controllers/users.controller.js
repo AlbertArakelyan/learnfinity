@@ -1,6 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 
+require('dotenv').config();
+
 const {
   findUserById,
   findExistingUserByEmail,
@@ -352,10 +354,14 @@ async function httpChangeAvatar(req, res) {
 
     fs.writeFileSync(avatarPath, bufferData);
 
+    const photoUrl = `${process.env.API_BASE_URL}storage/avatars/${filename}`;
+
+    await editUser(userId, { photoUrl });
+
     return res.status(httpStatuses.ok).json({
       success: true,
       data: {
-        avatarUrl: `http://localhost:8000/storage/avatars/${filename}`, // TODO take from env
+        photoUrl,
       },
       message: userControllerMessages.avatarChanged,
       statusCode: httpStatuses.ok,

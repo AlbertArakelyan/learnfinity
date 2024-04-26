@@ -29,6 +29,8 @@ import {
   Book,
   MicrophoneLines,
   Ellipsis,
+  ArrowUpFromBracket,
+  XMark,
 } from './icons';
 
 // Types
@@ -62,6 +64,8 @@ export const icons = {
   book: Book,
   'microphone-lines': MicrophoneLines,
   ellipsis: Ellipsis,
+  'arrow-up-from-bracket': ArrowUpFromBracket,
+  'x-mark': XMark,
 };
 
 const Icon: FC<IIconProps> = ({ name, ...props }) => {

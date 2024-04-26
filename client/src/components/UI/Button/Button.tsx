@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { Loader } from 'components';
+import { Loader, Icon } from 'components';
 
 import { IButtonProps } from './types';
 
@@ -11,6 +11,7 @@ const Button: FC<IButtonProps> = ({
   isLoading,
   children,
   disabled,
+  icon,
   ...props
 }) => {
   return (
@@ -22,7 +23,16 @@ const Button: FC<IButtonProps> = ({
       disabled={disabled || isLoading}
       {...props}
     >
-      <div className={`base-button__content`}>{children}</div>
+      <div className={`base-button__content`}>
+        {icon ? (
+          <>
+            <Icon className="base-button__icon" name={icon} width="1.125rem" height="1.125rem" />
+            <span className="base-button__text">{children}</span>
+          </>
+        ) : (
+          children
+        )}
+      </div>
       {isLoading && <Loader className="base-button__loader" size="small" />}
     </button>
   );

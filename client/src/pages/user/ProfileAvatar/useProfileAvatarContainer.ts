@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from 'store/index';
 
-import { changeAvatar, selectUserPhotoUrl } from 'store/user';
+import { changeAvatar, selectUserPhotoUrl, selectIsLoading } from 'store/user';
 
 import { getImageBase64 } from 'helpers';
 
@@ -9,6 +9,7 @@ const useProfileAvatarContainer = () => {
   const dispatch = useAppDispatch();
 
   const userPhotoUrl = useAppSelector(selectUserPhotoUrl);
+  const isLoading = useAppSelector(selectIsLoading);
 
   const [image, setImage] = useState<string | null>(null);
   const [showingImage, setShowingImage] = useState<string | null>(null);
@@ -39,6 +40,7 @@ const useProfileAvatarContainer = () => {
     userPhotoUrl,
     handleImageChange,
     showingImage,
+    isLoading,
   };
 };
 

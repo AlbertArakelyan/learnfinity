@@ -6,7 +6,7 @@ import { IProfileAvatarProps } from './types';
 
 import styles from './ProfileAvatar.module.scss';
 
-const ProfileAvatar: FC<IProfileAvatarProps> = ({ userPhotoUrl, handleImageChange, showingImage }) => {
+const ProfileAvatar: FC<IProfileAvatarProps> = ({ userPhotoUrl, handleImageChange, showingImage, isLoading }) => {
   return (
     <div className={styles['profile-avatar']}>
       <div className={styles['profile-avatar__actions']}>
@@ -21,7 +21,7 @@ const ProfileAvatar: FC<IProfileAvatarProps> = ({ userPhotoUrl, handleImageChang
           />
           Upload Avatar
         </Button>
-        <Button btnColor="danger" icon="x-mark">
+        <Button btnColor="danger" icon="x-mark" isLoading={isLoading}>
           Delete Avatar
         </Button>
       </div>

@@ -10,7 +10,7 @@ const ProfileAvatar: FC<IProfileAvatarProps> = ({ userPhotoUrl, handleImageChang
   return (
     <div className={styles['profile-avatar']}>
       <div className={styles['profile-avatar__actions']}>
-        <Button icon="arrow-up-from-bracket">
+        <Button icon="arrow-up-from-bracket" isLoading={isLoading}>
           <label className={styles['profile-avatar__upload-label']} htmlFor="avatar-upload-input"></label>
           <input
             className={styles['profile-avatar__upload-input']}
@@ -21,7 +21,7 @@ const ProfileAvatar: FC<IProfileAvatarProps> = ({ userPhotoUrl, handleImageChang
           />
           Upload Avatar
         </Button>
-        <Button btnColor="danger" icon="x-mark" isLoading={isLoading}>
+        <Button btnColor="danger" icon="x-mark">
           Delete Avatar
         </Button>
       </div>

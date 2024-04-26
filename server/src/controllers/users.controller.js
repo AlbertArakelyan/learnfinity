@@ -1,6 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 
+require('dotenv').config();
+
 const {
   findUserById,
   findExistingUserByEmail,
@@ -17,6 +19,7 @@ const {
   editUser,
   isChangePasswordAllowed,
   changeUserPassword,
+  checkIsPasswordCorrect,
 } = require('../models/users/users.model');
 
 const httpStatuses = require('../constants/httpStatuses');
@@ -258,9 +261,16 @@ async function httpEditUser(req, res) {
       });
     }
 
+    const editUserSendData = {
+      id: editUserData._id,
+      email: editUserData.email,
+      fullName: editUserData.fullName,
+      photoUrl: editUserData.photoUrl,
+    };
+
     return res.status(httpStatuses.ok).json({
       success: true,
-      data: editUserData,
+      data: editUserSendData,
       message: userControllerMessages.userUpdated,
       statusCode: httpStatuses.ok,
     });
@@ -277,7 +287,7 @@ async function httpEditUser(req, res) {
 async function httpChangePassword(req, res) {
   try {
     const userId = req.user.id;
-    const { oldPassword, newPassword, confirmPassword } = req.body;
+    const { oldPassword, newPassword } = req.body;
 
     const isChangePasswordAllowedData = await isChangePasswordAllowed(userId, oldPassword);
 
@@ -289,19 +299,13 @@ async function httpChangePassword(req, res) {
       });
     }
 
-    if (newPassword !== confirmPassword) {
-      return res.status(httpStatuses.badRequest).json({
-        success: false,
-        message: userControllerMessages.passwordsDontMatch,
-        statusCode: httpStatuses.badRequest,
-      });
-    }
-
-    const updatedUser = await changeUserPassword(userId, newPassword);
+    await changeUserPassword(userId, newPassword);
 
     return res.status(httpStatuses.ok).json({
       success: true,
-      data: updatedUser,
+      data: {
+        isPasswordChanged: true,
+      },
       message: userControllerMessages.passwordChanged,
       statusCode: httpStatuses.ok,
     });
@@ -345,10 +349,14 @@ async function httpChangeAvatar(req, res) {
 
     fs.writeFileSync(avatarPath, bufferData);
 
+    const photoUrl = `${process.env.API_BASE_URL}storage/avatars/${filename}`;
+
+    await editUser(userId, { photoUrl });
+
     return res.status(httpStatuses.ok).json({
       success: true,
       data: {
-        avatarUrl: `http://localhost:8000/storage/avatars/${filename}`, // TODO take from env
+        photoUrl,
       },
       message: userControllerMessages.avatarChanged,
       statusCode: httpStatuses.ok,

@@ -25,3 +25,5 @@ export { default as Newspaper } from './Newspaper';
 export { default as Book } from './Book';
 export { default as MicrophoneLines } from './MicrophoneLines';
 export { default as Ellipsis } from './Ellipsis';
+export { default as ArrowUpFromBracket } from './ArrowUpFromBracket';
+export { default as XMark } from './XMark';

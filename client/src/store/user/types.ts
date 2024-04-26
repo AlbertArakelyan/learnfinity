@@ -1,4 +1,4 @@
-import { IUser, IUserSignUpData, IUserResetPasswordData, IUserSignInData } from 'types';
+import { IUser, IUserSignUpData, IUserResetPasswordData, IUserSignInData, IChangePasswordData } from 'types';
 
 export interface IVerificationForgotPasswordData {
   email: string;
@@ -54,3 +54,30 @@ export interface ISignInActionReturnData {
  * getUser Action Types
  */
 export type GetUserActionReturnData = IUser;
+
+/**
+ * editUser Action Types
+ */
+export type EditUserPayloadDataType = Partial<IUser>;
+
+export type EditUserActionReturnDataType = IUser;
+
+/**
+ * changeAvatar Action Types
+ */
+export interface IChangeAvatarPayloadData {
+  image: string;
+}
+
+export interface IChangeAvatarActionReturnData {
+  photoUrl: string;
+}
+
+/**
+ * changePassword Action Types
+ */
+export type ChangePasswordPayloadDataType = IChangePasswordData;
+
+export interface IChangePasswordActionReturnData {
+  isPasswordChanged: boolean;
+}

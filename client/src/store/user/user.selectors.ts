@@ -10,4 +10,6 @@ export const selectIsVerificationPassed = createSelector(userState, ({ isVerific
 export const selectForgotPasswordData = createSelector(userState, ({ forgotPasswordData }) => forgotPasswordData);
 export const selectAccessToken = createSelector(userState, ({ accessToken }) => accessToken);
 export const selectUser = createSelector(userState, ({ user }) => user);
+export const selectUserFullName = createSelector(userState, ({ user }) => user?.fullName);
 export const selectUserId = createSelector(userState, ({ user }) => user?.id);
+export const selectUserPhotoUrl = createSelector(userState, ({ user }) => user?.photoUrl);

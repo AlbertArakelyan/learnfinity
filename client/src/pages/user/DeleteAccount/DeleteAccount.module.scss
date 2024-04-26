@@ -1,0 +1,10 @@
+@import "src/assets/styles/abstracts/mixins";
+
+.delete-account {
+  @include flex(column, flex-start, flex-start);
+  row-gap: 2rem;
+}
+
+.delete-account__input-label {
+  background-color: var(--background-color);
+}

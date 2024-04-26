@@ -69,6 +69,10 @@
 }
 .base-button__content {
   transition: opacity .2s ease;
+  @include flex(row, center, center);
+}
+.base-button__icon {
+  margin-right: .6rem;
 }
 .base-button__loader {
   position: absolute;

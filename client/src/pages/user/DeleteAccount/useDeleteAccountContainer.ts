@@ -19,7 +19,6 @@ const useDeleteAccountContainer = () => {
 
   const handleFormSubmit = (data: IDeleteAccountData) => {
     alert('Why to delete, just stay in the app ^^');
-    console.log(data);
   };
 
   return {

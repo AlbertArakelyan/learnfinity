@@ -21,7 +21,7 @@ const ProfileAvatar: FC<IProfileAvatarProps> = ({ userPhotoUrl, handleImageChang
           />
           Upload Avatar
         </Button>
-        <Button btnColor="danger" icon="x-mark">
+        <Button btnColor="danger" icon="x-mark" onClick={() => alert('Coming Soon...')}>
           Delete Avatar
         </Button>
       </div>

@@ -12,4 +12,13 @@
       background-color: var(--white-background-highlited-active);
     }
   }
+
+  &--coming-soon {
+    opacity: 0.4;
+    pointer-events: none;
+
+    .learning-paths-layout__nav-link-button {
+      background-color: transparent;
+    }
+  }
 }

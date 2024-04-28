@@ -1,5 +1,7 @@
 export type ThemeType = 'dark' | 'light';
 
+export type SettingsThemeType = ThemeType | 'systemDefault';
+
 export type ColorType = 'primary' | 'danger';
 
 export type VariantType = 'default' | 'rounded' | 'circle';

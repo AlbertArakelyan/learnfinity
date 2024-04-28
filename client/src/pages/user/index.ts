@@ -4,3 +4,4 @@ export { default as Name } from './Name';
 export { default as ProfileAvatar } from './ProfileAvatar';
 export { default as Password } from './Password';
 export { default as DeleteAccount } from './DeleteAccount';
+export { default as Settings } from './Settings';

@@ -13,6 +13,7 @@ import {
   ProfileAvatar,
   Password,
   DeleteAccount,
+  Settings,
 } from 'pages';
 
 import { BaseLayout, AuthLayout, LearningPathsLayout, ProfileLayout } from 'components';
@@ -37,6 +38,7 @@ const App: FC<IAppProps> = ({ theme, isUserAuth }) => {
               <Route path="/profile/password" element={<Password />} />
               <Route path="/profile/delete" element={<DeleteAccount />} />
             </Route>
+            <Route path="/settings" element={<Settings />} />
             <Route path="/*" element={<Navigate to="/learning-paths" replace />} />
           </Route>
         ) : (

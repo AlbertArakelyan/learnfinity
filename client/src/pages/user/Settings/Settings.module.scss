@@ -1,0 +1,14 @@
+@import "src/assets/styles/abstracts/mixins";
+
+.settings__title {
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  width: 100%;
+  border-bottom: .063rem solid var(--separator-border-color);
+  @include font(1.75rem, 500, var(--primary-text-color));
+}
+
+.settings__themes {
+  @include flex(row, flex-start, flex-start, wrap);
+  gap: 0.75rem;
+}

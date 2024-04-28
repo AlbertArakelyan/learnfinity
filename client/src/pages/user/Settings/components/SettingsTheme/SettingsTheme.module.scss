@@ -1,0 +1,41 @@
+@import "src/assets/styles/abstracts/mixins";
+
+
+.settings-theme-wrapper {
+  width: calc(25% - 0.75rem);
+}
+
+.settings-theme {
+  position: relative;
+  width: 100%;
+  background-color: transparent;
+  border-radius: .25rem;
+  padding: 0;
+  box-shadow: 0 0 3px var(--shadow-sm-color);
+  border: .063rem solid var(--separator-border-color);
+  @include flex(column, flex-start, flex-start);
+  transition: border-color .2s ease, box-shadow .2s ease;
+  cursor: pointer;
+
+  &--active {
+    box-shadow: 0 0 5px var(--shadow-md-color);
+    border-color: var(--primary);
+
+    .settings-theme__name-wrapper {
+      border-color: var(--primary);
+    }
+  }
+}
+
+.settings-theme__name-wrapper {
+  width: 100%;
+  border-top: .063rem solid var(--separator-border-color);
+  padding: 1rem .75rem;
+  display: flex;
+  @include flex(row, center, flex-start);
+  transition: border-color .2s ease;
+}
+
+.settings-theme__name {
+  @include font(1rem, 400, var(--primary-text-color));
+}

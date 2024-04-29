@@ -14,15 +14,17 @@ const LearningPaths: FC<ILearningPathsProps> = ({
   currentPage,
   totalPages,
 }) => {
-  return !!learningPathsContent.length ? (
+  return (
     <div className={styles['learning-paths']}>
       <LoadingScreen isLoading={isLoadingGetLearningPaths}>
-        <div className={styles['learning-paths__content']}>{learningPathsContent}</div>
+        {!!learningPathsContent.length ? (
+          <div className={styles['learning-paths__content']}>{learningPathsContent}</div>
+        ) : (
+          <LearningPathsNotFound />
+        )}
+        <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handleSetCurrentPage} />
       </LoadingScreen>
-      <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handleSetCurrentPage} />
     </div>
-  ) : (
-    <LearningPathsNotFound />
   );
 };
 

@@ -82,7 +82,7 @@ export const getLearningPaths = createAsyncThunk<IGetLearningPathsActionReturnDa
         listType: LearningPathsListAndRequestTypes[learningPathsType],
       };
     } catch (error: any) {
-      // TODO send error in specfic cases from backend not for !length
+      // TODO send error in specific cases from backend not for !length
       // console.log('createLearningPath', error);
       toast.error(error.message, {
         type: 'error',
@@ -107,10 +107,11 @@ export const getUserLearningPath = createAsyncThunk<IGetLearningPathActionReturn
       }
 
       if (!learningPathItemsResponse.data?.success) {
-        toast.error(learningPathItemsResponse.data.message, {
-          type: 'error',
-          hideProgressBar: true,
-        });
+        // TODO send error in specific cases from backend not for !length
+        // toast.error(learningPathItemsResponse.data.message, {
+        //   type: 'error',
+        //   hideProgressBar: true,
+        // });
       }
 
       return {

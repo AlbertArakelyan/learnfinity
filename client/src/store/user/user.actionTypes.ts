@@ -7,3 +7,4 @@ export const GET_USER = 'user/GET_USER';
 export const EDIT_USER = 'user/EDIT_USER';
 export const CHANGE_AVATAR = 'user/CHANGE_AVATAR';
 export const CHANGE_PASSWORD = 'user/CHANGE_PASSWORD';
+export const LOG_OUT = 'user/LOG_OUT';

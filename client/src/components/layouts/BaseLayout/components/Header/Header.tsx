@@ -7,7 +7,7 @@ import { IHeaderProps } from './types';
 
 import styles from './Header.module.scss';
 
-const Header: FC<IHeaderProps> = ({ user }) => {
+const Header: FC<IHeaderProps> = ({ user, handleLogOut }) => {
   return (
     <header className={styles['header']}>
       <SearchBar />
@@ -18,7 +18,7 @@ const Header: FC<IHeaderProps> = ({ user }) => {
           dropdownId="avatar-dropdown"
           className={styles['header__avatar']}
         >
-          <LogoutButton />
+          <LogoutButton onClick={handleLogOut} />
         </Dropdown>
       </div>
     </header>

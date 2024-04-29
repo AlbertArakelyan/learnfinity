@@ -3,9 +3,9 @@ import Header from './Header';
 import useHeaderContainer from './useHeaderContainer';
 
 const HeaderContainer = () => {
-  const { user } = useHeaderContainer();
+  const { user, handleLogOut } = useHeaderContainer();
 
-  return <Header user={user} />;
+  return <Header user={user} handleLogOut={handleLogOut} />;
 };
 
 export default HeaderContainer;

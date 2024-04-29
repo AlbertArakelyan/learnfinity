@@ -10,6 +10,7 @@ import {
   editUser,
   changeAvatar,
   changePassword,
+  logOut,
 } from './user.actions';
 
 import { IUserState } from './types';
@@ -147,6 +148,14 @@ const userReducer = createReducer(initialState, (buider) => {
     .addCase(changePassword.rejected, (state, action) => {
       state.isLoading = false;
       state.error = action.error?.message as string;
+    })
+
+    // logOut
+    .addCase(logOut, (state) => {
+      state.user = null;
+      state.accessToken = null;
+      state.isLoading = false;
+      state.error = null;
     })
 
     .addDefaultCase((state) => state);

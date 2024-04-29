@@ -83,11 +83,11 @@ export const getLearningPaths = createAsyncThunk<IGetLearningPathsActionReturnDa
       };
     } catch (error: any) {
       // TODO send error in specific cases from backend not for !length
-      // console.log('createLearningPath', error);
-      toast.error(error.message, {
-        type: 'error',
-        hideProgressBar: true,
-      });
+      console.log('createLearningPath', error);
+      // toast.error(error.message, {
+      //   type: 'error',
+      //   hideProgressBar: true,
+      // });
       throw error.message as string;
     }
   }

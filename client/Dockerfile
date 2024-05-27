@@ -8,6 +8,6 @@ RUN yarn install
 
 COPY . .
 
-RUN yarn build
+RUN yarn build:docker
 
 VOLUME /usr/src/app/build

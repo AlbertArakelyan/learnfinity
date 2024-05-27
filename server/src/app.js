@@ -1,3 +1,4 @@
+const path = require('path');
 const express = require('express');
 const cors = require('cors');
 
@@ -13,8 +14,14 @@ app.use('/api', api);
 
 app.use('/storage', express.static('storage'));
 
-app.get('/', (req, res) => {
-  res.send('<h1>Hello Learnfinity!</h1>');
+// app.get('/', (req, res) => {
+//   res.send('<h1>Hello Learnfinity!</h1>');
+// });
+
+app.use(express.static(path.join(__dirname, '..', 'public')));
+
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
 });
 
 module.exports = app;

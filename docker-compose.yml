@@ -1,0 +1,34 @@
+version: "3.8"
+services:
+  mongodb:
+    image: mongo:latest
+    restart: always
+    ports:
+      - "27017:27017"
+    networks:
+      - learnfinity-app-network
+    volumes:
+      - mongo-data:/data/db
+  express:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    depends_on:
+      - mongodb
+    networks:
+      - learnfinity-app-network
+    ports:
+      - "8000:8000"
+  react:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    depends_on:
+      - mongodb
+      - express
+networks:
+  learnfinity-app-network:
+    driver: bridge
+volumes:
+  mongo-data:
+    driver: local

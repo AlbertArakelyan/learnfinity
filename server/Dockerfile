@@ -7,11 +7,11 @@ COPY yarn.lock ./
 
 RUN yarn install
 
-COPY . ./server/
+COPY . /usr/src/app/
 
 # For security purposes
 USER node
 
-EXPOSE 5000
+EXPOSE 8000
 
 CMD ["yarn", "start"]

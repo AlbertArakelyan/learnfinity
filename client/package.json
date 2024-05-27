@@ -39,6 +39,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "BUILD_PATH=/usr/src/app/build react-scripts build",
+    "build:local": "BUILD_PATH=../server/public react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint . --ext .ts --ext .tsx",

@@ -11,6 +11,17 @@ services:
     volumes:
       - mongo-data:/data/db
 
+  react:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    depends_on:
+      - mongodb
+    networks:
+      - learnfinity-app-network
+    volumes:
+      - build-volume:/usr/src/app/build
+
   express:
     build:
       context: ./server
@@ -26,15 +37,6 @@ services:
       - "8000:8000"
     volumes:
       - build-volume:/usr/src/app/public
-
-  react:
-    build:
-      context: ./client
-      dockerfile: Dockerfile
-    networks:
-      - learnfinity-app-network
-    volumes:
-      - build-volume:/usr/src/app/build
 
 networks:
   learnfinity-app-network:

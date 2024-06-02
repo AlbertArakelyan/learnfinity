@@ -21,6 +21,8 @@ services:
       - learnfinity-app-network
     volumes:
       - build-volume:/usr/src/app/build
+    env_file:
+      - ./client/.env
 
   express:
     build:

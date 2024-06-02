@@ -36,6 +36,19 @@ services:
     volumes:
       - build-volume:/usr/src/app/build
 
+  
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - express
+    networks:
+      - learnfinity-app-network
+
 networks:
   learnfinity-app-network:
     driver: bridge

@@ -9,9 +9,6 @@ RUN yarn install
 
 COPY . /usr/src/app/
 
-# For security purposes
-USER node
-
 EXPOSE 8000
 
 CMD ["yarn", "start"]

@@ -49,7 +49,7 @@ Standard [React](https://reactjs.org/) + [Redux](https://redux.js.org/) with [Ty
 ## 📦 Installation
 _Note: make sure you have `.env` created from `.env.example` with appropriate variables._
 
-_Note: Make sure you are using correct `node` and `yarn` versions_
+_Note: Make sure you are using correct `node` and `yarn` versions._
 
 ### Repo
 - Clone the repo

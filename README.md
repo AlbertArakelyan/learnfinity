@@ -1,5 +1,7 @@
 # 📖 Learnfinity Plus
 
+![Screenshot](./screenshot.png)
+
 ## 📝 About the project
 A modern and user-friendly app for creating and sharing learning content only based on outer resources, found some great things on the internet then create an amazing Learning Path from them which will guarantee the desired skill.
 

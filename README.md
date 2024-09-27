@@ -58,11 +58,7 @@ git clone https://github.com/AlbertArakelyan/learnfinity.git
 ```
 
 ### Server
-- Change to the server directory
-```bash
-cd ./server
-```
-
+*in `server` directory*
 - Install dependencies
 ```bash
 yarn
@@ -76,15 +72,7 @@ yarn dev
 The development server will start running at: `http://localhost:8000`
 
 ### Client
-- Change to the client directory
-```bash
-cd ../client #from server directory
-```
-or
-```bash
-cd ./client #from root directory
-```
-
+*in `client` directory*
 - Install dependencies
 ```bash
 yarn

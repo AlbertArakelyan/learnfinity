@@ -1,6 +1,6 @@
 # 📖 Learnfinity Plus
 
-> A modern and user-friendly app for creating and sharing learning content only based on outer resources written in React/Typescript and Express/Nodejs.
+> A modern and user-friendly app for creating and sharing learning content written in React/Typescript and Express/Nodejs.
 
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/AlbertArakelyan/learnfinity)
 ![Language](https://img.shields.io/badge/language-typescript%2C%20nodejs-blue)

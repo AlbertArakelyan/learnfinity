@@ -1,6 +1,6 @@
 # 📖 Learnfinity Plus
 
-> A modern and user-friendly app for creating and sharing learning content only based on outer resources
+> A modern and user-friendly app for creating and sharing learning content only based on outer resources.
 
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/AlbertArakelyan/learnfinity)
 ![Language](https://img.shields.io/badge/language-typescript%2C%20nodejs-blue)

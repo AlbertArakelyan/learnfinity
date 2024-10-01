@@ -1,6 +1,21 @@
 # 📖 Learnfinity Plus
 
+> A modern and user-friendly app for creating and sharing learning content only based on outer resources
+
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/AlbertArakelyan/learnfinity)
+![Language](https://img.shields.io/badge/language-typescript%2C%20nodejs-blue)
+![Platforms](https://img.shields.io/badge/platforms-Browser-green)
+![License](https://img.shields.io/github/license/espanso/espanso)
+
 ![Screenshot](./screenshot.png)
+
+**What is a Learning Path?**  
+A learning path is a structured guide that helps individuals achieve specific educational goals by organizing topics and resources in a logical sequence. It offers several benefits:
+
+- Provides a clear roadmap for mastering a subject.
+- Breaks down complex topics into manageable steps.
+- Encourages consistent progress and self-paced learning.
+- Facilitates skill development with tailored resources.
 
 ## 📝 About the project
 A modern and user-friendly app for creating and sharing learning content only based on outer resources, find some great things on the internet then create an amazing Learning Path from them which will guarantee the desired skill.

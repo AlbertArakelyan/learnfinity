@@ -17,8 +17,28 @@ A learning path is a structured guide that helps individuals achieve specific ed
 - Encourages consistent progress and self-paced learning.
 - Facilitates skill development with tailored resources.
 
+---
+
 ## 📝 About the project
 A modern and user-friendly app for creating and sharing learning content only based on outer resources, find some great things on the internet then create an amazing Learning Path from them which will guarantee the desired skill.
+
+## 🔑 Key Features
+- Works on **Browser**
+- Databse in **the Cloud** for **Users**
+- Public **Learning Path** creation
+- Private **Learning Path** creation
+- **Settings** and **Profile** pages
+- **Dark Theme** 😊
+
+## 🙏 Donations
+LearnfinityPlus is a free, open source software developed in my (little) spare time. If you liked the project and would like to support further development, please consider making a small donation, it really helps :)
+
+<a href="https://www.buymeacoffee.com/albertarakelyan" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="width: 108px !important;" ></a>
+
+## 👨‍💻Contibutors
+People who helped the project along the way, thank you to all of you!
+
+[![Image](https://contrib.rocks/image?repo=AlbertArakelyan/learnfinity)](https://github.com/AlbertArakelyan/learnfinity/graphs/contributors)
 
 ## 🏰 Architecture
 ### Backend
@@ -58,15 +78,15 @@ Standard [React](https://reactjs.org/) + [Redux](https://redux.js.org/) with [Ty
   </tbody>
 </table>
 
-### Versions
-- node: `20.10.0`
-- npm: `10.2.3`
-- yarn: `1.22.21`
-
 ## 📦 Installation
 _Note: make sure you have `.env` created from `.env.example` with appropriate variables._
 
 _Note: Make sure you are using correct `node` and `yarn` versions._
+
+### Versions
+- node: `20.10.0`
+- npm: `10.2.3`
+- yarn: `1.22.21`
 
 ### Repo
 - Clone the repo

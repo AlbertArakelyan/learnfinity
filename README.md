@@ -5,7 +5,7 @@
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/AlbertArakelyan/learnfinity)
 ![Language](https://img.shields.io/badge/language-typescript%2C%20nodejs-blue)
 ![Platforms](https://img.shields.io/badge/platforms-Browser-green)
-![License](https://img.shields.io/github/license/espanso/espanso)
+![License](https://img.shields.io/github/license/AlbertArakelyan/learnfinity)
 
 ![Screenshot](./screenshot.png)
 
